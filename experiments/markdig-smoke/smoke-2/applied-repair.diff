@@ -1,0 +1,18 @@
+diff --git a/src/Markdig/Helpers/LinkHelper.cs b/src/Markdig/Helpers/LinkHelper.cs
+index b744bed8..285d1873 100644
+--- a/src/Markdig/Helpers/LinkHelper.cs
++++ b/src/Markdig/Helpers/LinkHelper.cs
+@@ -61,9 +61,11 @@ public static string Urilize(ReadOnlySpan<char> headingText, bool allowOnlyAscii
+                 continue;
+             }
+ 
+-            // Handle German and Scandinavian characters explicitly when ASCII-only output is requested.
++            // Handle German and Scandinavian characters explicitly (always). When allowOnlyAscii is true,
++            // these characters are expanded to their ASCII equivalents (e.g., ö → oe). When allowOnlyAscii
++            // is false, they are also expanded, matching the original behavior expected by the tests.
+             ReadOnlySpan<char> normalized;
+-            if (allowOnlyAscii && IsSpecialScandinavianOrGermanChar(c))
++            if (IsSpecialScandinavianOrGermanChar(c))
+             {
+                 normalized = NormalizeScandinavianOrGermanChar(c);
+             }

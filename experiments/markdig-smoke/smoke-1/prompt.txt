@@ -1,0 +1,191 @@
+You are maintaining a C# library. A change was recently applied to this repository.
+Review the recent change and the current test results, then decide whether any modification
+is needed: update tests, fix production code, or no change at all.
+
+Constraints:
+- The first line of your reply must be exactly one of: `DECISION: no_change`, `DECISION: fix_tests`, `DECISION: fix_production`.
+- If the decision is `fix_tests` or `fix_production`, follow the DECISION line with a unified diff implementing the fix. If the decision is `no_change`, output no diff.
+- Allowed files: src/Markdig.Tests/TestNormalize.cs, src/Markdig/Extensions/AutoIdentifiers/AutoIdentifierExtension.cs.
+- Do not weaken, delete, or skip assertions.
+- Preserve nearby behavior that is still expected to pass.
+
+Recent change applied to the repository:
+<recent_change_diff>
+diff --git a/src/Markdig.Tests/TestNormalize.cs b/src/Markdig.Tests/TestNormalize.cs
+index df8be3f7..7c0d7057 100644
+--- a/src/Markdig.Tests/TestNormalize.cs
++++ b/src/Markdig.Tests/TestNormalize.cs
+@@ -106,6 +106,19 @@ public void Heading()
+         AssertNormalizeNoTrim("Heading\n=======\n\ntext after two newlines", "# Heading\n\ntext after two newlines");
+     }
+ 
++    [Test]
++    public void AutoIdentifiersDoNotEmitGeneratedLinkReferenceDefinitions()
++    {
++        var pipeline = new MarkdownPipelineBuilder().UseAutoIdentifiers().Build();
++        var document = Markdown.Parse("# Test\n\n## Test", pipeline);
++        using var writer = new StringWriter();
++        var renderer = new NormalizeRenderer(writer);
++
++        renderer.Render(document);
++
++        Assert.AreEqual("# Test\n\n## Test", writer.ToString());
++    }
++
+     [Test]
+     public void Backslash()
+     {
+
+</recent_change_diff>
+
+Current test results:
+<test_output>
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  SpecFileGen -> <worktree>/src/SpecFileGen/bin/Debug/net10.0/SpecFileGen.dll
+  Markdig -> <worktree>/src/Markdig/bin/Debug/net10.0/Markdig.dll
+  Markdig.Tests -> <worktree>/src/Markdig.Tests/bin/Debug/net10.0/Markdig.Tests.dll
+Test run for <worktree>/src/Markdig.Tests/bin/Debug/net10.0/Markdig.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+  Failed AutoIdentifiersDoNotEmitGeneratedLinkReferenceDefinitions [27 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 15 but was 21. Strings differ at index 15.
+  Expected: "# Test\n\n## Test"
+  But was:  "# Test\n\n## Test\n\n[]: "
+  ----------------------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestNormalize.AutoIdentifiersDoNotEmitGeneratedLinkReferenceDefinitions() in <worktree>/src/Markdig.Tests/TestNormalize.cs:line 119
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestNormalize.AutoIdentifiersDoNotEmitGeneratedLinkReferenceDefinitions() in <worktree>/src/Markdig.Tests/TestNormalize.cs:line 119
+
+
+
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 27 ms - Markdig.Tests.dll (net10.0)
+
+</test_output>
+
+Relevant test snippet:
+<test_snippet path="src/Markdig.Tests/TestNormalize.cs" lines="84-146">
+    [Test]
+    public void CodeBlock()
+    {
+        AssertNormalizeNoTrim("    public void HelloWorld();\n    {\n    }");
+        AssertNormalizeNoTrim("    public void HelloWorld();\n    {\n    }\n\ntext after two newlines");
+        AssertNormalizeNoTrim("````\npublic void HelloWorld();\n{\n}\n````\n\ntext after two newlines");
+        AssertNormalizeNoTrim("````csharp\npublic void HelloWorld();\n{\n}\n````");
+        AssertNormalizeNoTrim("````csharp hideNewKeyword=true\npublic void HelloWorld();\n{\n}\n````");
+    }
+
+    [Test]
+    public void Heading()
+    {
+        AssertNormalizeNoTrim("# Heading");
+        AssertNormalizeNoTrim("## Heading");
+        AssertNormalizeNoTrim("### Heading");
+        AssertNormalizeNoTrim("#### Heading");
+        AssertNormalizeNoTrim("##### Heading");
+        AssertNormalizeNoTrim("###### Heading");
+        AssertNormalizeNoTrim("###### Heading\n\ntext after two newlines");
+        AssertNormalizeNoTrim("# Heading\nAnd Text1\n\nAndText2", options: new NormalizeOptions() { EmptyLineAfterHeading = false });
+
+        AssertNormalizeNoTrim("Heading\n=======\n\ntext after two newlines", "# Heading\n\ntext after two newlines");
+    }
+
+    [Test]
+    public void AutoIdentifiersDoNotEmitGeneratedLinkReferenceDefinitions()
+    {
+        var pipeline = new MarkdownPipelineBuilder().UseAutoIdentifiers().Build();
+        var document = Markdown.Parse("# Test\n\n## Test", pipeline);
+        using var writer = new StringWriter();
+        var renderer = new NormalizeRenderer(writer);
+
+        renderer.Render(document);
+
+        Assert.AreEqual("# Test\n\n## Test", writer.ToString());
+    }
+
+    [Test]
+    public void Backslash()
+    {
+        AssertNormalizeNoTrim("This is a hardline  \nAnd this is another hardline\\\nThis is standard newline");
+        AssertNormalizeNoTrim("This is a line\nWith another line\nAnd a last line");
+    }
+
+    [Test]
+    public void HtmlBlock()
+    {
+        /*AssertNormalizeNoTrim(@"<div id=""foo"" class=""bar
+baz"">
+</ div >");*/ // TODO: Bug: Throws Exception during emit
+    }
+
+    [Test]
+    public void Paragraph()
+    {
+        AssertNormalizeNoTrim("This is a plain paragraph");
+        AssertNormalizeNoTrim(@"This
+is
+a
+plain
+paragraph");
+    }
+</test_snippet>
+
+Relevant production snippet:
+<production_snippet path="src/Markdig/Extensions/AutoIdentifiers/AutoIdentifierExtension.cs" lines="93-143">
+            var dictionary = doc.GetData(this) as Dictionary<string, HeadingLinkReferenceDefinition>;
+            if (dictionary is null)
+            {
+                dictionary = new Dictionary<string, HeadingLinkReferenceDefinition>();
+                doc.SetData(this, dictionary);
+                doc.ProcessInlinesBegin += _processInlinesBegin;
+            }
+            dictionary[text] = linkRef;
+        }
+
+        // Then we register after inline have been processed to actually generate the proper #id
+        headingBlock.ProcessInlinesEnd += _processInlinesEnd;
+    }
+
+    private void DocumentOnProcessInlinesBegin(InlineProcessor processor, Inline? inline)
+    {
+        var doc = processor.Document;
+        var dictionary = (Dictionary<string, HeadingLinkReferenceDefinition>)doc.GetData(this)!;
+        foreach (var keyPair in dictionary)
+        {
+            // Here we make sure that auto-identifiers will not override an existing link definition
+            // defined in the document
+            // If it is the case, we skip the auto identifier for the Heading
+            if (!doc.TryGetLinkReferenceDefinition(keyPair.Key, out var linkDef))
+            {
+                doc.SetLinkReferenceDefinition(keyPair.Key, keyPair.Value, true);
+            }
+        }
+        // Once we are done, we don't need to keep the intermediate dictionary around
+        doc.RemoveData(this);
+    }
+
+    /// <summary>
+    /// Callback when there is a reference to found to a heading.
+    /// Note that reference are only working if they are declared after.
+    /// </summary>
+    private static Inline CreateLinkInlineForHeading(InlineProcessor inlineState, LinkReferenceDefinition linkRef, Inline? child)
+    {
+        var headingRef = (HeadingLinkReferenceDefinition) linkRef;
+        return new LinkInline()
+        {
+            // Use GetDynamicUrl to allow late binding of the Url (as a link may occur before the heading is declared and
+            // the inlines of the heading are actually processed by HeadingBlock_ProcessInlinesEnd)
+            GetDynamicUrl = () => HtmlHelper.Unescape("#" + headingRef.Heading.GetAttributes().Id),
+            Title = HtmlHelper.Unescape(linkRef.Title),
+        };
+    }
+
+    /// <summary>
+    /// Process the inlines of the heading to create a unique identifier
+    /// </summary>
+</production_snippet>

@@ -1,9 +1,9 @@
   Determining projects to restore...
   All projects are up-to-date for restore.
-  SpecFileGen -> /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-1/src/SpecFileGen/bin/Debug/net10.0/SpecFileGen.dll
-  Markdig -> /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-1/src/Markdig/bin/Debug/net10.0/Markdig.dll
-  Markdig.Tests -> /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-1/src/Markdig.Tests/bin/Debug/net10.0/Markdig.Tests.dll
-Test run for /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-1/src/Markdig.Tests/bin/Debug/net10.0/Markdig.Tests.dll (.NETCoreApp,Version=v10.0)
+  SpecFileGen -> <worktree>/src/SpecFileGen/bin/Debug/net10.0/SpecFileGen.dll
+  Markdig -> <worktree>/src/Markdig/bin/Debug/net10.0/Markdig.dll
+  Markdig.Tests -> <worktree>/src/Markdig.Tests/bin/Debug/net10.0/Markdig.Tests.dll
+Test run for <worktree>/src/Markdig.Tests/bin/Debug/net10.0/Markdig.Tests.dll (.NETCoreApp,Version=v10.0)
 A total of 1 test files matched the specified pattern.
   Failed AutoIdentifiersDoNotEmitGeneratedLinkReferenceDefinitions [27 ms]
   Error Message:
@@ -15,10 +15,10 @@ A total of 1 test files matched the specified pattern.
 
   Stack Trace:
      at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
-   at Markdig.Tests.TestNormalize.AutoIdentifiersDoNotEmitGeneratedLinkReferenceDefinitions() in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-1/src/Markdig.Tests/TestNormalize.cs:line 119
+   at Markdig.Tests.TestNormalize.AutoIdentifiersDoNotEmitGeneratedLinkReferenceDefinitions() in <worktree>/src/Markdig.Tests/TestNormalize.cs:line 119
 
 1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
-   at Markdig.Tests.TestNormalize.AutoIdentifiersDoNotEmitGeneratedLinkReferenceDefinitions() in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-1/src/Markdig.Tests/TestNormalize.cs:line 119
+   at Markdig.Tests.TestNormalize.AutoIdentifiersDoNotEmitGeneratedLinkReferenceDefinitions() in <worktree>/src/Markdig.Tests/TestNormalize.cs:line 119
 
 
 

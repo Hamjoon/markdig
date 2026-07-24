@@ -1,0 +1,17 @@
+{
+  "id": "smoke-2",
+  "category": "S",
+  "decision": "fix_production",
+  "decision_match": false,
+  "stage2_applied": true,
+  "apply_status": "APPLY: OK smoke-2 method=context-match files=1",
+  "target_pass": true,
+  "build_ok": true,
+  "preservation_pass": false,
+  "generated_invariant": null,
+  "repair_success": "no",
+  "pipeline_error": false,
+  "test_summary": "Passed!  - Failed:     0, Passed:   118, Skipped:     0, Total:   118, Duration: 49 ms - Markdig.Tests.dll (net10.0)",
+  "signal_covered": null,
+  "signal_note": "skipped: repair_success != yes"
+}

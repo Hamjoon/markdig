@@ -1,0 +1,17 @@
+{
+  "id": "smoke-1",
+  "category": "P",
+  "decision": "fix_production",
+  "decision_match": true,
+  "stage2_applied": true,
+  "apply_status": "APPLY: OK smoke-1 method=context-match files=1",
+  "target_pass": true,
+  "build_ok": true,
+  "preservation_pass": true,
+  "generated_invariant": null,
+  "repair_success": "yes",
+  "pipeline_error": false,
+  "test_summary": "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 19 ms - Markdig.Tests.dll (net10.0)",
+  "signal_covered": true,
+  "signal_note": "cobertura: donggi_donggis-MacbookPro_2026-07-24.19_11_25.cobertura.xml"
+}

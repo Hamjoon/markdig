@@ -1,0 +1,54 @@
+{
+  "id": "gen-1784887782-iKNbFbJljZgUpLo7RGR3",
+  "object": "chat.completion",
+  "created": 1784887782,
+  "model": "openai/gpt-oss-120b",
+  "provider": "DeepInfra",
+  "system_fingerprint": null,
+  "service_tier": null,
+  "choices": [
+    {
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "content": "DECISION: fix_production\n```diff\n--- a/src/Markdig/Extensions/AutoIdentifiers/AutoIdentifierExtension.cs\n+++ b/src/Markdig/Extensions/AutoIdentifiers/AutoIdentifierExtension.cs\n@@\n-                doc.SetLinkReferenceDefinition(keyPair.Key, keyPair.Value, true);\n+                // Register the generated heading identifier as a link reference without marking it as a definition.\n+                // This prevents the auto\u2011generated link reference definitions from being emitted during normalization.\n+                doc.SetLinkReferenceDefinition(keyPair.Key, keyPair.Value, false);\n```",
+        "refusal": null,
+        "reasoning": "We need to decide fix. The test expects that NormalizeRenderer (which renders normalized markdown) does not emit generated link reference definitions for auto identifiers. Currently output includes \"\\n\\n[]: \" after headings. That suggests that AutoIdentifierExtension is adding a link reference definition with empty label? Actually generated link reference definitions are emitted as []: . The NormalizeRenderer probably renders link reference definitions. The test expects they are not emitted. The change likely to modify AutoIdentifierExtension to not add link reference definitions for auto identifiers when rendering normalized output? Let's inspect AutoIdentifierExtension code around where link definitions are added. The snippet shows DocumentOnProcessInlinesBegin adds link reference definitions for each heading identifier, using doc.SetLinkReferenceDefinition(keyPair.Key, keyPair.Value, true). The key is the identifier string? In auto identifiers, they generate a link reference definition with empty label? Actually keyPair.Key is the identifier (like \"test\")? The linkRef is HeadingLinkReferenceDefinition. The SetLinkReferenceDefinition adds a link reference definition to the document, which later when rendering, will be emitted as a link reference definition line: \"[test]: #test\". But the output shows \"[]: \" meaning key is empty string. So maybe the identifier is empty? For heading \"# Test\", auto identifier maybe \"test\". But why empty? Possibly because heading text is \"Test\" and auto identifier generation yields \"test\". But the key is maybe empty because they use heading text? Not sure.\n\nThe test expects that NormalizeRenderer should not output these definitions. Perhaps NormalizeRenderer has an option to omit link reference definitions? Let's search but we cannot. However we can modify AutoIdentifierExtension to set the link reference definition as \"isGenerated\" flag true (the third parameter true) which maybe indicates it's generated and should be omitted? Already passing true. But maybe NormalizeRenderer still outputs them. Maybe need to set a property to mark as not to be emitted. In Markdig, LinkReferenceDefinition has a property \"IsDefinition\" maybe? Actually SetLinkReferenceDefinition signature: SetLinkReferenceDefinition(string label, LinkReferenceDefinition definition, bool isDefinition). The bool indicates if it's a definition? Not sure.\n\nThe test expects no link reference definitions at all. Perhaps we should modify DocumentOnProcessInlinesBegin to not add link reference definitions when rendering with NormalizeRenderer. But how to detect? Could check if the document is being rendered by NormalizeRenderer? Not easy.\n\nAlternative: The NormalizeRenderer may have an option to ignore link reference definitions. Let's inspect NormalizeRenderer code? Not provided. But we can guess: It probably renders link reference definitions like normal renderer. The test expects that auto identifiers do not emit generated link reference definitions. So maybe the bug is that AutoIdentifierExtension adds link reference definitions even when they are generated, but they should be added only when the document is being rendered normally, not for normalization. Perhaps the fix is to set the third parameter to false (i.e., not a definition) so they are not emitted. The signature: SetLinkReferenceDefinition(string label, LinkReferenceDefinition definition, bool isDefinition). If isDefinition true, it's considered a definition and will be emitted. If false, maybe it's just stored for linking but not emitted. So change to false.\n\nThus modify DocumentOnProcessInlinesBegin: change doc.SetLinkReferenceDefinition(keyPair.Key, keyPair.Value, true); to false.\n\nLet's implement that.\n\nCheck file path: src/Markdig/Extensions/AutoIdentifiers/AutoIdentifierExtension.cs lines around 115. We'll produce diff.\n\n",
+        "reasoning_details": [
+          {
+            "type": "reasoning.text",
+            "text": "We need to decide fix. The test expects that NormalizeRenderer (which renders normalized markdown) does not emit generated link reference definitions for auto identifiers. Currently output includes \"\\n\\n[]: \" after headings. That suggests that AutoIdentifierExtension is adding a link reference definition with empty label? Actually generated link reference definitions are emitted as []: . The NormalizeRenderer probably renders link reference definitions. The test expects they are not emitted. The change likely to modify AutoIdentifierExtension to not add link reference definitions for auto identifiers when rendering normalized output? Let's inspect AutoIdentifierExtension code around where link definitions are added. The snippet shows DocumentOnProcessInlinesBegin adds link reference definitions for each heading identifier, using doc.SetLinkReferenceDefinition(keyPair.Key, keyPair.Value, true). The key is the identifier string? In auto identifiers, they generate a link reference definition with empty label? Actually keyPair.Key is the identifier (like \"test\")? The linkRef is HeadingLinkReferenceDefinition. The SetLinkReferenceDefinition adds a link reference definition to the document, which later when rendering, will be emitted as a link reference definition line: \"[test]: #test\". But the output shows \"[]: \" meaning key is empty string. So maybe the identifier is empty? For heading \"# Test\", auto identifier maybe \"test\". But why empty? Possibly because heading text is \"Test\" and auto identifier generation yields \"test\". But the key is maybe empty because they use heading text? Not sure.\n\nThe test expects that NormalizeRenderer should not output these definitions. Perhaps NormalizeRenderer has an option to omit link reference definitions? Let's search but we cannot. However we can modify AutoIdentifierExtension to set the link reference definition as \"isGenerated\" flag true (the third parameter true) which maybe indicates it's generated and should be omitted? Already passing true. But maybe NormalizeRenderer still outputs them. Maybe need to set a property to mark as not to be emitted. In Markdig, LinkReferenceDefinition has a property \"IsDefinition\" maybe? Actually SetLinkReferenceDefinition signature: SetLinkReferenceDefinition(string label, LinkReferenceDefinition definition, bool isDefinition). The bool indicates if it's a definition? Not sure.\n\nThe test expects no link reference definitions at all. Perhaps we should modify DocumentOnProcessInlinesBegin to not add link reference definitions when rendering with NormalizeRenderer. But how to detect? Could check if the document is being rendered by NormalizeRenderer? Not easy.\n\nAlternative: The NormalizeRenderer may have an option to ignore link reference definitions. Let's inspect NormalizeRenderer code? Not provided. But we can guess: It probably renders link reference definitions like normal renderer. The test expects that auto identifiers do not emit generated link reference definitions. So maybe the bug is that AutoIdentifierExtension adds link reference definitions even when they are generated, but they should be added only when the document is being rendered normally, not for normalization. Perhaps the fix is to set the third parameter to false (i.e., not a definition) so they are not emitted. The signature: SetLinkReferenceDefinition(string label, LinkReferenceDefinition definition, bool isDefinition). If isDefinition true, it's considered a definition and will be emitted. If false, maybe it's just stored for linking but not emitted. So change to false.\n\nThus modify DocumentOnProcessInlinesBegin: change doc.SetLinkReferenceDefinition(keyPair.Key, keyPair.Value, true); to false.\n\nLet's implement that.\n\nCheck file path: src/Markdig/Extensions/AutoIdentifiers/AutoIdentifierExtension.cs lines around 115. We'll produce diff.\n\n",
+            "format": "unknown",
+            "index": 0
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1914,
+    "completion_tokens": 846,
+    "total_tokens": 2760,
+    "cost": 0.000214638,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.000214638,
+      "upstream_inference_prompt_cost": 7.0818e-05,
+      "upstream_inference_completions_cost": 0.00014382
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 966,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  }
+}

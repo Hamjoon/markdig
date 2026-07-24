@@ -1,0 +1,10 @@
+DECISION: fix_production
+```diff
+--- a/src/Markdig/Extensions/AutoIdentifiers/AutoIdentifierExtension.cs
++++ b/src/Markdig/Extensions/AutoIdentifiers/AutoIdentifierExtension.cs
+@@
+-                doc.SetLinkReferenceDefinition(keyPair.Key, keyPair.Value, true);
++                // Register the generated heading identifier as a link reference without marking it as a definition.
++                // This prevents the auto‑generated link reference definitions from being emitted during normalization.
++                doc.SetLinkReferenceDefinition(keyPair.Key, keyPair.Value, false);
+```

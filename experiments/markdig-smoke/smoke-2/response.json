@@ -1,0 +1,54 @@
+{
+  "id": "gen-1784887807-CvmImfokjEzhkSnRIXgG",
+  "object": "chat.completion",
+  "created": 1784887807,
+  "model": "openai/gpt-oss-120b",
+  "provider": "DeepInfra",
+  "system_fingerprint": null,
+  "service_tier": null,
+  "choices": [
+    {
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "content": "DECISION: fix_production\ndiff --git a/src/Markdig/Helpers/LinkHelper.cs b/src/Markdig/Helpers/LinkHelper.cs\nindex b744bed8..d3f9a2c1 100644\n--- a/src/Markdig/Helpers/LinkHelper.cs\n+++ b/src/Markdig/Helpers/LinkHelper.cs\n@@\n-            // Handle German and Scandinavian characters explicitly when ASCII-only output is requested.\n-            ReadOnlySpan<char> normalized;\n-            if (allowOnlyAscii && IsSpecialScandinavianOrGermanChar(c))\n-            {\n-                normalized = NormalizeScandinavianOrGermanChar(c);\n-            }\n-            else\n-            {\n-                normalized = allowOnlyAscii ? CharNormalizer.ConvertToAscii(c) : ReadOnlySpan<char>.Empty;\n-            }\n+            // Handle German and Scandinavian characters explicitly (always). When allowOnlyAscii is true,\n+            // these characters are expanded to their ASCII equivalents (e.g., \u00f6 \u2192 oe). When allowOnlyAscii\n+            // is false, they are also expanded, matching the original behavior expected by the tests.\n+            ReadOnlySpan<char> normalized;\n+            if (IsSpecialScandinavianOrGermanChar(c))\n+            {\n+                normalized = NormalizeScandinavianOrGermanChar(c);\n+            }\n+            else\n+            {\n+                normalized = allowOnlyAscii ? CharNormalizer.ConvertToAscii(c) : ReadOnlySpan<char>.Empty;\n+            }",
+        "refusal": null,
+        "reasoning": "We need to understand failing tests. The recent change added condition `if (allowOnlyAscii && IsSpecialScandinavianOrGermanChar(c))` before normalizing special chars. Previously, code always normalized special chars regardless of allowOnlyAscii. The tests expect that when allowOnlyAscii = false, special chars are normalized (expanded) e.g., \"sch\u00f6n\" -> \"schoen\". When allowOnlyAscii = true, they should be decomposed via NFD, not expanded, e.g., \"sch\u00f6n\" -> \"schon\". The change now only expands when allowOnlyAscii is true, which is opposite of expected. So many tests failing for both allowOnlyAscii true and false. The fix is to revert condition: special chars should be normalized when allowOnlyAscii is false (or always). The original code before change likely had `if (IsSpecialScandinavianOrGermanChar(c))` without allowOnlyAscii check. So we need to modify LinkHelper.cs to remove the allowOnlyAscii condition, i.e., always apply NormalizeScandinavianOrGermanChar for those chars.\n\nLet's open the file snippet lines 61-... Already we saw:\n\n```csharp\n// Handle German and Scandinavian characters explicitly when ASCII-only output is requested.\nReadOnlySpan<char> normalized;\nif (allowOnlyAscii && IsSpecialScandinavianOrGermanChar(c))\n{\n    normalized = NormalizeScandinavianOrGermanChar(c);\n}\nelse\n{\n    normalized = allowOnlyAscii ? CharNormalizer.ConvertToAscii(c) : ReadOnlySpan<char>.Empty;\n}\n```\n\nWe need to change to:\n\n```csharp\nReadOnlySpan<char> normalized;\nif (IsSpecialScandinavianOrGermanChar(c))\n{\n    normalized = NormalizeScandinavianOrGermanChar(c);\n}\nelse\n{\n    normalized = allowOnlyAscii ? CharNormalizer.ConvertToAscii(c) : ReadOnlySpan<char>.Empty;\n}\n```\n\nThus remove `allowOnlyAscii &&` condition.\n\nAlso comment update maybe.\n\nImplement diff.\n\nCheck other parts: earlier comment says \"Handle German and Scandinavian characters explicitly when ASCII-only output is requested.\" Should be updated to reflect always.\n\nThus decision: fix_production.\n\n",
+        "reasoning_details": [
+          {
+            "type": "reasoning.text",
+            "text": "We need to understand failing tests. The recent change added condition `if (allowOnlyAscii && IsSpecialScandinavianOrGermanChar(c))` before normalizing special chars. Previously, code always normalized special chars regardless of allowOnlyAscii. The tests expect that when allowOnlyAscii = false, special chars are normalized (expanded) e.g., \"sch\u00f6n\" -> \"schoen\". When allowOnlyAscii = true, they should be decomposed via NFD, not expanded, e.g., \"sch\u00f6n\" -> \"schon\". The change now only expands when allowOnlyAscii is true, which is opposite of expected. So many tests failing for both allowOnlyAscii true and false. The fix is to revert condition: special chars should be normalized when allowOnlyAscii is false (or always). The original code before change likely had `if (IsSpecialScandinavianOrGermanChar(c))` without allowOnlyAscii check. So we need to modify LinkHelper.cs to remove the allowOnlyAscii condition, i.e., always apply NormalizeScandinavianOrGermanChar for those chars.\n\nLet's open the file snippet lines 61-... Already we saw:\n\n```csharp\n// Handle German and Scandinavian characters explicitly when ASCII-only output is requested.\nReadOnlySpan<char> normalized;\nif (allowOnlyAscii && IsSpecialScandinavianOrGermanChar(c))\n{\n    normalized = NormalizeScandinavianOrGermanChar(c);\n}\nelse\n{\n    normalized = allowOnlyAscii ? CharNormalizer.ConvertToAscii(c) : ReadOnlySpan<char>.Empty;\n}\n```\n\nWe need to change to:\n\n```csharp\nReadOnlySpan<char> normalized;\nif (IsSpecialScandinavianOrGermanChar(c))\n{\n    normalized = NormalizeScandinavianOrGermanChar(c);\n}\nelse\n{\n    normalized = allowOnlyAscii ? CharNormalizer.ConvertToAscii(c) : ReadOnlySpan<char>.Empty;\n}\n```\n\nThus remove `allowOnlyAscii &&` condition.\n\nAlso comment update maybe.\n\nImplement diff.\n\nCheck other parts: earlier comment says \"Handle German and Scandinavian characters explicitly when ASCII-only output is requested.\" Should be updated to reflect always.\n\nThus decision: fix_production.\n\n",
+            "format": "unknown",
+            "index": 0
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 8463,
+    "completion_tokens": 766,
+    "total_tokens": 9229,
+    "cost": 0.000443351,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.000443351,
+      "upstream_inference_prompt_cost": 0.000313131,
+      "upstream_inference_completions_cost": 0.00013022
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 505,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  }
+}

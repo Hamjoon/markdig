@@ -1,3 +1,37 @@
+You are maintaining a C# library. A change was recently applied to this repository.
+Review the recent change and the current test results, then decide whether any modification
+is needed: update tests, fix production code, or no change at all.
+
+Constraints:
+- The first line of your reply must be exactly one of: `DECISION: no_change`, `DECISION: fix_tests`, `DECISION: fix_production`.
+- If the decision is `fix_tests` or `fix_production`, follow the DECISION line with a unified diff implementing the fix. If the decision is `no_change`, output no diff.
+- Allowed files: src/Markdig.Tests/TestLinkHelper.cs, src/Markdig/Helpers/LinkHelper.cs.
+- Do not weaken, delete, or skip assertions.
+- Preserve nearby behavior that is still expected to pass.
+
+Recent change applied to the repository:
+<recent_change_diff>
+diff --git a/src/Markdig/Helpers/LinkHelper.cs b/src/Markdig/Helpers/LinkHelper.cs
+index ffa2e7ed..b744bed8 100644
+--- a/src/Markdig/Helpers/LinkHelper.cs
++++ b/src/Markdig/Helpers/LinkHelper.cs
+@@ -61,9 +61,9 @@ public static string Urilize(ReadOnlySpan<char> headingText, bool allowOnlyAscii
+                 continue;
+             }
+ 
+-            // Handle German umlauts and Norwegian/Danish characters explicitly (they don't decompose properly)
++            // Handle German and Scandinavian characters explicitly when ASCII-only output is requested.
+             ReadOnlySpan<char> normalized;
+-            if (IsSpecialScandinavianOrGermanChar(c))
++            if (allowOnlyAscii && IsSpecialScandinavianOrGermanChar(c))
+             {
+                 normalized = NormalizeScandinavianOrGermanChar(c);
+             }
+
+</recent_change_diff>
+
+Current test results:
+<test_output>
   Determining projects to restore...
   All projects are up-to-date for restore.
   SpecFileGen -> <worktree>/src/SpecFileGen/bin/Debug/net10.0/SpecFileGen.dll
@@ -397,3 +431,207 @@ A total of 1 test files matched the specified pattern.
 
 
 Failed!  - Failed:    22, Passed:    96, Skipped:     0, Total:   118, Duration: 63 ms - Markdig.Tests.dll (net10.0)
+
+</test_output>
+
+Relevant test snippet:
+<test_snippet path="src/Markdig.Tests/TestLinkHelper.cs" lines="321-461">
+    [TestCase(" bc", "bc")]
+    [TestCase("?bc", "bc")]
+    [TestCase(".bc", "bc")]
+    [TestCase("a-.-", "a")] // Not Pandoc equivalent: a-.-
+    public void TestUrilizeOnlyAscii_Simple(string input, string expectedResult)
+    {
+        Assert.AreEqual(expectedResult, LinkHelper.Urilize(input, true));
+    }
+
+    [TestCase("bær", "baer")]
+    [TestCase("bør", "boer")]
+    [TestCase("bΘr", "br")]
+    [TestCase("四五", "")]
+    public void TestUrilizeOnlyAscii_NonAscii(string input, string expectedResult)
+    {
+        Assert.AreEqual(expectedResult, LinkHelper.Urilize(input, true));
+    }
+
+    [TestCase("bár", "bar")]
+    [TestCase("àrrivé", "arrive")]
+    public void TestUrilizeOnlyAscii_Normalization(string input, string expectedResult)
+    {
+        Assert.AreEqual(expectedResult, LinkHelper.Urilize(input, true));
+    }
+
+    // Tests for NormalizeScandinavianOrGermanChar method mappings
+    // These special characters are always normalized (both allowOnlyAscii=true and false)
+    // 
+    // Note: When allowOnlyAscii=true, NFD (Canonical Decomposition) is applied first:
+    // - German umlauts ä,ö,ü decompose to base letter + combining mark (ü -> u + ¨)
+    //   The combining mark is then stripped, leaving just the base letter (ü -> u)
+    // - å decomposes similarly (å -> a + ˚ -> a)
+    // - But ø, æ, ß, þ, ð do NOT decompose, so they use NormalizeScandinavianOrGermanChar
+    //
+    // When allowOnlyAscii=false, NormalizeScandinavianOrGermanChar is used for ALL special chars
+    
+    // German ß (Eszett/sharp s) - does NOT decompose with NFD
+    [TestCase("Straße", "strasse")]    // ß -> ss (both allowOnlyAscii=true and false)
+    
+    // Scandinavian æ, ø - do NOT decompose with NFD
+    [TestCase("æble", "aeble")]        // æ -> ae (both modes)
+    [TestCase("Ærø", "aeroe")]         // Æ -> Ae, ø -> oe (both modes, then lowercase)
+    [TestCase("København", "koebenhavn")] // ø -> oe (both modes)
+    [TestCase("Øresund", "oeresund")]  // Ø -> Oe (both modes, then lowercase)
+    
+    // Icelandic þ, ð - do NOT decompose with NFD
+    [TestCase("þing", "thing")]        // þ (thorn) -> th (both modes)
+    [TestCase("bað", "bad")]           // ð (eth) -> d (both modes)
+    
+    // Mixed special characters (only chars that behave same in both modes)
+    [TestCase("øst-æble", "oest-aeble")] // ø->oe, æ->ae (both modes)
+    public void TestUrilizeScandinavianGermanChars(string input, string expectedResult)
+    {
+        // These transformations apply regardless of allowOnlyAscii flag
+        Assert.AreEqual(expectedResult, LinkHelper.Urilize(input, true));
+        Assert.AreEqual(expectedResult, LinkHelper.Urilize(input, false));
+    }
+    
+    // Tests specific to allowOnlyAscii=true behavior
+    // German umlauts (ä, ö, ü) and å decompose with NFD, so they become base letter only
+    [TestCase("schön", "schon")]       // ö decomposes to o (NFD strips combining mark)
+    [TestCase("Mädchen", "madchen")]   // ä decomposes to a
+    [TestCase("Übung", "ubung")]       // Ü decomposes to U (then lowercase to u)
+    [TestCase("Düsseldorf", "dusseldorf")] // ü decomposes to u
+    [TestCase("Käse", "kase")]         // ä decomposes to a
+    [TestCase("gå", "ga")]             // å decomposes to a
+    [TestCase("Ålesund", "alesund")]   // Å decomposes to A (then lowercase)
+    [TestCase("grüßen", "grussen")]    // ü decomposes to u, ß -> ss
+    [TestCase("Þór", "thor")]          // Þ -> Th, ó decomposes to o (then lowercase)
+    [TestCase("Íslandsbanki", "islandsbanki")] // Í decomposes to I (then lowercase)
+    public void TestUrilizeOnlyAscii_GermanUmlautsDecompose(string input, string expectedResult)
+    {
+        // With allowOnlyAscii=true, these characters decompose via NFD and lose their diacritics
+        Assert.AreEqual(expectedResult, LinkHelper.Urilize(input, true));
+    }
+    
+    // Tests specific to allowOnlyAscii=false behavior
+    // All special chars use NormalizeScandinavianOrGermanChar (including ä, ö, ü, å)
+    [TestCase("schön", "schoen")]      // ö -> oe (NormalizeScandinavianOrGermanChar)
+    [TestCase("Mädchen", "maedchen")]  // ä -> ae
+    [TestCase("Übung", "uebung")]      // Ü -> Ue (then lowercase)
+    [TestCase("Düsseldorf", "duesseldorf")] // ü -> ue
+    [TestCase("Käse", "kaese")]        // ä -> ae
+    [TestCase("gå", "gaa")]            // å -> aa
+    [TestCase("Ålesund", "aalesund")]  // Å -> Aa (then lowercase)
+    [TestCase("grüßen", "gruessen")]   // ü -> ue, ß -> ss
+    [TestCase("Þór", "thór")]          // Þ -> Th (then lowercase 'th'), ó is kept as-is
+    [TestCase("Íslandsbanki", "íslandsbanki")] // í is kept as-is when allowOnlyAscii=false
+    public void TestUrilizeNonAscii_GermanUmlautsExpanded(string input, string expectedResult)
+    {
+        // With allowOnlyAscii=false, these characters use NormalizeScandinavianOrGermanChar
+        Assert.AreEqual(expectedResult, LinkHelper.Urilize(input, false));
+    }
+    
+    [TestCase("123", "")]
+    [TestCase("1,-b", "b")]
+    [TestCase("b1,-", "b1")] // Not Pandoc equivalent: b1-
+    [TestCase("ab3", "ab3")]
+    [TestCase("ab3de", "ab3de")]
+    public void TestUrilizeOnlyAscii_Numeric(string input, string expectedResult)
+    {
+        Assert.AreEqual(expectedResult, LinkHelper.Urilize(input, true));
+    }
+
+    [TestCase("一二三四五", "一二三四五")]
+    [TestCase("一,-b", "一-b")]
+    public void TestUrilizeNonAscii_NonAsciiNumeric(string input, string expectedResult)
+    {
+        Assert.AreEqual(expectedResult, LinkHelper.Urilize(input, false));
+    }
+
+    [TestCase("bær", "baer")]
+    [TestCase("æ5el", "ae5el")]
+    [TestCase("-æ5el", "ae5el")]
+    [TestCase("-frø-", "froe")]
+    [TestCase("-fr-ø", "fr-oe")]
+    public void TestUrilizeNonAscii_Simple(string input, string expectedResult)
+    {
+        Assert.AreEqual(expectedResult, LinkHelper.Urilize(input, false));
+    }
+
+    // Just to be sure, test for characters expressly forbidden in URI fragments:
+    [TestCase("b#r", "br")]
+    [TestCase("b%r", "br")] // Invalid except as an escape character
+    [TestCase("b^r", "br")]
+    [TestCase("b[r", "br")]
+    [TestCase("b]r", "br")]
+    [TestCase("b{r", "br")]
+    [TestCase("b}r", "br")]
+    [TestCase("b<r", "br")]
+    [TestCase("b>r", "br")]
+    [TestCase(@"b\r", "br")]
+    [TestCase(@"b""r", "br")]
+    [TestCase(@"Requirement 😀", "requirement")]
+    public void TestUrilizeNonAscii_NonValidCharactersForFragments(string input, string expectedResult)
+    {
+        Assert.AreEqual(expectedResult, LinkHelper.Urilize(input, false));
+    }
+
+    [Test]
+    public void TestUnicodeInDomainNameOfLinkReferenceDefinition()
+</test_snippet>
+
+Relevant production snippet:
+<production_snippet path="src/Markdig/Helpers/LinkHelper.cs" lines="39-91">
+    public static string Urilize(ReadOnlySpan<char> headingText, bool allowOnlyAscii, bool keepOpeningDigits = false)
+    {
+        var headingBuffer = new ValueStringBuilder(stackalloc char[ValueStringBuilder.StackallocThreshold]);
+        bool hasLetter = keepOpeningDigits && headingText.Length > 0 && char.IsLetterOrDigit(headingText[0]);
+        bool previousIsSpace = false;
+
+        // First normalize the string to decompose characters if allowOnlyAscii is true
+        string normalizedString = string.Empty;
+        if (allowOnlyAscii)
+        {
+            normalizedString = headingText.ToString().Normalize(NormalizationForm.FormD);
+        }
+
+        var textToProcess = string.IsNullOrEmpty(normalizedString) ? headingText : normalizedString.AsSpan();
+
+        for (int i = 0; i < textToProcess.Length; i++)
+        {
+            var c = textToProcess[i];
+
+            // Skip combining diacritical marks when normalized
+            if (allowOnlyAscii && CharUnicodeInfo.GetUnicodeCategory(c) == UnicodeCategory.NonSpacingMark)
+            {
+                continue;
+            }
+
+            // Handle German and Scandinavian characters explicitly when ASCII-only output is requested.
+            ReadOnlySpan<char> normalized;
+            if (allowOnlyAscii && IsSpecialScandinavianOrGermanChar(c))
+            {
+                normalized = NormalizeScandinavianOrGermanChar(c);
+            }
+            else
+            {
+                normalized = allowOnlyAscii ? CharNormalizer.ConvertToAscii(c) : ReadOnlySpan<char>.Empty;
+            }
+
+            for (int j = 0; j < (normalized.Length < 1 ? 1 : normalized.Length); j++)
+            {
+                if (!normalized.IsEmpty)
+                {
+                    c = normalized[j];
+                }
+
+                if (char.IsLetter(c))
+                {
+                    if (allowOnlyAscii && (c < ' ' || c >= 127))
+                    {
+                        continue;
+                    }
+                    c = char.IsUpper(c) ? char.ToLowerInvariant(c) : c;
+                    headingBuffer.Append(c);
+                    hasLetter = true;
+                    previousIsSpace = false;
+</production_snippet>

@@ -1,0 +1,2 @@
+error: patch failed: src/Markdig/Helpers/LinkHelper.cs:61
+error: src/Markdig/Helpers/LinkHelper.cs: patch does not apply

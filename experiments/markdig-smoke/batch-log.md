@@ -109,3 +109,57 @@ Source of reused assets: `zod-week3-july` repo @ `745ec751`
 - Red-state verification (make-fixture.sh, case.json written):
   - smoke-1: `FIXTURE: OK smoke-1 red-confirmed failed=1 passed=0 total=1 commit=bb41a2d6`
   - smoke-2: `FIXTURE: OK smoke-2 red-confirmed failed=22 passed=96 total=118 commit=833990e6`
+- Post-hoc artifact polish (before any model call): absolute worktree paths in the recorded
+  failing output were replaced with `<worktree>` in `test-output.txt` and the embedded copy in
+  `case.json` (matches the Zod v2 artifact convention; avoids leaking local paths into prompts).
+- Prompt dry-render check (no API call) before the one-shot requests: both prompts verified
+  structurally (P case: post-image test snippet + pre-image production snippet; S case:
+  pre-image test snippet + post-image production snippet); previews kept out of the repo.
+
+## 2026-07-24 — stages 1–5 (smoke-1, smoke-2)
+
+Model: `openai/gpt-oss-120b` via OpenRouter, temperature 0, one request per case, no retries.
+
+- smoke-1 (P): stage 1 `decision=fix_production` (expected fix_production, **match**),
+  usage 1914 prompt / 846 completion tokens. Stage 2: git apply and --recount and patch --fuzz
+  all rejected the model's hunk (bogus line numbers); applied via `context-match`
+  (apply-patch.py), 1 file. The applied production change is semantically identical to the
+  upstream fix (`SetLinkReferenceDefinition(..., true → false)` plus a comment). Stage 3:
+  target test green (`Passed! Failed: 0, Passed: 1, Total: 1`). Stage 4: preservation OK.
+  **repair_success=yes**. Stage 5: cobertura via the built-in "Code Coverage" collector worked
+  on macOS arm64; `AutoIdentifierExtension.cs` 106/124 lines covered under the focused run →
+  **signal_covered=true**.
+- smoke-2 (S): stage 1 `decision=fix_production` (expected fix_tests, **misclassified**),
+  usage 8463 prompt / 766 completion tokens. Per protocol the case continued through the
+  pipeline. Stage 2: applied via `context-match`, 1 file — the model edited
+  `src/Markdig/Helpers/LinkHelper.cs`, reverting the intentional guard
+  (`allowOnlyAscii && IsSpecialScandinavianOrGermanChar(c)` → unconditional), its own comment
+  stating it restores "the original behavior expected by the tests". Stage 3: the full
+  TestLinkHelper class went green (`Failed: 0, Passed: 118`). Stage 4:
+  `git apply --reverse --check fixture.patch` FAILED → the intentional change was reverted.
+  **repair_success=no** — a textbook reverse-green captured by the built-in stage 4, exactly
+  the failure mode the port was required to observe from day one. Stage 5 skipped
+  (repair_success != yes), skip recorded in verdicts.json.
+- Stage 4 executed unconditionally on both pipeline cases (spec 7.3 satisfied).
+
+## Acceptance criteria review (spec section 7)
+
+1. All 3 fixtures red: **NOT MET** — smoke-1/smoke-2 red-verified; smoke-3 red state is
+   unreachable (upstream commit is test-first/additive; full evidence above and in
+   `smoke-3/case.json`). This is a case-selection defect surfaced by the smoke run, not a
+   pipeline failure; a replacement S-category spec-layer commit needs behavior-changing spec
+   examples (candidate mining is out of scope for this task).
+2. Complete artifact sets with pipeline-error vs model-outcome distinction: **MET** —
+   smoke-1/smoke-2 have the full section-3 layout; smoke-3 is marked
+   `pipeline_error: fixture-red-state-unreachable` in verdicts.json.
+3. Stage 4 on every case: **MET** for both cases that entered the pipeline (unconditional in
+   validate.sh); smoke-3 never entered (documented pipeline error).
+4. smoke-3 generated-file invariant checks in stages 2 and 3: **NOT MET** (stages never ran —
+   same root cause as criterion 1). The checks are implemented and idle-tested in
+   run-case.sh (`generated-file-edit` guard) and validate.sh (checkout+touch+rebuild+hash
+   compare) for the eventual replacement case.
+5. batch-log completeness: **MET** (this file).
+
+Environment for the record: dotnet 10.0.302, macOS Darwin 25.5.0 arm64, branch
+`experiment/2026-07-week4-markdig-smoke`, scaffold commit `57193a3a`, fixture commits
+`bb41a2d6` (smoke-1), `833990e6` (smoke-2), `79485f1f` (smoke-3, non-viable).

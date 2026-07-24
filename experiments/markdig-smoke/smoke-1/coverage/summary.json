@@ -1,0 +1,8 @@
+[
+  {
+    "file": "src/Markdig/Extensions/AutoIdentifiers/AutoIdentifierExtension.cs",
+    "lines_covered": 106,
+    "lines_valid": 124,
+    "covered": true
+  }
+]
