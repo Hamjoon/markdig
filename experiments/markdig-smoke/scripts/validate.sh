@@ -16,6 +16,7 @@ CASEDIR=$EXP/$ID
 WT=$ROOT/.worktrees/$ID
 LOG=$CASEDIR/logs
 TFM=net10.0
+export DOTNET_CLI_UI_LANGUAGE=en   # summary parsing needs English runner output
 mkdir -p "$LOG"
 
 CASE=$(jq -c ".[] | select(.id == \"$ID\")" "$EXP/cases.json")

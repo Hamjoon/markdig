@@ -1,0 +1,30 @@
+{
+  "id": "smoke-3",
+  "category": "S",
+  "upstream_sha": "25506f20d96f214f951ac2d881550d8b883bf9f0",
+  "upstream_subject": "Fix plus superscript parsing (#791)",
+  "test_paths": [
+    "src/Markdig.Tests/Specs/EmphasisExtraSpecs.md"
+  ],
+  "prod_paths": [
+    "src/Markdig/Helpers/CharHelper.cs"
+  ],
+  "test_revert_paths": [
+    "src/Markdig.Tests/Specs/EmphasisExtraSpecs.md",
+    "src/Markdig.Tests/Specs/EmphasisExtraSpecs.generated.cs"
+  ],
+  "generated_files": [
+    "src/Markdig.Tests/Specs/EmphasisExtraSpecs.generated.cs"
+  ],
+  "generated_guard": true,
+  "target_filter": "Markdig.Tests.TestExtensionsSuperscriptAndSubscript",
+  "worktree": ".worktrees/smoke-3",
+  "fixture_commit": "79485f1f8d27b53372a219ab1ebac4ee5059f1ee",
+  "fixture_viable": false,
+  "fixture_invalid_reason": "red-state-unreachable: the stale (C~1) spec examples are green under C's production. Upstream 25506f20 is test-first/additive: it ADDS plus-sign content to EmphasisExtraSpecs Example003 alongside the CharHelper.IsPunctuationException('+') change; the C~1 examples contain no '+' adjacent to emphasis delimiters, so reverting the test side cannot produce a failing test.",
+  "evidence": {
+    "focused_run": "dotnet test src/Markdig.Tests -f net10.0 --filter \"FullyQualifiedName~SuperscriptAndSubscript\" --nologo -> Passed! Failed: 0, Passed: 2, Total: 2 (logs/discover.raw.log)",
+    "full_suite_run": "dotnet test src/Markdig.Tests -f net10.0 --nologo -> Passed! Failed: 0, Passed: 3791, Skipped: 1, Total: 3792 (logs/full-suite-green.raw.log)",
+    "worktree_clean_after_regen": "SpecFileGen regeneration from the C~1 .md reproduced the committed C~1 .generated.cs byte-identically (git status clean)"
+  }
+}

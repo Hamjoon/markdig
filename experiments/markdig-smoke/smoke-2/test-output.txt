@@ -1,0 +1,399 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  SpecFileGen -> /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/SpecFileGen/bin/Debug/net10.0/SpecFileGen.dll
+  Markdig -> /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig/bin/Debug/net10.0/Markdig.dll
+  Markdig.Tests -> /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/bin/Debug/net10.0/Markdig.Tests.dll
+Test run for /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/bin/Debug/net10.0/Markdig.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+  Failed TestUrilizeNonAscii_GermanUmlautsExpanded("schön","schoen") [12 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 6 but was 5. Strings differ at index 3.
+  Expected: "schoen"
+  But was:  "schön"
+  --------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 412
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 412
+
+
+  Failed TestUrilizeNonAscii_GermanUmlautsExpanded("Mädchen","maedchen") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 8 but was 7. Strings differ at index 1.
+  Expected: "maedchen"
+  But was:  "mädchen"
+  ------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 412
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 412
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(Object, Span`1)
+
+
+  Failed TestUrilizeNonAscii_GermanUmlautsExpanded("Übung","uebung") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 6 but was 5. Strings differ at index 0.
+  Expected: "uebung"
+  But was:  "übung"
+  -----------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 412
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 412
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(Object, Span`1)
+
+
+  Failed TestUrilizeNonAscii_GermanUmlautsExpanded("Düsseldorf","duesseldorf") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 11 but was 10. Strings differ at index 1.
+  Expected: "duesseldorf"
+  But was:  "düsseldorf"
+  ------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 412
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 412
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(Object, Span`1)
+
+
+  Failed TestUrilizeNonAscii_GermanUmlautsExpanded("Käse","kaese") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 5 but was 4. Strings differ at index 1.
+  Expected: "kaese"
+  But was:  "käse"
+  ------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 412
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 412
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(Object, Span`1)
+
+
+  Failed TestUrilizeNonAscii_GermanUmlautsExpanded("gå","gaa") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 3 but was 2. Strings differ at index 1.
+  Expected: "gaa"
+  But was:  "gå"
+  ------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 412
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 412
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(Object, Span`1)
+
+
+  Failed TestUrilizeNonAscii_GermanUmlautsExpanded("Ålesund","aalesund") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 8 but was 7. Strings differ at index 0.
+  Expected: "aalesund"
+  But was:  "ålesund"
+  -----------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 412
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 412
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(Object, Span`1)
+
+
+  Failed TestUrilizeNonAscii_GermanUmlautsExpanded("grüßen","gruessen") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 8 but was 6. Strings differ at index 2.
+  Expected: "gruessen"
+  But was:  "grüßen"
+  -------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 412
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 412
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(Object, Span`1)
+
+
+  Failed TestUrilizeNonAscii_GermanUmlautsExpanded("Þór","thór") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 4 but was 3. Strings differ at index 0.
+  Expected: "thór"
+  But was:  "þór"
+  -----------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 412
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 412
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_GermanUmlautsExpanded(Object, Span`1)
+
+
+  Failed TestUrilizeNonAscii_Simple("bær","baer") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 4 but was 3. Strings differ at index 1.
+  Expected: "baer"
+  But was:  "bær"
+  ------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_Simple(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 439
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_Simple(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 439
+
+
+  Failed TestUrilizeNonAscii_Simple("æ5el","ae5el") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 5 but was 4. Strings differ at index 0.
+  Expected: "ae5el"
+  But was:  "æ5el"
+  -----------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_Simple(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 439
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_Simple(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_Simple(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 439
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_Simple(Object, Span`1)
+
+
+  Failed TestUrilizeNonAscii_Simple("-æ5el","ae5el") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 5 but was 4. Strings differ at index 0.
+  Expected: "ae5el"
+  But was:  "æ5el"
+  -----------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_Simple(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 439
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_Simple(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_Simple(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 439
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_Simple(Object, Span`1)
+
+
+  Failed TestUrilizeNonAscii_Simple("-frø-","froe") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 4 but was 3. Strings differ at index 2.
+  Expected: "froe"
+  But was:  "frø"
+  -------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_Simple(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 439
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_Simple(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_Simple(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 439
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_Simple(Object, Span`1)
+
+
+  Failed TestUrilizeNonAscii_Simple("-fr-ø","fr-oe") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 5 but was 4. Strings differ at index 3.
+  Expected: "fr-oe"
+  But was:  "fr-ø"
+  --------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_Simple(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 439
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_Simple(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_Simple(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 439
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_Simple(Object, Span`1)
+
+
+  Failed TestUrilizeScandinavianGermanChars("Straße","strasse") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 7 but was 6. Strings differ at index 4.
+  Expected: "strasse"
+  But was:  "straße"
+  ---------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeScandinavianGermanChars(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 376
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeScandinavianGermanChars(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 376
+
+
+  Failed TestUrilizeScandinavianGermanChars("æble","aeble") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 5 but was 4. Strings differ at index 0.
+  Expected: "aeble"
+  But was:  "æble"
+  -----------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeScandinavianGermanChars(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 376
+   at InvokeStub_TestLinkHelper.TestUrilizeScandinavianGermanChars(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeScandinavianGermanChars(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 376
+   at InvokeStub_TestLinkHelper.TestUrilizeScandinavianGermanChars(Object, Span`1)
+
+
+  Failed TestUrilizeScandinavianGermanChars("Ærø","aeroe") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 5 but was 3. Strings differ at index 0.
+  Expected: "aeroe"
+  But was:  "ærø"
+  -----------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeScandinavianGermanChars(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 376
+   at InvokeStub_TestLinkHelper.TestUrilizeScandinavianGermanChars(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeScandinavianGermanChars(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 376
+   at InvokeStub_TestLinkHelper.TestUrilizeScandinavianGermanChars(Object, Span`1)
+
+
+  Failed TestUrilizeScandinavianGermanChars("København","koebenhavn") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 10 but was 9. Strings differ at index 1.
+  Expected: "koebenhavn"
+  But was:  "københavn"
+  ------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeScandinavianGermanChars(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 376
+   at InvokeStub_TestLinkHelper.TestUrilizeScandinavianGermanChars(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeScandinavianGermanChars(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 376
+   at InvokeStub_TestLinkHelper.TestUrilizeScandinavianGermanChars(Object, Span`1)
+
+
+  Failed TestUrilizeScandinavianGermanChars("Øresund","oeresund") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 8 but was 7. Strings differ at index 0.
+  Expected: "oeresund"
+  But was:  "øresund"
+  -----------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeScandinavianGermanChars(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 376
+   at InvokeStub_TestLinkHelper.TestUrilizeScandinavianGermanChars(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeScandinavianGermanChars(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 376
+   at InvokeStub_TestLinkHelper.TestUrilizeScandinavianGermanChars(Object, Span`1)
+
+
+  Failed TestUrilizeScandinavianGermanChars("þing","thing") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 5 but was 4. Strings differ at index 0.
+  Expected: "thing"
+  But was:  "þing"
+  -----------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeScandinavianGermanChars(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 376
+   at InvokeStub_TestLinkHelper.TestUrilizeScandinavianGermanChars(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeScandinavianGermanChars(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 376
+   at InvokeStub_TestLinkHelper.TestUrilizeScandinavianGermanChars(Object, Span`1)
+
+
+  Failed TestUrilizeScandinavianGermanChars("bað","bad") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  String lengths are both 3. Strings differ at index 2.
+  Expected: "bad"
+  But was:  "bað"
+  -------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeScandinavianGermanChars(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 376
+   at InvokeStub_TestLinkHelper.TestUrilizeScandinavianGermanChars(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeScandinavianGermanChars(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 376
+   at InvokeStub_TestLinkHelper.TestUrilizeScandinavianGermanChars(Object, Span`1)
+
+
+  Failed TestUrilizeScandinavianGermanChars("øst-æble","oest-aeble") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 10 but was 8. Strings differ at index 0.
+  Expected: "oest-aeble"
+  But was:  "øst-æble"
+  -----------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeScandinavianGermanChars(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 376
+   at InvokeStub_TestLinkHelper.TestUrilizeScandinavianGermanChars(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeScandinavianGermanChars(String input, String expectedResult) in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-2/src/Markdig.Tests/TestLinkHelper.cs:line 376
+   at InvokeStub_TestLinkHelper.TestUrilizeScandinavianGermanChars(Object, Span`1)
+
+
+
+Failed!  - Failed:    22, Passed:    96, Skipped:     0, Total:   118, Duration: 63 ms - Markdig.Tests.dll (net10.0)

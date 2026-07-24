@@ -1,0 +1,13 @@
+diff --git a/src/Markdig/Helpers/CharHelper.cs b/src/Markdig/Helpers/CharHelper.cs
+index 2827b863..f4f6b2cb 100644
+--- a/src/Markdig/Helpers/CharHelper.cs
++++ b/src/Markdig/Helpers/CharHelper.cs
+@@ -80,7 +80,7 @@ public static class CharHelper
+ 
+     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+     private static bool IsPunctuationException(char c) =>
+-        c is '−' or '-' or '†' or '‡';
++        c is '−' or '-' or '+' or '†' or '‡';
+ 
+     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+     private static bool IsPunctuationException(Rune c) =>

@@ -1,0 +1,13 @@
+diff --git a/src/Markdig/Extensions/AutoIdentifiers/AutoIdentifierExtension.cs b/src/Markdig/Extensions/AutoIdentifiers/AutoIdentifierExtension.cs
+index 8e015437..5236358d 100644
+--- a/src/Markdig/Extensions/AutoIdentifiers/AutoIdentifierExtension.cs
++++ b/src/Markdig/Extensions/AutoIdentifiers/AutoIdentifierExtension.cs
+@@ -115,7 +115,7 @@ private void DocumentOnProcessInlinesBegin(InlineProcessor processor, Inline? in
+             // If it is the case, we skip the auto identifier for the Heading
+             if (!doc.TryGetLinkReferenceDefinition(keyPair.Key, out var linkDef))
+             {
+-                doc.SetLinkReferenceDefinition(keyPair.Key, keyPair.Value, false);
++                doc.SetLinkReferenceDefinition(keyPair.Key, keyPair.Value, true);
+             }
+         }
+         // Once we are done, we don't need to keep the intermediate dictionary around

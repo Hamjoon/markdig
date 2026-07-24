@@ -1,0 +1,27 @@
+{
+  "id": "smoke-1",
+  "category": "P",
+  "upstream_sha": "9dffce52b61068c4451399068f72cdad34f79bdb",
+  "upstream_subject": "Fix NormalizeRenderer auto identifiers output (#930)",
+  "test_paths": [
+    "src/Markdig.Tests/TestNormalize.cs"
+  ],
+  "prod_paths": [
+    "src/Markdig/Extensions/AutoIdentifiers/AutoIdentifierExtension.cs"
+  ],
+  "test_revert_paths": [
+    "src/Markdig.Tests/TestNormalize.cs"
+  ],
+  "generated_files": [],
+  "generated_guard": false,
+  "target_filter": "Markdig.Tests.TestNormalize.AutoIdentifiersDoNotEmitGeneratedLinkReferenceDefinitions",
+  "worktree": ".worktrees/smoke-1",
+  "fixture_commit": "bb41a2d6eb91036fac712e63a042f38106d97778",
+  "failing_test_command": "dotnet test src/Markdig.Tests -f net10.0 --filter \"FullyQualifiedName~Markdig.Tests.TestNormalize.AutoIdentifiersDoNotEmitGeneratedLinkReferenceDefinitions\" --nologo",
+  "failing_summary": {
+    "failed": 1,
+    "passed": 0,
+    "total": 1
+  },
+  "failing_output_truncated": "  Determining projects to restore...\n  All projects are up-to-date for restore.\n  SpecFileGen -> /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-1/src/SpecFileGen/bin/Debug/net10.0/SpecFileGen.dll\n  Markdig -> /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-1/src/Markdig/bin/Debug/net10.0/Markdig.dll\n  Markdig.Tests -> /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-1/src/Markdig.Tests/bin/Debug/net10.0/Markdig.Tests.dll\nTest run for /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-1/src/Markdig.Tests/bin/Debug/net10.0/Markdig.Tests.dll (.NETCoreApp,Version=v10.0)\nA total of 1 test files matched the specified pattern.\n  Failed AutoIdentifiersDoNotEmitGeneratedLinkReferenceDefinitions [27 ms]\n  Error Message:\n     Assert.That(actual, Is.EqualTo(expected))\n  Expected string length 15 but was 21. Strings differ at index 15.\n  Expected: \"# Test\\n\\n## Test\"\n  But was:  \"# Test\\n\\n## Test\\n\\n[]: \"\n  ----------------------------^\n\n  Stack Trace:\n     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)\n   at Markdig.Tests.TestNormalize.AutoIdentifiersDoNotEmitGeneratedLinkReferenceDefinitions() in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-1/src/Markdig.Tests/TestNormalize.cs:line 119\n\n1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)\n   at Markdig.Tests.TestNormalize.AutoIdentifiersDoNotEmitGeneratedLinkReferenceDefinitions() in /Users/donggi/_projects/experiment-projects/markdig/.worktrees/smoke-1/src/Markdig.Tests/TestNormalize.cs:line 119\n\n\n\nFailed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 27 ms - Markdig.Tests.dll (net10.0)\n"
+}

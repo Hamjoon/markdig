@@ -4,38 +4,59 @@
     "category": "P",
     "upstream_sha": "9dffce52b61068c4451399068f72cdad34f79bdb",
     "upstream_subject": "Fix NormalizeRenderer auto identifiers output (#930)",
-    "test_paths": ["src/Markdig.Tests/TestNormalize.cs"],
-    "prod_paths": ["src/Markdig/Extensions/AutoIdentifiers/AutoIdentifierExtension.cs"],
-    "test_revert_paths": ["src/Markdig.Tests/TestNormalize.cs"],
+    "test_paths": [
+      "src/Markdig.Tests/TestNormalize.cs"
+    ],
+    "prod_paths": [
+      "src/Markdig/Extensions/AutoIdentifiers/AutoIdentifierExtension.cs"
+    ],
+    "test_revert_paths": [
+      "src/Markdig.Tests/TestNormalize.cs"
+    ],
     "generated_files": [],
     "generated_guard": false,
     "discover_filter": "Markdig.Tests.TestNormalize",
-    "target_filter": "TBD"
+    "target_filter": "Markdig.Tests.TestNormalize.AutoIdentifiersDoNotEmitGeneratedLinkReferenceDefinitions"
   },
   {
     "id": "smoke-2",
     "category": "S",
     "upstream_sha": "50061841a45e142192362131c9ed2ea6043f302e",
     "upstream_subject": "Fix LinkHelper non-ASCII urilize (#942)",
-    "test_paths": ["src/Markdig.Tests/TestLinkHelper.cs"],
-    "prod_paths": ["src/Markdig/Helpers/LinkHelper.cs"],
-    "test_revert_paths": ["src/Markdig.Tests/TestLinkHelper.cs"],
+    "test_paths": [
+      "src/Markdig.Tests/TestLinkHelper.cs"
+    ],
+    "prod_paths": [
+      "src/Markdig/Helpers/LinkHelper.cs"
+    ],
+    "test_revert_paths": [
+      "src/Markdig.Tests/TestLinkHelper.cs"
+    ],
     "generated_files": [],
     "generated_guard": false,
     "discover_filter": "Markdig.Tests.TestLinkHelper",
-    "target_filter": "TBD"
+    "target_filter": "Markdig.Tests.TestLinkHelper"
   },
   {
     "id": "smoke-3",
     "category": "S",
     "upstream_sha": "25506f20d96f214f951ac2d881550d8b883bf9f0",
     "upstream_subject": "Fix plus superscript parsing (#791)",
-    "test_paths": ["src/Markdig.Tests/Specs/EmphasisExtraSpecs.md"],
-    "prod_paths": ["src/Markdig/Helpers/CharHelper.cs"],
-    "test_revert_paths": ["src/Markdig.Tests/Specs/EmphasisExtraSpecs.md", "src/Markdig.Tests/Specs/EmphasisExtraSpecs.generated.cs"],
-    "generated_files": ["src/Markdig.Tests/Specs/EmphasisExtraSpecs.generated.cs"],
+    "test_paths": [
+      "src/Markdig.Tests/Specs/EmphasisExtraSpecs.md"
+    ],
+    "prod_paths": [
+      "src/Markdig/Helpers/CharHelper.cs"
+    ],
+    "test_revert_paths": [
+      "src/Markdig.Tests/Specs/EmphasisExtraSpecs.md",
+      "src/Markdig.Tests/Specs/EmphasisExtraSpecs.generated.cs"
+    ],
+    "generated_files": [
+      "src/Markdig.Tests/Specs/EmphasisExtraSpecs.generated.cs"
+    ],
     "generated_guard": true,
     "discover_filter": "SuperscriptAndSubscript",
-    "target_filter": "TBD"
+    "target_filter": "Markdig.Tests.TestExtensionsSuperscriptAndSubscript"
   }
 ]

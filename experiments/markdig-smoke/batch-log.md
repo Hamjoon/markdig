@@ -76,3 +76,36 @@ Source of reused assets: `zod-week3-july` repo @ `745ec751`
   characters adjacent to delimiter runs. Hypothesis: the stale spec state may be GREEN under the
   new production, which would make smoke-3 unusable as an S fixture (upstream commit is
   test-first/additive). To be verified empirically in the fixture phase before any model call.
+
+## 2026-07-24 — fixture construction
+
+- Tooling issue: `dotnet test` runner output is localized (Korean) on this machine, which broke
+  the English summary parsing on the first smoke-3 discovery run. Fixed by exporting
+  `DOTNET_CLI_UI_LANGUAGE=en` in make-fixture.sh / validate.sh / signal.sh. The smoke-3
+  discovery result itself was unaffected (rc=0, 통과/Passed: 2, 실패/Failed: 0).
+- First build in each worktree regenerates ALL `*.generated.cs` (fresh checkout gives every
+  spec `.md` a new mtime). Regeneration is byte-stable: worktrees stay `git status`-clean.
+- **smoke-3 CONFIRMED NON-VIABLE** (pre-registered concern was correct):
+  - focused stale run: `Passed! Failed: 0, Passed: 2, Total: 2` (`smoke-3/logs/discover.raw.log`)
+  - full-suite stale run: `Passed! Failed: 0, Passed: 3791, Skipped: 1, Total: 3792`
+    (`smoke-3/logs/full-suite-green.raw.log`)
+  - Root cause: upstream `25506f20` is test-first/additive — the old spec examples do not
+    contradict the new production behavior, so no stale-failing state exists for this commit.
+    This is a case-mining defect, not a pipeline error: an S-category spec-layer case needs a
+    commit whose spec `.md` diff CHANGES existing expected output, not one that only adds
+    examples. Recorded as `pipeline_error: fixture-red-state-unreachable` in
+    `smoke-3/verdicts.json`; stages 1–5 skipped (no failing output exists for the stage-1
+    prompt). Spec acceptance criterion 7.1 ("all 3 fixtures red") is therefore not satisfiable
+    with the specified case list; criteria are evaluated on smoke-1/smoke-2.
+  - smoke-3 artifacts kept: fixture worktree + commit `79485f1f`, `stale-test.patch`,
+    `fixture.patch`, `case.json` (with evidence), `verdicts.json`, logs.
+- smoke-1 discovery: 1 failed / 38 total under `~Markdig.Tests.TestNormalize`; failing test
+  `AutoIdentifiersDoNotEmitGeneratedLinkReferenceDefinitions` (copied verbatim from runner
+  output). Final filter is method-level FQN.
+- smoke-2 discovery: 22 failed under `~Markdig.Tests.TestLinkHelper` (renamed/changed
+  parameterized tests `TestUrilizeScandinavianGermanChars`, `TestUrilizeNonAscii_*`). Final
+  filter is class-level `Markdig.Tests.TestLinkHelper` because the upstream commit renames test
+  methods (a method-level filter would stop matching after a legitimate repair).
+- Red-state verification (make-fixture.sh, case.json written):
+  - smoke-1: `FIXTURE: OK smoke-1 red-confirmed failed=1 passed=0 total=1 commit=bb41a2d6`
+  - smoke-2: `FIXTURE: OK smoke-2 red-confirmed failed=22 passed=96 total=118 commit=833990e6`

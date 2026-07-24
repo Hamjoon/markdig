@@ -1,0 +1,17 @@
+{
+  "id": "smoke-3",
+  "category": "S",
+  "decision": null,
+  "decision_match": null,
+  "stage2_applied": null,
+  "apply_status": null,
+  "target_pass": null,
+  "build_ok": true,
+  "preservation_pass": null,
+  "generated_invariant": null,
+  "repair_success": null,
+  "signal_covered": null,
+  "pipeline_error": true,
+  "pipeline_error_kind": "fixture-red-state-unreachable",
+  "note": "Not a model outcome: the S-fixture construction (spec section 4) yields a fully green tree at the stale state, so stages 1-5 were not run (no failing output exists to build the stage-1 prompt from; a model call would burn the one-request-per-case budget on an invalid case). See case.json evidence and batch-log.md."
+}
