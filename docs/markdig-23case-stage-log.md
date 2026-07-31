@@ -491,3 +491,23 @@ Chronological log. All times local, 2026-07-31.
   model response, result, repair evidence, or validation log changed.
 - Updated the pipeline helpers to read per-case input/run records and the
   consolidated metadata rather than recreating the removed root JSON files.
+
+## 2026-08-01 — Supplemental coverage protocol freeze
+
+- Confirmed that the original Markdig run had no Coverlet, XPlat Code
+  Coverage, or other line-coverage collection despite the Zod Week 4 report
+  retaining coverage as its final signal stage.
+- Froze a post-hoc coverage-only supplement before execution. It reuses the
+  same 23 immutable model responses and applies only to the two previously
+  successful repairs; no decision or repair result can change.
+- Pinned the reference procedure to Zod Week 4 commit `53aaeb99` and
+  `dotnet-coverage` 18.9.0. Raw Cobertura output will remain temporary; only
+  sanitized line summaries and logs will enter the archive.
+- Mutation/Stryker remains excluded by Gary's explicit instruction.
+- A pre-final dry run initially treated every upstream production path as a
+  required coverage file. P-09 exposed that one candidate path has no net
+  production diff in the validated repaired tree under the frozen target.
+  Before the canonical run, the collector was corrected to the pinned Zod
+  `compute-mutate.py` semantics: coverage scope is the net production diff
+  from the frozen base. The generated dry-run coverage outputs were discarded;
+  no model response, repair result, or original signal was changed.

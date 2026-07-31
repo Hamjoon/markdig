@@ -120,3 +120,44 @@ attempts until first success, normalized applied diff, actual paths,
 preservation result, sanitized logs, test counts, and final flags. Reconcile
 the aggregate JSON and English reports, commit locally, and stop. Publication
 requires a separate explicit approval after the evaluation is complete.
+
+## Post-Hoc Supplemental Coverage Protocol
+
+Coverage was not part of the original frozen evaluation. After that omission
+was identified, this supplemental protocol was frozen before collecting any
+coverage result. It does not change a model response, repair judgment, or the
+original strict-signal result.
+
+The procedure follows the coverage criterion in Zod Week 4 commit
+`53aaeb99d50a253d83f5dc18791b118c480ea8db`: coverage applies only to cases
+whose repair already passed patch application, target validation, and recent-
+change preservation. The pinned Zod runner SHA-256 is
+`62a3b96892b00a9433c7b5c1f17539ff660b02eae99ffe3ba260390eaf1a30bc`;
+the pinned `signal-case.sh` SHA-256 is
+`df5a508508c866e17e6dd5474bbee6ff7c6c4f4573c578250cde695b952f119d`.
+
+For each successful repair:
+
+1. Reconstruct the frozen base, apply and commit `fixture.patch`, then apply
+   the archived normalized `applied-repair.diff` without inference.
+2. Recheck the frozen target counts and `git apply --reverse --check` fixture
+   preservation.
+3. Run only the frozen target filter under `dotnet-coverage` 18.9.0 and emit
+   temporary Cobertura XML.
+4. Match Zod's production-scope rule: form candidates from the frozen
+   `prod_src_files` plus the model repair's actual production paths, then keep
+   only files present in the validated repaired tree's net diff from the
+   frozen base. Record excluded candidates and their reason.
+5. For every in-scope production file, union instrumented source lines across
+   reported classes and record covered lines, total lines, and percent.
+6. Mark the case `signal_preserved` only when every in-scope production file is
+   present in the report and has at least one covered line. A present file with
+   zero covered lines is `signal_weakened`; missing or failed tooling is
+   `signal_unknown`.
+
+Raw Cobertura XML is not archived because it contains machine-specific source
+paths. Only a path-sanitized per-case summary and execution log are retained.
+Cases without a successful repair are not rerun for coverage; their existing
+failure/no-change status is recorded explicitly as non-applicable,
+`partial_repair`, or `signal_unknown`. Mutation testing remains excluded by
+instruction.
