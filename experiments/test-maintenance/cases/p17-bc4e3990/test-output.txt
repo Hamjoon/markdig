@@ -1,0 +1,121 @@
+[... truncated, last 120 lines ...]
+  Failed TestIssue887ListAfterNestedBlockQuote [10 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 487 but was 453. Strings differ at index 237.
+  Expected: "...ckquote>\n<p>Not continued QL3</p>\n</blockquote>\n<ol start=..."
+  But was:  "...ckquote>\n<p>Not continued QL3\n2. Ordered 2 QL2 level 1\nCon..."
+  --------------------------------------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue, DiffStyle diffStyle, TextWriter output) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 86
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 22
+   at Markdig.Tests.TestParser.PrintAssertExpected(String source, String result, String expected, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 117
+   at Markdig.Tests.TestParser.TestSpec(String inputText, String expectedOutputText, MarkdownPipeline pipeline, Boolean plainText, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 98
+   at Markdig.Tests.TestParser.TestSpec(String inputText, String expectedOutputText, String extensions, Boolean plainText, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 85
+   at Markdig.Tests.MiscTests.TestIssue887ListAfterNestedBlockQuote() in <worktree>/src/Markdig.Tests/MiscTests.cs:line 487
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue, DiffStyle diffStyle, TextWriter output) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 86
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 22
+   at Markdig.Tests.TestParser.PrintAssertExpected(String source, String result, String expected, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 117
+   at Markdig.Tests.TestParser.TestSpec(String inputText, String expectedOutputText, MarkdownPipeline pipeline, Boolean plainText, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 98
+   at Markdig.Tests.TestParser.TestSpec(String inputText, String expectedOutputText, String extensions, Boolean plainText, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 85
+   at Markdig.Tests.MiscTests.TestIssue887ListAfterNestedBlockQuote() in <worktree>/src/Markdig.Tests/MiscTests.cs:line 487
+
+
+  Standard Output Messages:
+ Pipeline configured with extensions: default
+ ```````````````````Source
+ >·>*·_Unordered·1_·QL2·level·1·no·space·sep
+ >·>··Continued·1
+ >·>·*·Unordered·2·level·1
+ >·>·1.·**Ordered·1**·QL2·level·1
+ >·>····Continued·1
+ >·>·>·Not·continued·QL3
+ >·>·2.·Ordered·2·QL2·level·1
+ >·>·Continued·2a
+ >·>
+ >·>····Continued·2b
+ >·>
+ >·>····Continued·2c
+ >·>
+ >·>····3.·Ordered·3·QL2·level·2
+ >·>·······Continued·3a
+ >·>
+ >·>·······Continued·3b
+
+ ```````````````````Result
+ <blockquote>
+ <blockquote>
+ <ul>
+ <li><em>Unordered·1</em>·QL2·level·1·no·space·sep
+ Continued·1</li>
+ <li>Unordered·2·level·1</li>
+ </ul>
+ <ol>
+ <li><strong>Ordered·1</strong>·QL2·level·1
+ Continued·1</li>
+ </ol>
+ <blockquote>
+ <p>Not·continued·QL3
+ 2.·Ordered·2·QL2·level·1
+ Continued·2a</p>
+ </blockquote>
+ <p>Continued·2b</p>
+ <p>Continued·2c</p>
+ <ol·start="3">
+ <li><p>Ordered·3·QL2·level·2
+ Continued·3a</p>
+ <p>Continued·3b</p></li>
+ </ol>
+ </blockquote>
+ </blockquote>
+ ```````````````````Expected
+ <blockquote>
+ <blockquote>
+ <ul>
+ <li><em>Unordered·1</em>·QL2·level·1·no·space·sep
+ Continued·1</li>
+ <li>Unordered·2·level·1</li>
+ </ul>
+ <ol>
+ <li><strong>Ordered·1</strong>·QL2·level·1
+ Continued·1</li>
+ </ol>
+ <blockquote>
+ <p>Not·continued·QL3</p>
+ </blockquote>
+ <ol·start="2">
+ <li><p>Ordered·2·QL2·level·1
+ Continued·2a</p>
+ <p>Continued·2b</p>
+ <p>Continued·2c</p>
+ <ol·start="3">
+ <li><p>Ordered·3·QL2·level·2
+ Continued·3a</p>
+ <p>Continued·3b</p></li>
+ </ol></li>
+ </ol>
+ </blockquote>
+ </blockquote>
+ ```````````````````
+
+
+ Index    Expected     Actual
+ ----------------------------
+ >>> 237    60   <     10   \n
+ *** 238    47   /     50   2
+ *** 239    112  p     46   .
+ *** 240    62   >     32   \u20;
+ *** 241    10   \n    79   O
+ *** 242    60   <     114  r
+ *** 243    47   /     100  d
+ *** 244    98   b     101  e
+ *** 245    108  l     114  r
+ *** 246    111  o     101  e
+
+
+
+Failed!  - Failed:     1, Passed:    50, Skipped:     0, Total:    51, Duration: 299 ms - Markdig.Tests.dll (net10.0)

@@ -1,0 +1,127 @@
+{
+  "case_id": "P-07",
+  "category": "P",
+  "expected_decision": "fix_production",
+  "attempt": 1,
+  "status": "evaluated",
+  "reason": "executable-validation-failed",
+  "response": {
+    "first_line": "DECISION: fix_production",
+    "decision": "fix_production",
+    "decision_line_valid": true,
+    "body_empty": false,
+    "patch_present": true,
+    "raw_unified_diff_conformant": false,
+    "header_paths_safe": true,
+    "header_scope_valid": true,
+    "header_paths": [],
+    "parse_reason": null,
+    "response_sha256": "6b128ae77f827cd4b37438ac0aa9f1f20d5360944b6b45e4e1c430cb36933283",
+    "extracted_patch_sha256": "9f0f93efce298e58a3798fa01271ed332a89b06c9dc90359a7cce83408240c81"
+  },
+  "fixture": {
+    "base_sha": "5dca4149a518a385f40dc7b11a2a86cd4452df4b",
+    "upstream_sha": "fcbf8170633e7e1025a37718af9c253698166b52",
+    "tfm": "net10.0",
+    "target_filter": "FullyQualifiedName~TestCjkFriendlyEmphasis",
+    "constructed": true,
+    "committed": true
+  },
+  "model_patch": {
+    "apply_attempted": true,
+    "apply_attempts": [
+      {
+        "method": "git-apply",
+        "rc": 128
+      },
+      {
+        "method": "git-apply-recount",
+        "rc": 128
+      },
+      {
+        "method": "patch-fuzz",
+        "rc": 2
+      },
+      {
+        "method": "context-match",
+        "rc": 0
+      }
+    ],
+    "apply_method": "context-match",
+    "apply_succeeded": true,
+    "effective_change": true,
+    "actual_paths": [
+      "src/Markdig/Parsers/Inlines/EmphasisInlineParser.cs"
+    ],
+    "scope_valid": true,
+    "decision_side_valid": true,
+    "applied_diff": "applied-repair.diff",
+    "applied_diff_sha256": "881abd25f05afc349d71bd089c7e9f1a526f06027eb51d5f2078dfe58298bbd7"
+  },
+  "preservation": {
+    "checked": true,
+    "passed": true,
+    "rc": 0,
+    "method": "git apply --reverse --check fixture.patch"
+  },
+  "runs": [
+    {
+      "kind": "build",
+      "label": "after-model-action",
+      "command": "dotnet build src/Markdig.Tests/Markdig.Tests.csproj -c Release -f net10.0 -v q",
+      "rc": 0
+    },
+    {
+      "kind": "test",
+      "label": "target-after-model-action",
+      "command": "dotnet test src/Markdig.Tests/Markdig.Tests.csproj -c Release -f net10.0 --no-build --filter FullyQualifiedName~TestCjkFriendlyEmphasis",
+      "filter": "FullyQualifiedName~TestCjkFriendlyEmphasis",
+      "rc": 1,
+      "counts": {
+        "failed": 3,
+        "passed": 104,
+        "skipped": 0,
+        "total": 107
+      },
+      "failed_tests": [
+        "TestCjkFriendlyEmphasisAfterLineBreaksAndEntities(\"&#10;**Entity**\",\"<p>\\n<strong>Entity</strong></p>\\n\")",
+        "TestCjkFriendlyEmphasisAfterLineBreaksAndEntities(\"&#13;**CarriageReturn**\",\"<p>\\r<strong>CarriageReturn</strong></p>\\n\")",
+        "TestCjkFriendlyEmphasisAfterLineBreaksAndEntities(\"**First**&#10;**Second**\",\"<p><strong>First</strong>\\n<strong>Second</strong></p>\\n\")"
+      ]
+    },
+    {
+      "kind": "test",
+      "label": "full-suite-after-model-action",
+      "command": "dotnet test src/Markdig.Tests/Markdig.Tests.csproj -c Release -f net10.0 --no-build",
+      "filter": null,
+      "rc": 1,
+      "counts": {
+        "failed": 5,
+        "passed": 3769,
+        "skipped": 1,
+        "total": 3775
+      },
+      "failed_tests": [
+        "ExtensionsEmphasisOnHtmlEntities_Example006",
+        "TestCjkFriendlyEmphasisAfterLineBreaksAndEntities(\"&#10;**Entity**\",\"<p>\\n<strong>Entity</strong></p>\\n\")",
+        "TestCjkFriendlyEmphasisAfterLineBreaksAndEntities(\"&#13;**CarriageReturn**\",\"<p>\\r<strong>CarriageReturn</strong></p>\\n\")",
+        "TestCjkFriendlyEmphasisAfterLineBreaksAndEntities(\"**First**&#10;**Second**\",\"<p><strong>First</strong>\\n<strong>Second</strong></p>\\n\")",
+        "TestEmphasisAndHtmlEntity"
+      ]
+    }
+  ],
+  "decision_correct": true,
+  "response_contract_valid": true,
+  "behavior_validation_pass": false,
+  "repair_success": false,
+  "strict_signal_pass": false,
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "evaluated",
+      "reason": "executable-validation-failed",
+      "record": "result.json"
+    }
+  ],
+  "archive_case_id": "p07-fcbf8170"
+}

@@ -1,0 +1,161 @@
+[... truncated, last 160 lines ...]
+ >>> 27     116  t     112  p
+ *** 28     97   a     62   >
+ *** 29     98   b     97   a
+ *** 30     108  l     32   \u20;
+ *** 31     101  e     124  |
+ *** 32     62   >     32   \u20;
+ *** 33     10   \n    98   b
+ *** 34     60   <     10   \n
+ *** 35     116  t     45   -
+ *** 36     104  h     32   \u20;
+
+
+  Failed TestPipeTable [1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 394 but was 273. Strings differ at index 0.
+  Expected: "table        ( 0, 0)  0-10\ntablerow     ( 0, 0)  0-2\ntablecel..."
+  But was:  "paragraph    ( 0, 0)  0-10\nliteral      ( 0, 0)  0-2\nlinebrea..."
+  -----------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue, DiffStyle diffStyle, TextWriter output) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 86
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 22
+   at Markdig.Tests.TestSourcePosition.Check(String text, String expectedResult, String extensions, Boolean trackTrivia) in <worktree>/src/Markdig.Tests/TestSourcePosition.cs:line 968
+   at Markdig.Tests.TestSourcePosition.TestPipeTable() in <worktree>/src/Markdig.Tests/TestSourcePosition.cs:line 770
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue, DiffStyle diffStyle, TextWriter output) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 86
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 22
+   at Markdig.Tests.TestSourcePosition.Check(String text, String expectedResult, String extensions, Boolean trackTrivia) in <worktree>/src/Markdig.Tests/TestSourcePosition.cs:line 968
+   at Markdig.Tests.TestSourcePosition.TestPipeTable() in <worktree>/src/Markdig.Tests/TestSourcePosition.cs:line 770
+
+
+  Standard Output Messages:
+ ```````````````````Source
+ a|b
+ -|-
+ 0|1
+
+ ```````````````````Result
+ paragraph    ( 0, 0)  0-10
+ literal      ( 0, 0)  0-2
+ linebreak    ( 0, 3)  3-3
+ literal      ( 1, 0)  4-4
+ pipetabledelimiter ( 1, 1)  5-5
+ literal      ( 1, 2)  6-6
+ linebreak    ( 1, 3)  7-7
+ literal      ( 2, 0)  8-8
+ pipetabledelimiter ( 2, 1)  9-9
+ literal      ( 2, 2) 10-10
+ ```````````````````Expected
+ table        ( 0, 0)  0-10
+ tablerow     ( 0, 0)  0-2
+ tablecell    ( 0, 0)  0-0
+ paragraph    ( 0, 0)  0-0
+ literal      ( 0, 0)  0-0
+ tablecell    ( 0, 2)  2-2
+ paragraph    ( 0, 2)  2-2
+ literal      ( 0, 2)  2-2
+ tablerow     ( 2, 0)  8-10
+ tablecell    ( 2, 0)  8-8
+ paragraph    ( 2, 0)  8-8
+ literal      ( 2, 0)  8-8
+ tablecell    ( 2, 2) 10-10
+ paragraph    ( 2, 2) 10-10
+ literal      ( 2, 2) 10-10
+ ```````````````````
+
+
+ Index    Expected     Actual
+ ----------------------------
+ >>> 0      116  t     112  p
+ *** 2      98   b     114  r
+ *** 3      108  l     97   a
+ *** 4      101  e     103  g
+ *** 5      32   \u20;   114  r
+ *** 6      32   \u20;   97   a
+ *** 7      32   \u20;   112  p
+ *** 8      32   \u20;   104  h
+
+
+  Failed TestPipeTable2 [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 449 but was 328. Strings differ at index 52.
+  Expected: "paragraph    ( 0, 0)  0-0\nliteral      ( 0, 0)  0-0\ntable    ..."
+  But was:  "paragraph    ( 0, 0)  0-0\nliteral      ( 0, 0)  0-0\nparagraph..."
+  -----------------------------------------------------------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue, DiffStyle diffStyle, TextWriter output) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 86
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 22
+   at Markdig.Tests.TestSourcePosition.Check(String text, String expectedResult, String extensions, Boolean trackTrivia) in <worktree>/src/Markdig.Tests/TestSourcePosition.cs:line 968
+   at Markdig.Tests.TestSourcePosition.TestPipeTable2() in <worktree>/src/Markdig.Tests/TestSourcePosition.cs:line 793
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue, DiffStyle diffStyle, TextWriter output) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 86
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 22
+   at Markdig.Tests.TestSourcePosition.Check(String text, String expectedResult, String extensions, Boolean trackTrivia) in <worktree>/src/Markdig.Tests/TestSourcePosition.cs:line 968
+   at Markdig.Tests.TestSourcePosition.TestPipeTable2() in <worktree>/src/Markdig.Tests/TestSourcePosition.cs:line 793
+
+
+  Standard Output Messages:
+ ```````````````````Source
+ 0
+
+ a|b
+ -|-
+ 0|1
+
+ ```````````````````Result
+ paragraph    ( 0, 0)  0-0
+ literal      ( 0, 0)  0-0
+ paragraph    ( 2, 0)  3-13
+ literal      ( 2, 0)  3-5
+ linebreak    ( 2, 3)  6-6
+ literal      ( 3, 0)  7-7
+ pipetabledelimiter ( 3, 1)  8-8
+ literal      ( 3, 2)  9-9
+ linebreak    ( 3, 3) 10-10
+ literal      ( 4, 0) 11-11
+ pipetabledelimiter ( 4, 1) 12-12
+ literal      ( 4, 2) 13-13
+ ```````````````````Expected
+ paragraph    ( 0, 0)  0-0
+ literal      ( 0, 0)  0-0
+ table        ( 2, 0)  3-13
+ tablerow     ( 2, 0)  3-5
+ tablecell    ( 2, 0)  3-3
+ paragraph    ( 2, 0)  3-3
+ literal      ( 2, 0)  3-3
+ tablecell    ( 2, 2)  5-5
+ paragraph    ( 2, 2)  5-5
+ literal      ( 2, 2)  5-5
+ tablerow     ( 4, 0) 11-13
+ tablecell    ( 4, 0) 11-11
+ paragraph    ( 4, 0) 11-11
+ literal      ( 4, 0) 11-11
+ tablecell    ( 4, 2) 13-13
+ paragraph    ( 4, 2) 13-13
+ literal      ( 4, 2) 13-13
+ ```````````````````
+
+
+ Index    Expected     Actual
+ ----------------------------
+ >>> 52     116  t     112  p
+ *** 54     98   b     114  r
+ *** 55     108  l     97   a
+ *** 56     101  e     103  g
+ *** 57     32   \u20;   114  r
+ *** 58     32   \u20;   97   a
+ *** 59     32   \u20;   112  p
+ *** 60     32   \u20;   104  h
+
+
+
+Failed!  - Failed:    43, Passed:  3499, Skipped:     1, Total:  3543, Duration: 938 ms - Markdig.Tests.dll (net9.0)

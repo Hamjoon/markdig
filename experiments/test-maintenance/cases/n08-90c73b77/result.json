@@ -1,0 +1,84 @@
+{
+  "case_id": "N-08",
+  "category": "N",
+  "expected_decision": "no_change",
+  "attempt": 1,
+  "status": "evaluated",
+  "reason": "signal-pass",
+  "response": {
+    "first_line": "DECISION: no_change",
+    "decision": "no_change",
+    "decision_line_valid": true,
+    "body_empty": true,
+    "patch_present": false,
+    "raw_unified_diff_conformant": false,
+    "header_paths_safe": true,
+    "header_scope_valid": true,
+    "header_paths": [],
+    "parse_reason": null,
+    "response_sha256": "10f7f035854e91159bca190040dc4a455e24e5ead05e7be68fa4224c52d931d6",
+    "extracted_patch_sha256": null
+  },
+  "fixture": {
+    "base_sha": "ee403ce28f1a18a1216e43fdfb3344c45b3f813f",
+    "upstream_sha": "90c73b775453734fbfb28cde78c19b5c9f6139e9",
+    "tfm": "net9.0",
+    "target_filter": null,
+    "constructed": true,
+    "committed": true
+  },
+  "model_patch": {
+    "apply_attempted": false,
+    "apply_attempts": [],
+    "apply_method": null,
+    "apply_succeeded": false,
+    "effective_change": false,
+    "actual_paths": [],
+    "scope_valid": null,
+    "decision_side_valid": null,
+    "applied_diff": null,
+    "applied_diff_sha256": null
+  },
+  "preservation": {
+    "checked": true,
+    "passed": true,
+    "rc": 0,
+    "method": "git apply --reverse --check fixture.patch"
+  },
+  "runs": [
+    {
+      "kind": "build",
+      "label": "after-model-action",
+      "command": "dotnet build src/Markdig.Tests/Markdig.Tests.csproj -c Release -f net9.0 -v q",
+      "rc": 0
+    },
+    {
+      "kind": "test",
+      "label": "full-suite-after-model-action",
+      "command": "dotnet test src/Markdig.Tests/Markdig.Tests.csproj -c Release -f net9.0 --no-build",
+      "filter": null,
+      "rc": 0,
+      "counts": {
+        "failed": 0,
+        "passed": 3453,
+        "skipped": 1,
+        "total": 3454
+      },
+      "failed_tests": []
+    }
+  ],
+  "decision_correct": true,
+  "response_contract_valid": true,
+  "behavior_validation_pass": true,
+  "repair_success": false,
+  "strict_signal_pass": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "evaluated",
+      "reason": "signal-pass",
+      "record": "result.json"
+    }
+  ],
+  "archive_case_id": "n08-90c73b77"
+}

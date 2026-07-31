@@ -1,0 +1,22 @@
+{
+  "case_id": "N-03",
+  "category": "N",
+  "base_sha": "6261660d377e28430c0b01a0efc1f55476f86a45",
+  "upstream_sha": "ec2eef25b2a70dfab54e2636f50d14f2a0b8ca08",
+  "model": "openai/gpt-oss-120b",
+  "temperature": 0,
+  "allowed_files": [
+    "src/Markdig/Helpers/HtmlHelper.cs",
+    "src/Markdig/Parsers/Inlines/LinkInlineParser.cs"
+  ],
+  "fixture_paths": [
+    "src/Markdig/Helpers/HtmlHelper.cs",
+    "src/Markdig/Parsers/Inlines/LinkInlineParser.cs"
+  ],
+  "test_revision": null,
+  "production_revision": "ec2eef25b2a70dfab54e2636f50d14f2a0b8ca08",
+  "prompt_sha256": "3cf3914fbb8c13839daa2aa28f32f16ef636daf27ead9f8cbc83b51a3824b001",
+  "fixture_patch_sha256": "ee156fdb156eecdd596a0f0335f4914dbd62a871a5f98145a95b327859149496",
+  "test_output_sha256": "3427e2e10511a592799f3392df8ac92236b7d63fdf0431a615eb032ce86f8e73",
+  "prompt_characters": 7492
+}

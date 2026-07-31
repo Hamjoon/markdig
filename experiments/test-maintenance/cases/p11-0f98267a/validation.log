@@ -1,0 +1,161 @@
+[... truncated, last 160 lines ...]
+ *** 2      62   >     97   a
+ *** 3      97   a     98   b
+ *** 4      32   \u20;   108  l
+ *** 5      124  |     101  e
+ *** 6      32   \u20;   62   >
+ *** 7      98   b     10   \n
+ *** 8      32   \u20;   60   <
+ *** 9      60   <     116  t
+ *** 10     99   c     104  h
+
+
+  Failed ExtensionsPipeTable_Example028 [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 18 but was 143. Strings differ at index 1.
+  Expected: "<p>|||\n|||\n|||</p>"
+  But was:  "<table>\n<thead>\n<tr>\n<th></th>\n<th></th>\n</tr>\n</thead>\n<tbod..."
+  ------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue, DiffStyle diffStyle, TextWriter output) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 86
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 22
+   at Markdig.Tests.TestParser.PrintAssertExpected(String source, String result, String expected, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 117
+   at Markdig.Tests.TestParser.TestSpec(String inputText, String expectedOutputText, MarkdownPipeline pipeline, Boolean plainText, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 98
+   at Markdig.Tests.TestParser.TestSpec(String inputText, String expectedOutputText, String extensions, Boolean plainText, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 85
+   at Markdig.Tests.Specs.PipeTables.TestExtensionsPipeTable.ExtensionsPipeTable_Example028() in <worktree>/src/Markdig.Tests/Specs/PipeTableSpecs.generated.cs:line 1031
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue, DiffStyle diffStyle, TextWriter output) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 86
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 22
+   at Markdig.Tests.TestParser.PrintAssertExpected(String source, String result, String expected, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 117
+   at Markdig.Tests.TestParser.TestSpec(String inputText, String expectedOutputText, MarkdownPipeline pipeline, Boolean plainText, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 98
+   at Markdig.Tests.TestParser.TestSpec(String inputText, String expectedOutputText, String extensions, Boolean plainText, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 85
+   at Markdig.Tests.Specs.PipeTables.TestExtensionsPipeTable.ExtensionsPipeTable_Example028() in <worktree>/src/Markdig.Tests/Specs/PipeTableSpecs.generated.cs:line 1031
+
+
+  Standard Output Messages:
+ Example 28
+ Section Extensions / Pipe Table
+
+ Pipeline configured with extensions: pipetables
+ ```````````````````Source
+ |||
+ |||
+ |||
+ ```````````````````Result
+ <table>
+ <thead>
+ <tr>
+ <th></th>
+ <th></th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td></td>
+ <td></td>
+ </tr>
+ <tr>
+ <td></td>
+ <td></td>
+ </tr>
+ </tbody>
+ </table>
+ ```````````````````Expected
+ <p>|||
+ |||
+ |||</p>
+ ```````````````````
+
+
+ Index    Expected     Actual
+ ----------------------------
+ >>> 1      112  p     116  t
+ *** 2      62   >     97   a
+ *** 3      124  |     98   b
+ *** 4      124  |     108  l
+ *** 5      124  |     101  e
+ *** 6      10   \n    62   >
+ *** 7      124  |     10   \n
+ *** 8      124  |     60   <
+ *** 9      124  |     116  t
+ *** 10     10   \n    104  h
+
+
+  Skipped ListUnorderedLooseTop [< 1 ms]
+  Failed BoldTableCellWithUnmatchedSubscriptDelimiterDoesNotAddCells [3 ms]
+  Error Message:
+     Assert.That(rows, Has.All.Count.EqualTo(3))
+  Expected: all items property Count equal to 3
+  But was:  < < < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> >, <empty> >, < < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> >, <empty> >, < < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> > >, < < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> > > >
+  First non-matching item at index [0]:  < < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> >, <empty> >
+
+  Stack Trace:
+     at Markdig.Tests.TestPipeTable.BoldTableCellWithUnmatchedSubscriptDelimiterDoesNotAddCells() in <worktree>/src/Markdig.Tests/TestPipeTable.cs:line 186
+
+1)    at Markdig.Tests.TestPipeTable.BoldTableCellWithUnmatchedSubscriptDelimiterDoesNotAddCells() in <worktree>/src/Markdig.Tests/TestPipeTable.cs:line 186
+
+
+  Failed TestBugWithEmphasisAndTable [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 37 but was 91. Strings differ at index 1.
+  Expected: "<p><strong>basics | 8:00</strong></p>"
+  But was:  "<table>\n<thead>\n<tr>\n<th><strong>basics</strong></th>\n<th>8:0..."
+  ------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue, DiffStyle diffStyle, TextWriter output) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 86
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 22
+   at Markdig.Tests.TestParser.PrintAssertExpected(String source, String result, String expected, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 117
+   at Markdig.Tests.TestParser.TestSpec(String inputText, String expectedOutputText, MarkdownPipeline pipeline, Boolean plainText, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 98
+   at Markdig.Tests.TestParser.TestSpec(String inputText, String expectedOutputText, String extensions, Boolean plainText, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 85
+   at Markdig.Tests.TestPlayParser.TestBugWithEmphasisAndTable() in <worktree>/src/Markdig.Tests/TestPlayParser.cs:line 22
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue, DiffStyle diffStyle, TextWriter output) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 86
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 22
+   at Markdig.Tests.TestParser.PrintAssertExpected(String source, String result, String expected, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 117
+   at Markdig.Tests.TestParser.TestSpec(String inputText, String expectedOutputText, MarkdownPipeline pipeline, Boolean plainText, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 98
+   at Markdig.Tests.TestParser.TestSpec(String inputText, String expectedOutputText, String extensions, Boolean plainText, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 85
+   at Markdig.Tests.TestPlayParser.TestBugWithEmphasisAndTable() in <worktree>/src/Markdig.Tests/TestPlayParser.cs:line 22
+
+
+  Standard Output Messages:
+ Pipeline configured with extensions: advanced
+ ```````````````````Source
+ **basics·|·8:00**
+ ```````````````````Result
+ <table>
+ <thead>
+ <tr>
+ <th><strong>basics</strong></th>
+ <th>8:00</th>
+ </tr>
+ </thead>
+ </table>
+ ```````````````````Expected
+ <p><strong>basics·|·8:00</strong></p>
+ ```````````````````
+
+
+ Index    Expected     Actual
+ ----------------------------
+ >>> 1      112  p     116  t
+ *** 2      62   >     97   a
+ *** 3      60   <     98   b
+ *** 4      115  s     108  l
+ *** 5      116  t     101  e
+ *** 6      114  r     62   >
+ *** 7      111  o     10   \n
+ *** 8      110  n     60   <
+ *** 9      103  g     116  t
+ *** 10     62   >     104  h
+
+
+
+Failed!  - Failed:    10, Passed:  3765, Skipped:     1, Total:  3776, Duration: 931 ms - Markdig.Tests.dll (net10.0)

@@ -1,0 +1,12 @@
+diff --git a/src/Markdig/Parsers/ListBlockParser.cs b/src/Markdig/Parsers/ListBlockParser.cs
+index a17a48c7..e9dcf323 100644
+--- a/src/Markdig/Parsers/ListBlockParser.cs
++++ b/src/Markdig/Parsers/ListBlockParser.cs
+@@ -145,6 +145,7 @@ private BlockState TryContinueListItem(BlockProcessor state, ListItemBlock listI
+             if (list.CountBlankLinesReset == 1 && listItem.ColumnWidth < 0)
+             {
+                 state.Close(listItem);
++                list.CountBlankLinesReset = 0;
+ 
+                 // Leave the list open
+                 list.IsOpen = true;

@@ -1,0 +1,21 @@
+{
+  "case_id": "S-05",
+  "category": "S",
+  "base_sha": "8c01cf054971a1ec4cd663edaca6e2d035236133",
+  "upstream_sha": "12590e5fbe1730984e0783452666a67df8e0b806",
+  "model": "openai/gpt-oss-120b",
+  "temperature": 0,
+  "allowed_files": [
+    "src/Markdig.Tests/TestLinkHelper.cs",
+    "src/Markdig/Helpers/LinkHelper.cs"
+  ],
+  "fixture_paths": [
+    "src/Markdig/Helpers/LinkHelper.cs"
+  ],
+  "test_revision": "8c01cf054971a1ec4cd663edaca6e2d035236133",
+  "production_revision": "12590e5fbe1730984e0783452666a67df8e0b806",
+  "prompt_sha256": "97d8dab469ceed1898f38f665f5a1483d506c10e7d101c08b79181d267b54ef9",
+  "fixture_patch_sha256": "f3c0789016f9dfb55e2da5debdb35d86ab1f52179abcb25d87ff14904e394d5f",
+  "test_output_sha256": "8e0dacf1d1518c0b8509232cabc651c9a59a9e9b46a3ce23f0b32ae54d8df121",
+  "prompt_characters": 22258
+}

@@ -1,0 +1,69 @@
+Test run for <worktree>/src/Markdig.Tests/bin/Release/net10.0/Markdig.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+  Failed TestAbbreviations [13 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 280 but was 223. Strings differ at index 28.
+  Expected: "paragraph    ( 2, 0) 38-102\ncontainer    ( 2, 0) 38-102\nliter..."
+  But was:  "paragraph    ( 2, 0) 38-102\nliteral      ( 2, 0) 38-66\nabbrev..."
+  ----------------------------------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue, DiffStyle diffStyle, TextWriter output) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 86
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 22
+   at Markdig.Tests.TestSourcePosition.Check(String text, String expectedResult, String extensions, Boolean trackTrivia) in <worktree>/src/Markdig.Tests/TestSourcePosition.cs:line 991
+   at Markdig.Tests.TestSourcePosition.TestAbbreviations() in <worktree>/src/Markdig.Tests/TestSourcePosition.cs:line 536
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue, DiffStyle diffStyle, TextWriter output) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 86
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 22
+   at Markdig.Tests.TestSourcePosition.Check(String text, String expectedResult, String extensions, Boolean trackTrivia) in <worktree>/src/Markdig.Tests/TestSourcePosition.cs:line 991
+   at Markdig.Tests.TestSourcePosition.TestAbbreviations() in <worktree>/src/Markdig.Tests/TestSourcePosition.cs:line 536
+
+
+  Standard Output Messages:
+ ```````````````````Source
+ *[HTML]:·Hypertext·Markup·Language
+
+ Later·in·a·text·we·are·using·HTML·and·it·becomes·an·abbr·tag·HTML
+
+ HTML·abbreviation·at·the·beginning·of·a·line
+ ```````````````````Result
+ paragraph    ( 2, 0) 38-102
+ literal      ( 2, 0) 38-66
+ abbreviation ( 2,29) 67-70
+ literal      ( 2,33) 71-98
+ abbreviation ( 2,61) 99-102
+ paragraph    ( 4, 0) 107-150
+ abbreviation ( 4, 0) 107-110
+ literal      ( 4, 4) 111-150
+ ```````````````````Expected
+ paragraph    ( 2, 0) 38-102
+ container    ( 2, 0) 38-102
+ literal      ( 2, 0) 38-66
+ abbreviation ( 2,29) 67-70
+ literal      ( 2,33) 71-98
+ abbreviation ( 2,61) 99-102
+ paragraph    ( 4, 0) 107-150
+ container    ( 4, 0) 107-150
+ abbreviation ( 4, 0) 107-110
+ literal      ( 4, 4) 111-150
+ ```````````````````
+
+
+ Index    Expected     Actual
+ ----------------------------
+ >>> 28     99   c     108  l
+ *** 29     111  o     105  i
+ *** 30     110  n     116  t
+ *** 31     116  t     101  e
+ *** 32     97   a     114  r
+ *** 33     105  i     97   a
+ *** 34     110  n     108  l
+ *** 35     101  e     32   \u20;
+ *** 36     114  r     32   \u20;
+
+
+
+Failed!  - Failed:     1, Passed:    73, Skipped:     0, Total:    74, Duration: 101 ms - Markdig.Tests.dll (net10.0)

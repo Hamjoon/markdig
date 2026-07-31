@@ -1,0 +1,91 @@
+{
+  "case_id": "S-09",
+  "category": "S",
+  "expected_decision": "fix_tests",
+  "attempt": 1,
+  "status": "evaluated",
+  "reason": "build-failed-after-model-action",
+  "response": {
+    "first_line": "DECISION: fix_production",
+    "decision": "fix_production",
+    "decision_line_valid": true,
+    "body_empty": false,
+    "patch_present": true,
+    "raw_unified_diff_conformant": false,
+    "header_paths_safe": true,
+    "header_scope_valid": true,
+    "header_paths": [
+      "src/Markdig/Extensions/DefinitionLists/DefinitionListParser.cs"
+    ],
+    "parse_reason": null,
+    "response_sha256": "791cbfadc3a8322b5dc1ae452c05bcf2f73fe91d2483a84063682cf08514bde5",
+    "extracted_patch_sha256": "c05265135e2f0c17abd694fe5d9a153893c104a1c3b20da7e27fda3e4df48423"
+  },
+  "fixture": {
+    "base_sha": "c488a27497199aa520df540ffecf1e159fbc06a1",
+    "upstream_sha": "148fd08b1d5604177637307d82e6b83079642d63",
+    "tfm": "net10.0",
+    "target_filter": "FullyQualifiedName~CounterState|FullyQualifiedName~CountingInlineParser|FullyQualifiedName~TestParserAuthoringHelpers|FullyQualifiedName~TestSourcePosition",
+    "constructed": true,
+    "committed": true
+  },
+  "model_patch": {
+    "apply_attempted": true,
+    "apply_attempts": [
+      {
+        "method": "git-apply",
+        "rc": 128
+      },
+      {
+        "method": "git-apply-recount",
+        "rc": 128
+      },
+      {
+        "method": "patch-fuzz",
+        "rc": 2
+      },
+      {
+        "method": "context-match",
+        "rc": 0
+      }
+    ],
+    "apply_method": "context-match",
+    "apply_succeeded": true,
+    "effective_change": true,
+    "actual_paths": [
+      "src/Markdig/Extensions/DefinitionLists/DefinitionListParser.cs"
+    ],
+    "scope_valid": true,
+    "decision_side_valid": true,
+    "applied_diff": "applied-repair.diff",
+    "applied_diff_sha256": "190812e08e837d3bfe942fac6ba6ede5c62b3f615c4792973c6b9893ab0efe47"
+  },
+  "preservation": {
+    "checked": true,
+    "passed": false,
+    "rc": 1,
+    "method": "git apply --reverse --check fixture.patch"
+  },
+  "runs": [
+    {
+      "kind": "build",
+      "label": "after-model-action",
+      "command": "dotnet build src/Markdig.Tests/Markdig.Tests.csproj -c Release -f net10.0 -v q",
+      "rc": 1
+    }
+  ],
+  "decision_correct": false,
+  "response_contract_valid": true,
+  "behavior_validation_pass": false,
+  "repair_success": false,
+  "strict_signal_pass": false,
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "evaluated",
+      "reason": "build-failed-after-model-action",
+      "record": "result.json"
+    }
+  ],
+  "archive_case_id": "s09-148fd08b"
+}

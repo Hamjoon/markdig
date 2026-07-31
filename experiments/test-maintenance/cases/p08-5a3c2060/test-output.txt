@@ -1,0 +1,54 @@
+Test run for <worktree>/src/Markdig.Tests/bin/Release/net9.0/Markdig.Tests.dll (.NETCoreApp,Version=v9.0)
+A total of 1 test files matched the specified pattern.
+  Failed Test("- 1.\n- 2.") [13 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 9 but was 6. Strings differ at index 1.
+  Expected: "- 1.\n- 2."
+  But was:  "-\n- 2."
+  ------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue, DiffStyle diffStyle, TextWriter output) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 86
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 22
+   at Markdig.Tests.TestParser.PrintAssertExpected(String source, String result, String expected, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 117
+   at Markdig.Tests.TestRoundtrip.RoundTrip(String markdown, String context) in <worktree>/src/Markdig.Tests/TestRoundtrip.cs:line 27
+   at Markdig.Tests.RoundtripSpecs.TestUnorderedList.Test(String value) in <worktree>/src/Markdig.Tests/RoundtripSpecs/TestUnorderedList.cs:line 31
+   at InvokeStub_TestUnorderedList.Test(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue, DiffStyle diffStyle, TextWriter output) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 86
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 22
+   at Markdig.Tests.TestParser.PrintAssertExpected(String source, String result, String expected, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 117
+   at Markdig.Tests.TestRoundtrip.RoundTrip(String markdown, String context) in <worktree>/src/Markdig.Tests/TestRoundtrip.cs:line 27
+   at Markdig.Tests.RoundtripSpecs.TestUnorderedList.Test(String value) in <worktree>/src/Markdig.Tests/RoundtripSpecs/TestUnorderedList.cs:line 31
+   at InvokeStub_TestUnorderedList.Test(Object, Span`1)
+
+
+  Standard Output Messages:
+ ```````````````````Source
+
+ ```````````````````Result
+ -
+ -·2.
+ ```````````````````Expected
+ -·1.
+ -·2.
+ ```````````````````
+
+
+ Index    Expected     Actual
+ ----------------------------
+ >>> 1      32   \u20;   10   \n
+ *** 2      49   1     45   -
+ *** 3      46   .     32   \u20;
+ *** 4      10   \n    50   2
+ *** 5      45   -     46   .
+ *** 6      32   \u20;
+ *** 7      50   2
+ *** 8      46   .
+
+
+
+Failed!  - Failed:     1, Passed:   124, Skipped:     0, Total:   125, Duration: 50 ms - Markdig.Tests.dll (net9.0)

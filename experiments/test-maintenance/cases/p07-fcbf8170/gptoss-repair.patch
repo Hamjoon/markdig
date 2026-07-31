@@ -1,0 +1,33 @@
+@@
+-        if (processor.Inline is HtmlEntityInline htmlEntityInline)
+-        {
+-            if (htmlEntityInline.Transcoded.Length > 0)
+-            {
+-                pc = htmlEntityInline.Transcoded.RuneAt(htmlEntityInline.Transcoded.End);
+-
+-                if (CjkFriendlyEmphasis)
+-                {
+-                    twoPreviousChar = htmlEntityInline.Transcoded.RuneAt(htmlEntityInline.Transcoded.End - pc.Utf16SequenceLength);
+-                }
+-            }
+-        }
++        if (processor.Inline is HtmlEntityInline htmlEntityInline)
++        {
++            // The Transcoded slice contains the decoded characters of the HTML entity.
++            // Its End property points to the position *after* the last character (exclusive),
++            // so we need to subtract 1 to get the index of the last character.
++            if (htmlEntityInline.Transcoded.Length > 0)
++            {
++                // Get the last rune of the decoded entity.
++                pc = htmlEntityInline.Transcoded.RuneAt(htmlEntityInline.Transcoded.End - 1);
++
++                if (CjkFriendlyEmphasis)
++                {
++                    // For CJK‑friendly emphasis we also need the rune that appears
++                    // before the entity. We move back by the UTF‑16 length of the
++                    // current rune to land on the start of the previous rune.
++                    twoPreviousChar = htmlEntityInline.Transcoded.RuneAt(
++                        htmlEntityInline.Transcoded.End - 1 - pc.Utf16SequenceLength);
++                }
++            }
++        }

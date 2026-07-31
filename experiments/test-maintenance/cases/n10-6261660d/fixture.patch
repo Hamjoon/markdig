@@ -1,0 +1,20 @@
+diff --git a/src/Markdig/Helpers/LinkHelper.cs b/src/Markdig/Helpers/LinkHelper.cs
+index 3a9f9bb6..c5004594 100644
+--- a/src/Markdig/Helpers/LinkHelper.cs
++++ b/src/Markdig/Helpers/LinkHelper.cs
+@@ -411,7 +411,7 @@ public static bool TryParseInlineLink(ref StringSlice text, out string? link, ou
+         {
+             // Skip ')'
+             text.SkipChar();
+-            // not to normalize nulls
++            // not to normalize nulls into empty strings, since LinkInline.Title property is nullable.
+         }
+ 
+         return isValid;
+@@ -1565,4 +1565,4 @@ public static bool TryParseLabelTrivia<T>(ref T lines, bool allowEmpty, out stri
+         label = buffer.ToString();
+         return true;
+     }
+-}
+\ No newline at end of file
++}

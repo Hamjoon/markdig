@@ -1,0 +1,23 @@
+diff --git a/src/Markdig/Extensions/DefinitionLists/DefinitionListParser.cs b/src/Markdig/Extensions/DefinitionLists/DefinitionListParser.cs
+index e1dd0ced..c25193a4 100644
+--- a/src/Markdig/Extensions/DefinitionLists/DefinitionListParser.cs
++++ b/src/Markdig/Extensions/DefinitionLists/DefinitionListParser.cs
+@@ -71,11 +71,17 @@ public override BlockState TryOpen(BlockProcessor processor)
+             previousParent.Add(currentDefinitionList);
+         }
+ 
++        // The start position of the definition item should be the first non‑space character
++        // after the ':' marker (the column that was calculated earlier in the parser).
++        // Using the paragraph block's start position caused the definition item span to
++        // incorrectly begin at the start of the term line (index 0). We now compute the
++        // correct start position based on the column where the definition content begins.
++        int spanStart = processor.GetSourcePosition(column, out _, out _);
+         var definitionItem = new DefinitionItem(this)
+         {
+             Line = processor.LineIndex,
+             Column = column,
+-            Span = new SourceSpan(paragraphBlock.Span.Start, processor.Line.End),
++            Span = new SourceSpan(spanStart, processor.Line.End),
+             OpeningCharacter = processor.CurrentChar,
+         };
+ 

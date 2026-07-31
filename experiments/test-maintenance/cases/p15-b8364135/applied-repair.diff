@@ -1,0 +1,28 @@
+diff --git a/src/Markdig/Renderers/Roundtrip/Inlines/LinkInlineRenderer.cs b/src/Markdig/Renderers/Roundtrip/Inlines/LinkInlineRenderer.cs
+index 227fa703..fced3728 100644
+--- a/src/Markdig/Renderers/Roundtrip/Inlines/LinkInlineRenderer.cs
++++ b/src/Markdig/Renderers/Roundtrip/Inlines/LinkInlineRenderer.cs
+@@ -40,6 +40,7 @@ protected override void Write(RoundtripRenderer renderer, LinkInline link)
+         }
+         else
+         {
++            // Normal link with explicit URL
+             if (link.Url != null)
+             {
+                 renderer.Write('(');
+@@ -71,6 +72,15 @@ protected override void Write(RoundtripRenderer renderer, LinkInline link)
+ 
+                 renderer.Write(')');
+             }
++            // Auto link (no explicit URL, label holds the URL). Preserve the URL when round‑tripping.
++            else if (link.Label != null)
++            {
++                renderer.Write('(');
++                // Use the raw label text as the URL. This matches the expected round‑trip format
++                // e.g. "[http://example.com/](http://example.com/)".
++                renderer.Write(link.Label);
++                renderer.Write(')');
++            }
+         }
+     }
+ }

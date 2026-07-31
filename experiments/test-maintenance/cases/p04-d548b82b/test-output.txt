@@ -1,0 +1,36 @@
+Test run for <worktree>/src/Markdig.Tests/bin/Release/net9.0/Markdig.Tests.dll (.NETCoreApp,Version=v9.0)
+A total of 1 test files matched the specified pattern.
+  Failed TestTableBug("a\r| S | T |\r|---|---|") [11 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected: 1
+  But was:  0
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestPipeTable.TestTableBug(String markdown, Int32 tableCount) in <worktree>/src/Markdig.Tests/TestPipeTable.cs:line 22
+   at InvokeStub_TestPipeTable.TestTableBug(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestPipeTable.TestTableBug(String markdown, Int32 tableCount) in <worktree>/src/Markdig.Tests/TestPipeTable.cs:line 22
+   at InvokeStub_TestPipeTable.TestTableBug(Object, Span`1)
+
+
+  Failed TestTableBug("a\n| S | T |\r|---|---|") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected: 1
+  But was:  0
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestPipeTable.TestTableBug(String markdown, Int32 tableCount) in <worktree>/src/Markdig.Tests/TestPipeTable.cs:line 22
+   at InvokeStub_TestPipeTable.TestTableBug(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestPipeTable.TestTableBug(String markdown, Int32 tableCount) in <worktree>/src/Markdig.Tests/TestPipeTable.cs:line 22
+   at InvokeStub_TestPipeTable.TestTableBug(Object, Span`1)
+
+
+
+Failed!  - Failed:     2, Passed:    13, Skipped:     0, Total:    15, Duration: 40 ms - Markdig.Tests.dll (net9.0)

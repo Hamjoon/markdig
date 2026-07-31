@@ -1,0 +1,17 @@
+Test run for <worktree>/src/Markdig.Tests/bin/Release/net10.0/Markdig.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+  Failed BoldTableCellWithUnmatchedSubscriptDelimiterDoesNotAddCells [35 ms]
+  Error Message:
+     Assert.That(rows, Has.All.Count.EqualTo(3))
+  Expected: all items property Count equal to 3
+  But was:  < < < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> >, <empty> >, < < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> >, <empty> >, < < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> > >, < < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> > > >
+  First non-matching item at index [0]:  < < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> >, < <Markdig.Syntax.ParagraphBlock> >, <empty> >
+
+  Stack Trace:
+     at Markdig.Tests.TestPipeTable.BoldTableCellWithUnmatchedSubscriptDelimiterDoesNotAddCells() in <worktree>/src/Markdig.Tests/TestPipeTable.cs:line 186
+
+1)    at Markdig.Tests.TestPipeTable.BoldTableCellWithUnmatchedSubscriptDelimiterDoesNotAddCells() in <worktree>/src/Markdig.Tests/TestPipeTable.cs:line 186
+
+
+
+Failed!  - Failed:     1, Passed:    22, Skipped:     0, Total:    23, Duration: 56 ms - Markdig.Tests.dll (net10.0)

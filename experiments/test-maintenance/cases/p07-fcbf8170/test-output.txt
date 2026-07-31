@@ -1,0 +1,73 @@
+Test run for <worktree>/src/Markdig.Tests/bin/Release/net10.0/Markdig.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+  Failed TestCjkFriendlyEmphasisAfterLineBreaksAndEntities("&#10;**Entity**","<p>\n<strong>Entity</strong></p>\n") [4 ms]
+  Error Message:
+   System.IndexOutOfRangeException : Index was outside the bounds of the array.
+  Stack Trace:
+     at Markdig.Helpers.StringSlice.RuneAt(Int32 index) in <worktree>/src/Markdig/Helpers/StringSlice.cs:line 194
+   at Markdig.Parsers.Inlines.EmphasisInlineParser.Match(InlineProcessor processor, StringSlice& slice) in <worktree>/src/Markdig/Parsers/Inlines/EmphasisInlineParser.cs:line 180
+   at Markdig.Parsers.InlineProcessor.ProcessInlineLeaf(LeafBlock leafBlock) in <worktree>/src/Markdig/Parsers/InlineProcessor.cs:line 285
+   at Markdig.Parsers.MarkdownParser.ProcessInlines(InlineProcessor inlineProcessor, MarkdownDocument document) in <worktree>/src/Markdig/Parsers/MarkdownParser.cs:line 176
+   at Markdig.Parsers.MarkdownParser.Parse(String text, MarkdownPipeline pipeline, MarkdownParserContext context) in <worktree>/src/Markdig/Parsers/MarkdownParser.cs:line 76
+   at Markdig.Markdown.ToHtml(String markdown, MarkdownPipeline pipeline, MarkdownParserContext context) in <worktree>/src/Markdig/Markdown.cs:line 104
+   at Markdig.Tests.TestCjkFriendlyEmphasis.TestCjkFriendlyEmphasisAfterLineBreaksAndEntities(String source, String expected) in <worktree>/src/Markdig.Tests/TestCjkFriendlyEmphasis.cs:line 120
+   at InvokeStub_TestCjkFriendlyEmphasis.TestCjkFriendlyEmphasisAfterLineBreaksAndEntities(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+1)    at Markdig.Helpers.StringSlice.RuneAt(Int32 index) in <worktree>/src/Markdig/Helpers/StringSlice.cs:line 194
+   at Markdig.Parsers.Inlines.EmphasisInlineParser.Match(InlineProcessor processor, StringSlice& slice) in <worktree>/src/Markdig/Parsers/Inlines/EmphasisInlineParser.cs:line 180
+   at Markdig.Parsers.InlineProcessor.ProcessInlineLeaf(LeafBlock leafBlock) in <worktree>/src/Markdig/Parsers/InlineProcessor.cs:line 285
+   at Markdig.Parsers.MarkdownParser.ProcessInlines(InlineProcessor inlineProcessor, MarkdownDocument document) in <worktree>/src/Markdig/Parsers/MarkdownParser.cs:line 176
+   at Markdig.Parsers.MarkdownParser.Parse(String text, MarkdownPipeline pipeline, MarkdownParserContext context) in <worktree>/src/Markdig/Parsers/MarkdownParser.cs:line 76
+   at Markdig.Markdown.ToHtml(String markdown, MarkdownPipeline pipeline, MarkdownParserContext context) in <worktree>/src/Markdig/Markdown.cs:line 104
+   at Markdig.Tests.TestCjkFriendlyEmphasis.TestCjkFriendlyEmphasisAfterLineBreaksAndEntities(String source, String expected) in <worktree>/src/Markdig.Tests/TestCjkFriendlyEmphasis.cs:line 120
+   at InvokeStub_TestCjkFriendlyEmphasis.TestCjkFriendlyEmphasisAfterLineBreaksAndEntities(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+
+  Failed TestCjkFriendlyEmphasisAfterLineBreaksAndEntities("**First**&#10;**Second**","<p><strong>First</strong>\n<strong>Second</strong></p>\n") [< 1 ms]
+  Error Message:
+   System.IndexOutOfRangeException : Index was outside the bounds of the array.
+  Stack Trace:
+     at Markdig.Helpers.StringSlice.RuneAt(Int32 index) in <worktree>/src/Markdig/Helpers/StringSlice.cs:line 194
+   at Markdig.Parsers.Inlines.EmphasisInlineParser.Match(InlineProcessor processor, StringSlice& slice) in <worktree>/src/Markdig/Parsers/Inlines/EmphasisInlineParser.cs:line 180
+   at Markdig.Parsers.InlineProcessor.ProcessInlineLeaf(LeafBlock leafBlock) in <worktree>/src/Markdig/Parsers/InlineProcessor.cs:line 285
+   at Markdig.Parsers.MarkdownParser.ProcessInlines(InlineProcessor inlineProcessor, MarkdownDocument document) in <worktree>/src/Markdig/Parsers/MarkdownParser.cs:line 176
+   at Markdig.Parsers.MarkdownParser.Parse(String text, MarkdownPipeline pipeline, MarkdownParserContext context) in <worktree>/src/Markdig/Parsers/MarkdownParser.cs:line 76
+   at Markdig.Markdown.ToHtml(String markdown, MarkdownPipeline pipeline, MarkdownParserContext context) in <worktree>/src/Markdig/Markdown.cs:line 104
+   at Markdig.Tests.TestCjkFriendlyEmphasis.TestCjkFriendlyEmphasisAfterLineBreaksAndEntities(String source, String expected) in <worktree>/src/Markdig.Tests/TestCjkFriendlyEmphasis.cs:line 120
+   at InvokeStub_TestCjkFriendlyEmphasis.TestCjkFriendlyEmphasisAfterLineBreaksAndEntities(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+1)    at Markdig.Helpers.StringSlice.RuneAt(Int32 index) in <worktree>/src/Markdig/Helpers/StringSlice.cs:line 194
+   at Markdig.Parsers.Inlines.EmphasisInlineParser.Match(InlineProcessor processor, StringSlice& slice) in <worktree>/src/Markdig/Parsers/Inlines/EmphasisInlineParser.cs:line 180
+   at Markdig.Parsers.InlineProcessor.ProcessInlineLeaf(LeafBlock leafBlock) in <worktree>/src/Markdig/Parsers/InlineProcessor.cs:line 285
+   at Markdig.Parsers.MarkdownParser.ProcessInlines(InlineProcessor inlineProcessor, MarkdownDocument document) in <worktree>/src/Markdig/Parsers/MarkdownParser.cs:line 176
+   at Markdig.Parsers.MarkdownParser.Parse(String text, MarkdownPipeline pipeline, MarkdownParserContext context) in <worktree>/src/Markdig/Parsers/MarkdownParser.cs:line 76
+   at Markdig.Markdown.ToHtml(String markdown, MarkdownPipeline pipeline, MarkdownParserContext context) in <worktree>/src/Markdig/Markdown.cs:line 104
+   at Markdig.Tests.TestCjkFriendlyEmphasis.TestCjkFriendlyEmphasisAfterLineBreaksAndEntities(String source, String expected) in <worktree>/src/Markdig.Tests/TestCjkFriendlyEmphasis.cs:line 120
+   at InvokeStub_TestCjkFriendlyEmphasis.TestCjkFriendlyEmphasisAfterLineBreaksAndEntities(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+
+  Failed TestCjkFriendlyEmphasisAfterLineBreaksAndEntities("&#13;**CarriageReturn**","<p>\r<strong>CarriageReturn</strong></p>\n") [< 1 ms]
+  Error Message:
+   System.IndexOutOfRangeException : Index was outside the bounds of the array.
+  Stack Trace:
+     at Markdig.Helpers.StringSlice.RuneAt(Int32 index) in <worktree>/src/Markdig/Helpers/StringSlice.cs:line 194
+   at Markdig.Parsers.Inlines.EmphasisInlineParser.Match(InlineProcessor processor, StringSlice& slice) in <worktree>/src/Markdig/Parsers/Inlines/EmphasisInlineParser.cs:line 180
+   at Markdig.Parsers.InlineProcessor.ProcessInlineLeaf(LeafBlock leafBlock) in <worktree>/src/Markdig/Parsers/InlineProcessor.cs:line 285
+   at Markdig.Parsers.MarkdownParser.ProcessInlines(InlineProcessor inlineProcessor, MarkdownDocument document) in <worktree>/src/Markdig/Parsers/MarkdownParser.cs:line 176
+   at Markdig.Parsers.MarkdownParser.Parse(String text, MarkdownPipeline pipeline, MarkdownParserContext context) in <worktree>/src/Markdig/Parsers/MarkdownParser.cs:line 76
+   at Markdig.Markdown.ToHtml(String markdown, MarkdownPipeline pipeline, MarkdownParserContext context) in <worktree>/src/Markdig/Markdown.cs:line 104
+   at Markdig.Tests.TestCjkFriendlyEmphasis.TestCjkFriendlyEmphasisAfterLineBreaksAndEntities(String source, String expected) in <worktree>/src/Markdig.Tests/TestCjkFriendlyEmphasis.cs:line 120
+   at InvokeStub_TestCjkFriendlyEmphasis.TestCjkFriendlyEmphasisAfterLineBreaksAndEntities(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+1)    at Markdig.Helpers.StringSlice.RuneAt(Int32 index) in <worktree>/src/Markdig/Helpers/StringSlice.cs:line 194
+   at Markdig.Parsers.Inlines.EmphasisInlineParser.Match(InlineProcessor processor, StringSlice& slice) in <worktree>/src/Markdig/Parsers/Inlines/EmphasisInlineParser.cs:line 180
+   at Markdig.Parsers.InlineProcessor.ProcessInlineLeaf(LeafBlock leafBlock) in <worktree>/src/Markdig/Parsers/InlineProcessor.cs:line 285
+   at Markdig.Parsers.MarkdownParser.ProcessInlines(InlineProcessor inlineProcessor, MarkdownDocument document) in <worktree>/src/Markdig/Parsers/MarkdownParser.cs:line 176
+   at Markdig.Parsers.MarkdownParser.Parse(String text, MarkdownPipeline pipeline, MarkdownParserContext context) in <worktree>/src/Markdig/Parsers/MarkdownParser.cs:line 76
+   at Markdig.Markdown.ToHtml(String markdown, MarkdownPipeline pipeline, MarkdownParserContext context) in <worktree>/src/Markdig/Markdown.cs:line 104
+   at Markdig.Tests.TestCjkFriendlyEmphasis.TestCjkFriendlyEmphasisAfterLineBreaksAndEntities(String source, String expected) in <worktree>/src/Markdig.Tests/TestCjkFriendlyEmphasis.cs:line 120
+   at InvokeStub_TestCjkFriendlyEmphasis.TestCjkFriendlyEmphasisAfterLineBreaksAndEntities(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+
+
+Failed!  - Failed:     3, Passed:   104, Skipped:     0, Total:   107, Duration: 41 ms - Markdig.Tests.dll (net10.0)

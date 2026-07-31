@@ -1,0 +1,957 @@
+{
+  "schema_version": 1,
+  "description": "Selection and fixture-verification provenance retained by the compact public archive.",
+  "selection": {
+    "mining": {
+      "window": {
+        "start_date": "2025-01-01",
+        "end_sha": "fc705234fa211d179ee1d5e7656b51ab99f70ca9"
+      },
+      "total_commits_incl_merges": 137,
+      "merge_commits_excluded": 21,
+      "non_merge_commits": 116,
+      "excluded": [
+        {
+          "sha": "25506f20d96f214f951ac2d881550d8b883bf9f0",
+          "date": "2026-06-17",
+          "subject": "Fix plus superscript parsing (#791)",
+          "reason": "smoke-commit"
+        },
+        {
+          "sha": "50061841a45e142192362131c9ed2ea6043f302e",
+          "date": "2026-06-17",
+          "subject": "Fix LinkHelper non-ASCII urilize (#942)",
+          "reason": "smoke-commit"
+        },
+        {
+          "sha": "9dffce52b61068c4451399068f72cdad34f79bdb",
+          "date": "2026-06-13",
+          "subject": "Fix NormalizeRenderer auto identifiers output (#930)",
+          "reason": "smoke-commit"
+        },
+        {
+          "sha": "5dca4149a518a385f40dc7b11a2a86cd4452df4b",
+          "date": "2026-06-13",
+          "subject": "Update AGENTS.md",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "31c2baadd084359060e6ecfd21d4a819fd1944d2",
+          "date": "2026-06-03",
+          "subject": "Update readme with Alert extension details (#940)",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "d72da576ea0200d83cba722a161a0c24d4e7d794",
+          "date": "2026-05-19",
+          "subject": "add InferColumnWidthsFromSeparator docs (#939)",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "be4da8b42dfdf4d5009c372d814ac2b9f968a8d2",
+          "date": "2026-05-12",
+          "subject": "Remove old changelog.md",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "bddaa55da1e61faaeab6c03c86941bb95f83f1a6",
+          "date": "2026-03-01",
+          "subject": "docs(site): document CJK friendly emphasis extension",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "391e03b8d0222bdad14f94c37b831bfde1bdc078",
+          "date": "2026-02-22",
+          "subject": "Update readme",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "361231dc9ee843d60c400cb1ff5fb19498f2a4c1",
+          "date": "2026-02-22",
+          "subject": "Fix ci",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "3167f8ef98ff4a83dcb3b980bdf3fa8feeef5804",
+          "date": "2026-02-22",
+          "subject": "Add missing markdown example",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "682a30c1fed5dee4448108db73a2b3ba8f5721b3",
+          "date": "2026-02-22",
+          "subject": "Add mermaid and katex",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "162c0d22646e461121874fad870023b45b88f7bc",
+          "date": "2026-02-22",
+          "subject": "Simplify NuGet description (#925)",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "f735314a772e40fd5e4cb82f0a1b32a4fbf1b852",
+          "date": "2026-02-22",
+          "subject": "Improve site documentation accuracy and structure",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "5de7e42a86fbf2cbe0177b108ae023eb76a4923f",
+          "date": "2026-02-22",
+          "subject": "Add namespace API docs for Markdig",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "b370c5cca0397f454c6d3a02c2eef9c74ea862da",
+          "date": "2026-02-22",
+          "subject": "Update banner",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "d1ce1886886db4377fdf65fef014a4789a18d17b",
+          "date": "2026-02-22",
+          "subject": "Add playground to frontpage",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "999ccbc7c31da270fe0e08b9dfda6e5b90814352",
+          "date": "2026-02-21",
+          "subject": "Fix top level readme about documentation",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "94cb00d19b20bfcb71fd4d654c125d833e8fa493",
+          "date": "2026-02-21",
+          "subject": "Add GitHub action for site",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "74f429c427a1eac2625f7eb52eb04c4388ecdb05",
+          "date": "2026-02-21",
+          "subject": "Add comprehensive documentation site",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "020a8490dd72c885f6d9c69a7cc001b516b256a9",
+          "date": "2026-02-21",
+          "subject": "Add DotSettings",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "310f084c9f05b2506bde70754f5ba6cfdde220eb",
+          "date": "2026-02-21",
+          "subject": "Move doc to site",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "0cc463b6e131ed7b500815f0dd452f9f7800df3f",
+          "date": "2026-02-21",
+          "subject": "Add XML docs for public Markdig API",
+          "reason": "prod-diff-too-large"
+        },
+        {
+          "sha": "e9d582a1695bacbbe064fd0d5d91290b2e32b988",
+          "date": "2026-02-21",
+          "subject": "Update deps NuGet",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "e5c88eff00fe6b94fc39dca17c3083896afe33dd",
+          "date": "2026-02-21",
+          "subject": "Move from net9.0 to net10.0",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "1a96addeba242312e752d68d0a82ceee75a219a5",
+          "date": "2026-02-21",
+          "subject": "Add api authoring 1.0",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "3f7c09c443ce523798ecb0e9ccb64250a9d6e005",
+          "date": "2026-02-21",
+          "subject": "Add instructions",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "a89056d9619f5b8c514221393496ee5c88a48b51",
+          "date": "2026-01-12",
+          "subject": "Recognize supplementary characters (#913)",
+          "reason": "prod-diff-too-large"
+        },
+        {
+          "sha": "cd7b9ca0ef66cb582232cbceaefbfe4195cf575b",
+          "date": "2025-11-17",
+          "subject": "Test netstandard (#915)",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "fb698598e4ce273dbdba7ae371e34c93b0091356",
+          "date": "2025-11-17",
+          "subject": "Use central package management",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "8c01cf054971a1ec4cd663edaca6e2d035236133",
+          "date": "2025-10-21",
+          "subject": "Add another test for pipe tables (#907)",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "03bdf6008631166ea8d288a647e2d1a2da0c389b",
+          "date": "2025-10-17",
+          "subject": "Add a basic fuzzing project (#903)",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "191e33ab324d4dc2fd3c3466b1b997e83ebe462d",
+          "date": "2025-10-16",
+          "subject": "Fix build warnings (#899)",
+          "reason": "comment-only-prod-diff"
+        },
+        {
+          "sha": "d5f8a809a00dd32975af3cf1c26609e5b7a7f7a3",
+          "date": "2025-10-16",
+          "subject": "Move sln to slnx (#901)",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "5e6fb2d1c538ada61f10e21d747ab1b5c122c894",
+          "date": "2025-09-08",
+          "subject": "Add test for issue #845 list item blank line",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "b92890094c28b86bf99beadb9ae897603755b212",
+          "date": "2025-06-12",
+          "subject": "Update readme.md",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "6d1fa96389c8cf04f235a9de06f1fb271610d95f",
+          "date": "2025-05-31",
+          "subject": "Changed link parsing tests for #872",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "09a4b81a6ed04baaf1f890a2e8665c01f9494ab6",
+          "date": "2025-04-15",
+          "subject": "Update tests",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "42ab98968d7efcc76a18d5bdabd1b2e48166539b",
+          "date": "2025-04-15",
+          "subject": "Update readme",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "023d93c091070e4e215c81158c22a2ec12ae1ce2",
+          "date": "2025-04-14",
+          "subject": "Update CommonMark spec to 0.31.2",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "f4effc25c00516799a92881520f2889e6ecc82da",
+          "date": "2025-04-15",
+          "subject": "Fix `MathInline` is called \"math block\"",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "ecfda373b9f9185f74bcf6e901a9d6901a841761",
+          "date": "2025-03-16",
+          "subject": "Avoid warnings in Markdig.WebApp",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "086440bcd3d14b838c2658f13e2a3bd77691d2f5",
+          "date": "2025-03-20",
+          "subject": "update repository's github path",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "ee403ce28f1a18a1216e43fdfb3344c45b3f813f",
+          "date": "2025-03-17",
+          "subject": "Port tests",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "8b403918b9539dd7bc47a3d9321627d62753e068",
+          "date": "2025-03-17",
+          "subject": "Update XML doc",
+          "reason": "comment-only-prod-diff"
+        },
+        {
+          "sha": "5b32391348835b4e5f451d15871bad490e001639",
+          "date": "2025-01-10",
+          "subject": "Update dependencies NuGet",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "7b6d659bbd803e401a1d5ca705cb1f69267a981b",
+          "date": "2025-01-03",
+          "subject": "A test has been added.",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "bc8ba4fecb9fd6ce849a601bc7031bb42210de76",
+          "date": "2025-01-03",
+          "subject": "A test has been added.",
+          "reason": "no-production-source-change"
+        },
+        {
+          "sha": "d87bb7292d550f95c0088454b96fc97e5de6e052",
+          "date": "2025-01-03",
+          "subject": "A test has been added.",
+          "reason": "no-production-source-change"
+        }
+      ],
+      "excluded_count": 49,
+      "pool_sizes": {
+        "S": 12,
+        "P": 23,
+        "N": 32
+      }
+    },
+    "screening": {
+      "S": {
+        "category": "S",
+        "accepted": 3,
+        "results": [
+          {
+            "queue_id": "S-01",
+            "sha": "55f770cc0724aff99b1de593ad4fba080645b500",
+            "status": "rejected",
+            "reason": "stale-state-green"
+          },
+          {
+            "queue_id": "S-02",
+            "sha": "6d5a12486304695da7d18c630f2ae3c474a75305",
+            "status": "rejected",
+            "reason": "stale-state-green"
+          },
+          {
+            "queue_id": "S-03",
+            "sha": "a9ce0eb438e48706d123cde703f85fb5627134ed",
+            "status": "rejected",
+            "reason": "base-suite-red"
+          },
+          {
+            "queue_id": "S-04",
+            "sha": "3fb74a0f2b31a3c2fe4c5f50c07cc1f6c39bf667",
+            "status": "rejected",
+            "reason": "stale-state-build-failure"
+          },
+          {
+            "queue_id": "S-05",
+            "sha": "12590e5fbe1730984e0783452666a67df8e0b806",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "S-06",
+            "sha": "7dceff2130d81a41b3ec4354c7e146ad9d790a8c",
+            "status": "rejected",
+            "reason": "stale-state-green"
+          },
+          {
+            "queue_id": "S-07",
+            "sha": "5365879a23c9f680b9ca6926783daa3f73795dc5",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "S-08",
+            "sha": "7cb7583fd774d5d10ad916f55da275f7977e8266",
+            "status": "rejected",
+            "reason": "stale-state-green"
+          },
+          {
+            "queue_id": "S-09",
+            "sha": "148fd08b1d5604177637307d82e6b83079642d63",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "S-10",
+            "sha": "fc705234fa211d179ee1d5e7656b51ab99f70ca9",
+            "status": "rejected",
+            "reason": "stale-state-green"
+          },
+          {
+            "queue_id": "S-11",
+            "sha": "a82c3bd705e03d67c168a5a773247130f3954115",
+            "status": "rejected",
+            "reason": "stale-state-green"
+          },
+          {
+            "queue_id": "S-12",
+            "sha": "7959e3b9129f9ad5e7b5b4c2bad149060381c01c",
+            "status": "rejected",
+            "reason": "stale-state-green"
+          }
+        ]
+      },
+      "P": {
+        "category": "P",
+        "accepted": 10,
+        "results": [
+          {
+            "queue_id": "P-01",
+            "sha": "ab6204cf610d64f507d6d3da67992c4f3bccf18d",
+            "status": "rejected",
+            "reason": "test-oracle-uncompilable"
+          },
+          {
+            "queue_id": "P-02",
+            "sha": "d7f13b03cf77d7abadf70c5b9aa310991d5fcfe7",
+            "status": "rejected",
+            "reason": "test-oracle-uncompilable"
+          },
+          {
+            "queue_id": "P-03",
+            "sha": "2c9a9a308c1091c8f763ca98c44a07b02acc4abf",
+            "status": "rejected",
+            "reason": "test-oracle-uncompilable"
+          },
+          {
+            "queue_id": "P-04",
+            "sha": "d548b82bcd269c34221d06a007b06f3ea33ed236",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "P-05",
+            "sha": "2e1d741aaf15ad1084334d397cc7abf63af323a4",
+            "status": "rejected",
+            "reason": "test-oracle-green"
+          },
+          {
+            "queue_id": "P-06",
+            "sha": "781d9b536598e0b770c1eabbe58d2ac76b285409",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "P-07",
+            "sha": "fcbf8170633e7e1025a37718af9c253698166b52",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "P-08",
+            "sha": "5a3c206076621dd75c6f0ec36236f031ebbadea2",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "P-09",
+            "sha": "800235ba7ab773ac3ea691d16e4bb17a1f9b0200",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "P-10",
+            "sha": "8cfa0cf0ae55fcff1aee61e402f727b2dd191420",
+            "status": "rejected",
+            "reason": "test-oracle-uncompilable"
+          },
+          {
+            "queue_id": "P-11",
+            "sha": "0f98267a8519ee6563dceae5ee31db3d60d2844f",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "P-12",
+            "sha": "5e5112ccca26ee0d4239014b6cd9f4d5d2f15f73",
+            "status": "rejected",
+            "reason": "test-oracle-uncompilable"
+          },
+          {
+            "queue_id": "P-13",
+            "sha": "39b07d6bc5d7b0fb20a3cedc8216cd87cdf1c9ac",
+            "status": "rejected",
+            "reason": "test-oracle-uncompilable"
+          },
+          {
+            "queue_id": "P-14",
+            "sha": "b15cf582a538e0c0e016e70cb8a0f03d4f2d55d8",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "P-15",
+            "sha": "b83641351f67e2c2f240167f9314aeb354714dad",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "P-16",
+            "sha": "d6e88f16f7d2d86a096a552250f89415513d09dc",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "P-17",
+            "sha": "bc4e399087e19ddbbdf95dc698bec7f752b3c8e5",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "P-18",
+            "sha": "a9bd7c6a5e1a0bd0992555ce3aeeafb4d4aee438",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "P-19",
+            "sha": "58e8217ddb0d5a08f5ee235675e23a53bb835ec7",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "P-20",
+            "sha": "0e9e80e1cd9c544d77eae59d62efc333bfc0cc3e",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "P-21",
+            "sha": "543570224e940826c38187f8eda013328d3e70d4",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "P-22",
+            "sha": "5c78932f552f25035521411885296eae2558222a",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "P-23",
+            "sha": "c41b38905302be286c0aa14e8e36ceb76cc4c437",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          }
+        ]
+      },
+      "N": {
+        "category": "N",
+        "accepted": 10,
+        "results": [
+          {
+            "queue_id": "N-01",
+            "sha": "adfcf42529649e1e4bf5e95e152411577e9f7eec",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "N-02",
+            "sha": "8269ff1af54456c97e58b53c5f6d3f4eaa24875b",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "N-03",
+            "sha": "ec2eef25b2a70dfab54e2636f50d14f2a0b8ca08",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "N-04",
+            "sha": "aab5543cb5b3bd78cf5222144e411f0f52672504",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "N-05",
+            "sha": "14406bc60d515bfe3bc96b017560d22fb5b9805b",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "N-06",
+            "sha": "148278417f5aeee2e523ee9ad2fea4500320fa23",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "N-07",
+            "sha": "c488a27497199aa520df540ffecf1e159fbc06a1",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "N-08",
+            "sha": "90c73b775453734fbfb28cde78c19b5c9f6139e9",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "N-09",
+            "sha": "3e0c72f0430cb58d7aa9caf325bd780325229e17",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "N-10",
+            "sha": "6261660d377e28430c0b01a0efc1f55476f86a45",
+            "status": "accepted",
+            "reason": null
+          },
+          {
+            "queue_id": "N-11",
+            "sha": "4dc0be88b4538a66284f612b5d56a40a9adb80b1",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "N-12",
+            "sha": "3d6993320588a0cb0b12aaa7adcb48a4849da860",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "N-13",
+            "sha": "bbefce3b1f2d38346fa6d6888137330de129f9a3",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "N-14",
+            "sha": "d8f69218db17ee86399f21915ab72d87138c4dc8",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "N-15",
+            "sha": "61e9be290b1dad611e8137251d249a3aae9664d3",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "N-16",
+            "sha": "118d28f886f0af1b1c7d7430d2f7ee8d5e4eca1c",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "N-17",
+            "sha": "47c4e9b1e2c6cd6eea018326a7053505dd904017",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "N-18",
+            "sha": "f2590e7b809c9b36dfbd2afcfdab185ae1fdcfce",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "N-19",
+            "sha": "9dac60df7358e2b4fa3108a00bf459b64d3cbaf3",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "N-20",
+            "sha": "1bac4afc9bfd023cb574f5e3d537de7c315c7dec",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "N-21",
+            "sha": "c82a36884d34f90ad03ac946cd81eddd455767c3",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "N-22",
+            "sha": "8484420b7288473eb76172846c64f7d43a8b269c",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "N-23",
+            "sha": "bcbd8e47ac388acdac0d3d98b8850eac460777cc",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "N-24",
+            "sha": "da3d7f4f3a43b912dad373970963561dc612c84f",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "N-25",
+            "sha": "7a9c192d7dcad181cdcc58fe720351dc684d35b7",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "N-26",
+            "sha": "d47fbc757fcad7c55cfd05be303cd1449cd7d6f5",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "N-27",
+            "sha": "80c50e31e25e92d2999e69f027f4b5080a8f7b75",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "N-28",
+            "sha": "eceb70c16a19bb37fe71b93cb1159224e637f955",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "N-29",
+            "sha": "0d6343b421734d15d71fc4b48c7e780fc085d3d7",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "N-30",
+            "sha": "3602433b842a650cbe8074daa4f44ba0f6684373",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "N-31",
+            "sha": "dab1ca54837338f6d168f130c534d24c5b902500",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          },
+          {
+            "queue_id": "N-32",
+            "sha": "0e6d0f4cb24cbf32a2f1f26cc43aeed7a7573edf",
+            "status": "not-screened",
+            "reason": "quota-reached-before-position"
+          }
+        ]
+      }
+    }
+  },
+  "fixture_verification": {
+    "all_ok": true,
+    "verified_case_count": 23,
+    "counts": {
+      "S": 3,
+      "P": 10,
+      "N": 10
+    },
+    "results": [
+      {
+        "case_id": "S-05",
+        "category": "S",
+        "upstream_sha": "12590e5fbe1730984e0783452666a67df8e0b806",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      },
+      {
+        "case_id": "S-07",
+        "category": "S",
+        "upstream_sha": "5365879a23c9f680b9ca6926783daa3f73795dc5",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      },
+      {
+        "case_id": "S-09",
+        "category": "S",
+        "upstream_sha": "148fd08b1d5604177637307d82e6b83079642d63",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      },
+      {
+        "case_id": "P-04",
+        "category": "P",
+        "upstream_sha": "d548b82bcd269c34221d06a007b06f3ea33ed236",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      },
+      {
+        "case_id": "P-06",
+        "category": "P",
+        "upstream_sha": "781d9b536598e0b770c1eabbe58d2ac76b285409",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      },
+      {
+        "case_id": "P-07",
+        "category": "P",
+        "upstream_sha": "fcbf8170633e7e1025a37718af9c253698166b52",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      },
+      {
+        "case_id": "P-08",
+        "category": "P",
+        "upstream_sha": "5a3c206076621dd75c6f0ec36236f031ebbadea2",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      },
+      {
+        "case_id": "P-09",
+        "category": "P",
+        "upstream_sha": "800235ba7ab773ac3ea691d16e4bb17a1f9b0200",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      },
+      {
+        "case_id": "P-11",
+        "category": "P",
+        "upstream_sha": "0f98267a8519ee6563dceae5ee31db3d60d2844f",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      },
+      {
+        "case_id": "P-14",
+        "category": "P",
+        "upstream_sha": "b15cf582a538e0c0e016e70cb8a0f03d4f2d55d8",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      },
+      {
+        "case_id": "P-15",
+        "category": "P",
+        "upstream_sha": "b83641351f67e2c2f240167f9314aeb354714dad",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      },
+      {
+        "case_id": "P-16",
+        "category": "P",
+        "upstream_sha": "d6e88f16f7d2d86a096a552250f89415513d09dc",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      },
+      {
+        "case_id": "P-17",
+        "category": "P",
+        "upstream_sha": "bc4e399087e19ddbbdf95dc698bec7f752b3c8e5",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      },
+      {
+        "case_id": "N-01",
+        "category": "N",
+        "upstream_sha": "adfcf42529649e1e4bf5e95e152411577e9f7eec",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      },
+      {
+        "case_id": "N-02",
+        "category": "N",
+        "upstream_sha": "8269ff1af54456c97e58b53c5f6d3f4eaa24875b",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      },
+      {
+        "case_id": "N-03",
+        "category": "N",
+        "upstream_sha": "ec2eef25b2a70dfab54e2636f50d14f2a0b8ca08",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      },
+      {
+        "case_id": "N-04",
+        "category": "N",
+        "upstream_sha": "aab5543cb5b3bd78cf5222144e411f0f52672504",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      },
+      {
+        "case_id": "N-05",
+        "category": "N",
+        "upstream_sha": "14406bc60d515bfe3bc96b017560d22fb5b9805b",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      },
+      {
+        "case_id": "N-06",
+        "category": "N",
+        "upstream_sha": "148278417f5aeee2e523ee9ad2fea4500320fa23",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      },
+      {
+        "case_id": "N-07",
+        "category": "N",
+        "upstream_sha": "c488a27497199aa520df540ffecf1e159fbc06a1",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      },
+      {
+        "case_id": "N-08",
+        "category": "N",
+        "upstream_sha": "90c73b775453734fbfb28cde78c19b5c9f6139e9",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      },
+      {
+        "case_id": "N-09",
+        "category": "N",
+        "upstream_sha": "3e0c72f0430cb58d7aa9caf325bd780325229e17",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      },
+      {
+        "case_id": "N-10",
+        "category": "N",
+        "upstream_sha": "6261660d377e28430c0b01a0efc1f55476f86a45",
+        "reverified_status": "accepted",
+        "counts_match_screening": true,
+        "identity_matches_screening": true,
+        "ok": true
+      }
+    ]
+  }
+}

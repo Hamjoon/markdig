@@ -1,0 +1,13 @@
+diff --git a/src/Markdig/Renderers/TextRendererBase.cs b/src/Markdig/Renderers/TextRendererBase.cs
+index ef4dd525..cb2b0da1 100644
+--- a/src/Markdig/Renderers/TextRendererBase.cs
++++ b/src/Markdig/Renderers/TextRendererBase.cs
+@@ -176,6 +176,8 @@ public void PopIndent()
+     {
+         if (this.indents.Count > 0)
+             indents.RemoveAt(indents.Count - 1);
++        else
++            throw new InvalidOperationException("No indent to pop");
+     }
+ 
+     public void ClearIndent() => indents.Clear();

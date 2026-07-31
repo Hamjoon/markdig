@@ -1,0 +1,121 @@
+[... truncated, last 120 lines ...]
+  Expected: "bær"
+  But was:  "baer"
+  ------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_Simple(String input, String expectedResult) in <worktree>/src/Markdig.Tests/TestLinkHelper.cs:line 370
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_Simple(String input, String expectedResult) in <worktree>/src/Markdig.Tests/TestLinkHelper.cs:line 370
+
+
+  Failed TestUrilizeNonAscii_Simple("æ5el","æ5el") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 4 but was 5. Strings differ at index 0.
+  Expected: "æ5el"
+  But was:  "ae5el"
+  -----------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_Simple(String input, String expectedResult) in <worktree>/src/Markdig.Tests/TestLinkHelper.cs:line 370
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_Simple(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_Simple(String input, String expectedResult) in <worktree>/src/Markdig.Tests/TestLinkHelper.cs:line 370
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_Simple(Object, Span`1)
+
+
+  Failed TestUrilizeNonAscii_Simple("-æ5el","æ5el") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 4 but was 5. Strings differ at index 0.
+  Expected: "æ5el"
+  But was:  "ae5el"
+  -----------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_Simple(String input, String expectedResult) in <worktree>/src/Markdig.Tests/TestLinkHelper.cs:line 370
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_Simple(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_Simple(String input, String expectedResult) in <worktree>/src/Markdig.Tests/TestLinkHelper.cs:line 370
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_Simple(Object, Span`1)
+
+
+  Failed TestUrilizeNonAscii_Simple("-frø-","frø") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 3 but was 4. Strings differ at index 2.
+  Expected: "frø"
+  But was:  "froe"
+  -------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_Simple(String input, String expectedResult) in <worktree>/src/Markdig.Tests/TestLinkHelper.cs:line 370
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_Simple(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_Simple(String input, String expectedResult) in <worktree>/src/Markdig.Tests/TestLinkHelper.cs:line 370
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_Simple(Object, Span`1)
+
+
+  Failed TestUrilizeNonAscii_Simple("-fr-ø","fr-ø") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 4 but was 5. Strings differ at index 3.
+  Expected: "fr-ø"
+  But was:  "fr-oe"
+  --------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_Simple(String input, String expectedResult) in <worktree>/src/Markdig.Tests/TestLinkHelper.cs:line 370
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_Simple(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeNonAscii_Simple(String input, String expectedResult) in <worktree>/src/Markdig.Tests/TestLinkHelper.cs:line 370
+   at InvokeStub_TestLinkHelper.TestUrilizeNonAscii_Simple(Object, Span`1)
+
+
+  Failed TestUrilizeOnlyAscii_NonAscii("bær","br") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 2 but was 4. Strings differ at index 1.
+  Expected: "br"
+  But was:  "baer"
+  ------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeOnlyAscii_NonAscii(String input, String expectedResult) in <worktree>/src/Markdig.Tests/TestLinkHelper.cs:line 336
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeOnlyAscii_NonAscii(String input, String expectedResult) in <worktree>/src/Markdig.Tests/TestLinkHelper.cs:line 336
+
+
+  Failed TestUrilizeOnlyAscii_NonAscii("bør","br") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 2 but was 4. Strings differ at index 1.
+  Expected: "br"
+  But was:  "boer"
+  ------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeOnlyAscii_NonAscii(String input, String expectedResult) in <worktree>/src/Markdig.Tests/TestLinkHelper.cs:line 336
+   at InvokeStub_TestLinkHelper.TestUrilizeOnlyAscii_NonAscii(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestLinkHelper.TestUrilizeOnlyAscii_NonAscii(String input, String expectedResult) in <worktree>/src/Markdig.Tests/TestLinkHelper.cs:line 336
+   at InvokeStub_TestLinkHelper.TestUrilizeOnlyAscii_NonAscii(Object, Span`1)
+
+
+
+Failed!  - Failed:     7, Passed:    83, Skipped:     0, Total:    90, Duration: 69 ms - Markdig.Tests.dll (net9.0)

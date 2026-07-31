@@ -1,0 +1,33 @@
+diff --git a/src/Markdig/Extensions/Tables/PipeTableParser.cs b/src/Markdig/Extensions/Tables/PipeTableParser.cs
+index f4d17c41..e46b78ac 100644
+--- a/src/Markdig/Extensions/Tables/PipeTableParser.cs
++++ b/src/Markdig/Extensions/Tables/PipeTableParser.cs
+@@ -66,10 +66,17 @@ public override bool Match(InlineProcessor processor, ref StringSlice slice)
+             // start for a table. Typically, with this, we can have an attributes {...}
+             // starting on the first line of a pipe table, even if the first line
+             // doesn't have a pipe
+-            if (processor.Inline != null && (localLineIndex > 0 || c == '\n' || c == '\r'))
+-            {
+-                return false;
+-            }
++        // If we already have inline content on the current line (i.e., we are still on the first
++        // line of the paragraph and the current character is not a line break), this cannot be
++        // the start of a pipe table. However, when we are on a subsequent line (localLineIndex > 0)
++        // we should allow a table to start even if the previous line contained inline content.
++        // The original condition rejected tables that were preceded by any inline content,
++        // which broke cases like \"a\\r| S | T |\\r|---|---|\" where a line with plain text is
++        // followed by a table. We now only reject when inline content exists on the same line.
++        if (processor.Inline != null && localLineIndex == 0 && c != '\n' && c != '\r')
++        {
++            return false;
++        }
+ 
+             if (processor.Inline is null)
+             {
+@@ -680,4 +687,4 @@ private sealed class TableState
+ 
+         public List<Inline> EndOfLines { get; } = [];
+     }
+-}
+\ No newline at end of file
++}

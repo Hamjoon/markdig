@@ -1,0 +1,81 @@
+--- a/src/Markdig/Renderers/Roundtrip/Inlines/LinkInlineRenderer.cs
++++ b/src/Markdig/Renderers/Roundtrip/Inlines/LinkInlineRenderer.cs
+@@
+-        else
+-        {
+-            if (link.Url != null)
+-            {
+-                renderer.Write('(');
+-                renderer.Write(link.TriviaBeforeUrl);
+-                if (link.UrlHasPointyBrackets)
+-                {
+-                    renderer.Write('<');
+-                }
+-                renderer.Write(link.UnescapedUrl);
+-                if (link.UrlHasPointyBrackets)
+-                {
+-                    renderer.Write('>');
+-                }
+-                renderer.Write(link.TriviaAfterUrl);
+-
+-                if (!string.IsNullOrEmpty(link.Title))
+-                {
+-                    var open = link.TitleEnclosingCharacter;
+-                    var close = link.TitleEnclosingCharacter;
+-                    if (link.TitleEnclosingCharacter == '(')
+-                    {
+-                        close = ')';
+-                    }
+-                    renderer.Write(open);
+-                    renderer.Write(link.UnescapedTitle);
+-                    renderer.Write(close);
+-                    renderer.Write(link.TriviaAfterTitle);
+-                }
+-
+-                renderer.Write(')');
+-            }
+-        }
++        else
++        {
++            // Normal link with explicit URL
++            if (link.Url != null)
++            {
++                renderer.Write('(');
++                renderer.Write(link.TriviaBeforeUrl);
++                if (link.UrlHasPointyBrackets)
++                {
++                    renderer.Write('<');
++                }
++                renderer.Write(link.UnescapedUrl);
++                if (link.UrlHasPointyBrackets)
++                {
++                    renderer.Write('>');
++                }
++                renderer.Write(link.TriviaAfterUrl);
++
++                if (!string.IsNullOrEmpty(link.Title))
++                {
++                    var open = link.TitleEnclosingCharacter;
++                    var close = link.TitleEnclosingCharacter;
++                    if (link.TitleEnclosingCharacter == '(')
++                    {
++                        close = ')';
++                    }
++                    renderer.Write(open);
++                    renderer.Write(link.UnescapedTitle);
++                    renderer.Write(close);
++                    renderer.Write(link.TriviaAfterTitle);
++                }
++
++                renderer.Write(')');
++            }
++            // Auto link (no explicit URL, label holds the URL). Preserve the URL when round‑tripping.
++            else if (link.Label != null)
++            {
++                renderer.Write('(');
++                // Use the raw label text as the URL. This matches the expected round‑trip format
++                // e.g. "[http://example.com/](http://example.com/)".
++                renderer.Write(link.Label);
++                renderer.Write(')');
++            }
++        }

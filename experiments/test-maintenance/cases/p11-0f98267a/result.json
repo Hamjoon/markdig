@@ -1,0 +1,132 @@
+{
+  "case_id": "P-11",
+  "category": "P",
+  "expected_decision": "fix_production",
+  "attempt": 1,
+  "status": "evaluated",
+  "reason": "executable-validation-failed",
+  "response": {
+    "first_line": "DECISION: fix_production",
+    "decision": "fix_production",
+    "decision_line_valid": true,
+    "body_empty": false,
+    "patch_present": true,
+    "raw_unified_diff_conformant": false,
+    "header_paths_safe": true,
+    "header_scope_valid": true,
+    "header_paths": [
+      "src/Markdig/Extensions/Tables/PipeTableParser.cs"
+    ],
+    "parse_reason": null,
+    "response_sha256": "bca20091b56bd93baf28d5b1884ae4c567daec233cef6a402cb49717a53f0642",
+    "extracted_patch_sha256": "8c43f9e22229adf13886347fd3303cec980377710250bbd558519e8b69fa6682"
+  },
+  "fixture": {
+    "base_sha": "fcbf8170633e7e1025a37718af9c253698166b52",
+    "upstream_sha": "0f98267a8519ee6563dceae5ee31db3d60d2844f",
+    "tfm": "net10.0",
+    "target_filter": "FullyQualifiedName~TestPipeTable",
+    "constructed": true,
+    "committed": true
+  },
+  "model_patch": {
+    "apply_attempted": true,
+    "apply_attempts": [
+      {
+        "method": "git-apply",
+        "rc": 128
+      },
+      {
+        "method": "git-apply-recount",
+        "rc": 128
+      },
+      {
+        "method": "patch-fuzz",
+        "rc": 2
+      },
+      {
+        "method": "context-match",
+        "rc": 0
+      }
+    ],
+    "apply_method": "context-match",
+    "apply_succeeded": true,
+    "effective_change": true,
+    "actual_paths": [
+      "src/Markdig/Extensions/Tables/PipeTableParser.cs"
+    ],
+    "scope_valid": true,
+    "decision_side_valid": true,
+    "applied_diff": "applied-repair.diff",
+    "applied_diff_sha256": "77fd51777a0eeba9b740c2a963c9c695c2514bbf4a8f8697eeb39e4db31796dd"
+  },
+  "preservation": {
+    "checked": true,
+    "passed": true,
+    "rc": 0,
+    "method": "git apply --reverse --check fixture.patch"
+  },
+  "runs": [
+    {
+      "kind": "build",
+      "label": "after-model-action",
+      "command": "dotnet build src/Markdig.Tests/Markdig.Tests.csproj -c Release -f net10.0 -v q",
+      "rc": 0
+    },
+    {
+      "kind": "test",
+      "label": "target-after-model-action",
+      "command": "dotnet test src/Markdig.Tests/Markdig.Tests.csproj -c Release -f net10.0 --no-build --filter FullyQualifiedName~TestPipeTable",
+      "filter": "FullyQualifiedName~TestPipeTable",
+      "rc": 1,
+      "counts": {
+        "failed": 1,
+        "passed": 22,
+        "skipped": 0,
+        "total": 23
+      },
+      "failed_tests": [
+        "BoldTableCellWithUnmatchedSubscriptDelimiterDoesNotAddCells"
+      ]
+    },
+    {
+      "kind": "test",
+      "label": "full-suite-after-model-action",
+      "command": "dotnet test src/Markdig.Tests/Markdig.Tests.csproj -c Release -f net10.0 --no-build",
+      "filter": null,
+      "rc": 1,
+      "counts": {
+        "failed": 10,
+        "passed": 3765,
+        "skipped": 1,
+        "total": 3776
+      },
+      "failed_tests": [
+        "BoldTableCellWithUnmatchedSubscriptDelimiterDoesNotAddCells",
+        "ExtensionsGfmPipeTable_Example005",
+        "ExtensionsGfmPipeTable_Example017",
+        "ExtensionsGfmPipeTable_Example019",
+        "ExtensionsGridTable_Example002",
+        "ExtensionsPipeTable_Example005",
+        "ExtensionsPipeTable_Example017",
+        "ExtensionsPipeTable_Example019",
+        "ExtensionsPipeTable_Example028",
+        "TestBugWithEmphasisAndTable"
+      ]
+    }
+  ],
+  "decision_correct": true,
+  "response_contract_valid": true,
+  "behavior_validation_pass": false,
+  "repair_success": false,
+  "strict_signal_pass": false,
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "evaluated",
+      "reason": "executable-validation-failed",
+      "record": "result.json"
+    }
+  ],
+  "archive_case_id": "p11-0f98267a"
+}

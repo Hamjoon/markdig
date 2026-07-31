@@ -1,0 +1,12 @@
+diff --git a/src/Markdig.Tests/RoundtripSpecs/TestUnorderedList.cs b/src/Markdig.Tests/RoundtripSpecs/TestUnorderedList.cs
+index f35a2e8b..a65c3e71 100644
+--- a/src/Markdig.Tests/RoundtripSpecs/TestUnorderedList.cs
++++ b/src/Markdig.Tests/RoundtripSpecs/TestUnorderedList.cs
+@@ -25,6 +25,7 @@ public class TestUnorderedList
+     [TestCase("-\ti1")]
+     [TestCase("-\ti1\n-\ti2")]
+     [TestCase("-\ti1\n-  i2\n-\ti3")]
++    [TestCase("- 1.\n- 2.")]
+     public void Test(string value)
+     {
+         RoundTrip(value);

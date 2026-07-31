@@ -1,0 +1,16 @@
+diff --git a/src/Markdig.Tests/TestCodeInline.cs b/src/Markdig.Tests/TestCodeInline.cs
+new file mode 100644
+index 00000000..b5427647
+--- /dev/null
++++ b/src/Markdig.Tests/TestCodeInline.cs
+@@ -0,0 +1,10 @@
++namespace Markdig.Tests;
++
++public class TestCodeInline
++{
++    [Test]
++    public void UnpairedCodeInlineWithTrailingChars()
++    {
++        TestParser.TestSpec("*`\n\f", "<p>*`</p>");
++    }
++}

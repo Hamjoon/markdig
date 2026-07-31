@@ -1,0 +1,89 @@
+diff --git a/src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs b/src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs
+index 781a4bfb..86221068 100644
+--- a/src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs
++++ b/src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs
+@@ -103,37 +103,53 @@ public static bool TryParse(ref StringSlice slice, [NotNullWhen(true)] out HtmlA
+ 
+         bool isValid = false;
+         var c = line.NextChar();
+-        while (true)
+-        {
+-            if (c == '}')
++            while (true)
+             {
+-                isValid = true;
+-                line.SkipChar(); // skip }
+-                break;
+-            }
++                if (c == '}')
++                {
++                    isValid = true;
++                    line.SkipChar(); // skip }
+ 
+-            if (c == '\0')
+-            {
+-                break;
+-            }
++                    // Skip a trailing line break (and optional carriage return) after the attribute block.
++                    // This prevents a stray newline from being emitted as whitespace inside the following block.
++                    if (line.CurrentChar == '\r')
++                    {
++                        line.SkipChar();
++                        if (line.CurrentChar == '\n')
++                        {
++                            line.SkipChar();
++                        }
++                    }
++                    else if (line.CurrentChar == '\n')
++                    {
++                        line.SkipChar();
++                    }
+ 
+-            bool isClass = c == '.';
+-            if (c == '#' || isClass)
+-            {
+-                c = line.NextChar(); // Skip #
+-                var start = line.Start;
+-                // Get all non-whitespace characters following a #
+-                // But stop if we found a } or \0
+-                while (c != '}' && !c.IsWhiteSpaceOrZero())
+-                {
+-                    c = line.NextChar();
++                    break;
+                 }
+-                var end = line.Start - 1;
+-                if (end == start)
++
++                if (c == '\0')
+                 {
+                     break;
+                 }
+-                var text = slice.Text.Substring(start, end - start + 1);
++
++                bool isClass = c == '.';
++                if (c == '#' || isClass)
++                {
++                    c = line.NextChar(); // Skip #
++                    var start = line.Start;
++                    // Get all non-whitespace characters following a #
++                    // But stop if we found a } or \0
++                    while (c != '}' && !c.IsWhiteSpaceOrZero())
++                    {
++                        c = line.NextChar();
++                    }
++                    var end = line.Start - 1;
++                    if (end == start)
++                    {
++                        break;
++                    }
++                    var text = slice.Text.Substring(start, end - start + 1);
+                 if (isClass)
+                 {
+                     classes ??= new List<string>();
+@@ -268,4 +284,4 @@ private static bool IsStartAttributeName(char c)
+     {
+         return c.IsAlpha() || c == '_' || c == ':';
+     }
+-}
+\ No newline at end of file
++}

@@ -1,0 +1,30 @@
+{
+  "case_id": "N-01",
+  "category": "N",
+  "base_sha": "dab1ca54837338f6d168f130c534d24c5b902500",
+  "upstream_sha": "adfcf42529649e1e4bf5e95e152411577e9f7eec",
+  "model": "openai/gpt-oss-120b",
+  "temperature": 0,
+  "allowed_files": [
+    "src/Markdig/Extensions/MediaLinks/HostProviderBuilder.cs",
+    "src/Markdig/Extensions/MediaLinks/MediaOptions.cs",
+    "src/Markdig/Globals.cs",
+    "src/Markdig/Helpers/CharHelper.cs",
+    "src/Markdig/Helpers/CharNormalizer.cs",
+    "src/Markdig/Helpers/CharacterMap.cs"
+  ],
+  "fixture_paths": [
+    "src/Markdig/Extensions/MediaLinks/HostProviderBuilder.cs",
+    "src/Markdig/Extensions/MediaLinks/MediaOptions.cs",
+    "src/Markdig/Globals.cs",
+    "src/Markdig/Helpers/CharHelper.cs",
+    "src/Markdig/Helpers/CharNormalizer.cs",
+    "src/Markdig/Helpers/CharacterMap.cs"
+  ],
+  "test_revision": null,
+  "production_revision": "adfcf42529649e1e4bf5e95e152411577e9f7eec",
+  "prompt_sha256": "233a3410145bbe3e3416cfba359d8380e19ef28d16e6c1c0212cc0f876c71723",
+  "fixture_patch_sha256": "5865b97faefa774a996365f30f2dbaf69d8c1a1b5beaa645d8fe1f92cdf109ad",
+  "test_output_sha256": "f5e2d39be0bd850c3c2dee153b0a166d7a93d0ec5b36505e03fd3780e34866a7",
+  "prompt_characters": 22702
+}

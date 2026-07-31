@@ -1,0 +1,5 @@
+Test run for <worktree>/src/Markdig.Tests/bin/Release/net9.0/Markdig.Tests.dll (.NETCoreApp,Version=v9.0)
+A total of 1 test files matched the specified pattern.
+  Skipped ListUnorderedLooseTop [< 1 ms]
+
+Passed!  - Failed:     0, Passed:  3541, Skipped:     1, Total:  3542, Duration: 931 ms - Markdig.Tests.dll (net9.0)

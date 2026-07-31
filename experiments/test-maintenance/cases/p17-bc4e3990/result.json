@@ -1,0 +1,91 @@
+{
+  "case_id": "P-17",
+  "category": "P",
+  "expected_decision": "fix_production",
+  "attempt": 1,
+  "status": "evaluated",
+  "reason": "build-failed-after-model-action",
+  "response": {
+    "first_line": "DECISION: fix_production",
+    "decision": "fix_production",
+    "decision_line_valid": true,
+    "body_empty": false,
+    "patch_present": true,
+    "raw_unified_diff_conformant": false,
+    "header_paths_safe": true,
+    "header_scope_valid": true,
+    "header_paths": [
+      "src/Markdig/Parsers/ListBlockParser.cs"
+    ],
+    "parse_reason": null,
+    "response_sha256": "121aed0b846dc90a1d3a4f8b2a400bdc62b84b648a97bcc6881d3c99f7e2cf4b",
+    "extracted_patch_sha256": "6b1edcd175da5481107d55143ecc1c37c222c46f7e2e0b9f4a5d4ff1345c3ad8"
+  },
+  "fixture": {
+    "base_sha": "9dffce52b61068c4451399068f72cdad34f79bdb",
+    "upstream_sha": "bc4e399087e19ddbbdf95dc698bec7f752b3c8e5",
+    "tfm": "net10.0",
+    "target_filter": "FullyQualifiedName~MiscTests",
+    "constructed": true,
+    "committed": true
+  },
+  "model_patch": {
+    "apply_attempted": true,
+    "apply_attempts": [
+      {
+        "method": "git-apply",
+        "rc": 128
+      },
+      {
+        "method": "git-apply-recount",
+        "rc": 128
+      },
+      {
+        "method": "patch-fuzz",
+        "rc": 2
+      },
+      {
+        "method": "context-match",
+        "rc": 0
+      }
+    ],
+    "apply_method": "context-match",
+    "apply_succeeded": true,
+    "effective_change": true,
+    "actual_paths": [
+      "src/Markdig/Parsers/ListBlockParser.cs"
+    ],
+    "scope_valid": true,
+    "decision_side_valid": true,
+    "applied_diff": "applied-repair.diff",
+    "applied_diff_sha256": "12a276e6de02f643193231869e5a479388e338c75c2fd623d3917df8fde0dd1a"
+  },
+  "preservation": {
+    "checked": true,
+    "passed": true,
+    "rc": 0,
+    "method": "git apply --reverse --check fixture.patch"
+  },
+  "runs": [
+    {
+      "kind": "build",
+      "label": "after-model-action",
+      "command": "dotnet build src/Markdig.Tests/Markdig.Tests.csproj -c Release -f net10.0 -v q",
+      "rc": 1
+    }
+  ],
+  "decision_correct": true,
+  "response_contract_valid": true,
+  "behavior_validation_pass": false,
+  "repair_success": false,
+  "strict_signal_pass": false,
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "evaluated",
+      "reason": "build-failed-after-model-action",
+      "record": "result.json"
+    }
+  ],
+  "archive_case_id": "p17-bc4e3990"
+}

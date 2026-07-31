@@ -1,0 +1,95 @@
+Test run for <worktree>/src/Markdig.Tests/bin/Release/net9.0/Markdig.Tests.dll (.NETCoreApp,Version=v9.0)
+A total of 1 test files matched the specified pattern.
+  Failed ExtensionsPipeTable_Example026 [17 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 129 but was 52. Strings differ at index 30.
+  Expected: "<p>Some\n<strong>text</strong>.</p>\n<table>\n<thead>\n<tr>\n<th>A..."
+  But was:  "<p>Some\n<strong>text</strong>.\n| A |\n|---|\n| B |</p>"
+  ------------------------------------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue, DiffStyle diffStyle, TextWriter output) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 86
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 22
+   at Markdig.Tests.TestParser.PrintAssertExpected(String source, String result, String expected, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 117
+   at Markdig.Tests.TestParser.TestSpec(String inputText, String expectedOutputText, MarkdownPipeline pipeline, Boolean plainText, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 98
+   at Markdig.Tests.TestParser.TestSpec(String inputText, String expectedOutputText, String extensions, Boolean plainText, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 85
+   at Markdig.Tests.Specs.PipeTables.TestExtensionsPipeTable.ExtensionsPipeTable_Example026() in <worktree>/src/Markdig.Tests/Specs/PipeTableSpecs.generated.cs:line 859
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue, DiffStyle diffStyle, TextWriter output) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 86
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 22
+   at Markdig.Tests.TestParser.PrintAssertExpected(String source, String result, String expected, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 117
+   at Markdig.Tests.TestParser.TestSpec(String inputText, String expectedOutputText, MarkdownPipeline pipeline, Boolean plainText, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 98
+   at Markdig.Tests.TestParser.TestSpec(String inputText, String expectedOutputText, String extensions, Boolean plainText, String context) in <worktree>/src/Markdig.Tests/TestParser.cs:line 85
+   at Markdig.Tests.Specs.PipeTables.TestExtensionsPipeTable.ExtensionsPipeTable_Example026() in <worktree>/src/Markdig.Tests/Specs/PipeTableSpecs.generated.cs:line 859
+
+
+  Standard Output Messages:
+ Example 26
+ Section Extensions / Pipe Table
+
+ Pipeline configured with extensions: pipetables
+ ```````````````````Source
+ Some
+ **text**.
+ |·A·|
+ |---|
+ |·B·|
+ ```````````````````Result
+ <p>Some
+ <strong>text</strong>.
+ |·A·|
+ |---|
+ |·B·|</p>
+ ```````````````````Expected
+ <p>Some
+ <strong>text</strong>.</p>
+ <table>
+ <thead>
+ <tr>
+ <th>A</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>B</td>
+ </tr>
+ </tbody>
+ </table>
+ ```````````````````
+
+
+ Index    Expected     Actual
+ ----------------------------
+ >>> 30     60   <     10   \n
+ *** 31     47   /     124  |
+ *** 32     112  p     32   \u20;
+ *** 33     62   >     65   A
+ *** 34     10   \n    32   \u20;
+ *** 35     60   <     124  |
+ *** 36     116  t     10   \n
+ *** 37     97   a     124  |
+ *** 38     98   b     45   -
+ *** 39     108  l     45   -
+
+
+  Failed TestTableBug("a\r\n| S | T |\r|---|---|") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected: 1
+  But was:  0
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestPipeTable.TestTableBug(String markdown, Int32 tableCount) in <worktree>/src/Markdig.Tests/TestPipeTable.cs:line 25
+   at InvokeStub_TestPipeTable.TestTableBug(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TestPipeTable.TestTableBug(String markdown, Int32 tableCount) in <worktree>/src/Markdig.Tests/TestPipeTable.cs:line 25
+   at InvokeStub_TestPipeTable.TestTableBug(Object, Span`1)
+
+
+
+Failed!  - Failed:     2, Passed:    58, Skipped:     0, Total:    60, Duration: 83 ms - Markdig.Tests.dll (net9.0)

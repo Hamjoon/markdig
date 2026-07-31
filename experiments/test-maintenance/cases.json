@@ -1,0 +1,455 @@
+{
+  "schema_version": 1,
+  "experiment": "markdig-week5-historical-test-maintenance",
+  "protocol_commit": "4c2a0fdab1d8ec95d6f7270b4bf49c8002aac92f",
+  "screening_artifact_commit": "771692a0b53d411661a3a8729ce630c9635214a8",
+  "cases": [
+    {
+      "case_id": "S-05",
+      "category": "S",
+      "upstream_sha": "12590e5fbe1730984e0783452666a67df8e0b806",
+      "base_sha": "8c01cf054971a1ec4cd663edaca6e2d035236133",
+      "subject": "feat(link-helper): improve ASCII normalization handling (#911)",
+      "date": "2025-11-10",
+      "tfm": "net9.0",
+      "dotnet_sdk": "9.0.316",
+      "target_filter": "FullyQualifiedName~TestLinkHelper",
+      "prod_src_files": [
+        "src/Markdig/Helpers/LinkHelper.cs"
+      ],
+      "test_src_files": [
+        "src/Markdig.Tests/TestLinkHelper.cs"
+      ],
+      "spec_md_files": [],
+      "archive_case_id": "s05-12590e5f"
+    },
+    {
+      "case_id": "S-07",
+      "category": "S",
+      "upstream_sha": "5365879a23c9f680b9ca6926783daa3f73795dc5",
+      "base_sha": "a9bd7c6a5e1a0bd0992555ce3aeeafb4d4aee438",
+      "subject": "Fix AbbreviationExtension corrupting emphasis/bold/italic resolution (#935) (#936)",
+      "date": "2026-04-20",
+      "tfm": "net10.0",
+      "dotnet_sdk": "10.0.302",
+      "target_filter": "FullyQualifiedName~TestExtensionsAbbreviation|FullyQualifiedName~TestSourcePosition",
+      "prod_src_files": [
+        "src/Markdig/Extensions/Abbreviations/AbbreviationParser.cs"
+      ],
+      "test_src_files": [
+        "src/Markdig.Tests/TestSourcePosition.cs"
+      ],
+      "spec_md_files": [
+        "src/Markdig.Tests/Specs/AbbreviationSpecs.md"
+      ],
+      "archive_case_id": "s07-5365879a"
+    },
+    {
+      "case_id": "S-09",
+      "category": "S",
+      "upstream_sha": "148fd08b1d5604177637307d82e6b83079642d63",
+      "base_sha": "c488a27497199aa520df540ffecf1e159fbc06a1",
+      "subject": "Add span validation/update APIs and tests",
+      "date": "2026-02-21",
+      "tfm": "net10.0",
+      "dotnet_sdk": "10.0.302",
+      "target_filter": "FullyQualifiedName~CounterState|FullyQualifiedName~CountingInlineParser|FullyQualifiedName~TestParserAuthoringHelpers|FullyQualifiedName~TestSourcePosition",
+      "prod_src_files": [
+        "src/Markdig/Extensions/DefinitionLists/DefinitionListParser.cs",
+        "src/Markdig/Extensions/JiraLinks/JiraLinkInlineParser.cs",
+        "src/Markdig/Parsers/InlineProcessor.cs",
+        "src/Markdig/Syntax/Block.cs",
+        "src/Markdig/Syntax/ContainerBlock.cs",
+        "src/Markdig/Syntax/Inlines/ContainerInline.cs"
+      ],
+      "test_src_files": [
+        "src/Markdig.Tests/TestExtensionSpanCoverage.cs",
+        "src/Markdig.Tests/TestParserAuthoringHelpers.cs",
+        "src/Markdig.Tests/TestSourcePosition.cs",
+        "src/Markdig.Tests/TestSpanConsistency.cs"
+      ],
+      "spec_md_files": [],
+      "archive_case_id": "s09-148fd08b"
+    },
+    {
+      "case_id": "P-04",
+      "category": "P",
+      "upstream_sha": "d548b82bcd269c34221d06a007b06f3ea33ed236",
+      "base_sha": "7ff8db9016593b71f9ae17d9b2b053fbd54e9cdf",
+      "subject": "Add support for a table without an extra new line before it",
+      "date": "2025-08-09",
+      "tfm": "net9.0",
+      "dotnet_sdk": "9.0.316",
+      "target_filter": "FullyQualifiedName~TestPipeTable",
+      "prod_src_files": [
+        "src/Markdig/Extensions/Tables/PipeTableParser.cs"
+      ],
+      "test_src_files": [
+        "src/Markdig.Tests/TestPipeTable.cs"
+      ],
+      "spec_md_files": [],
+      "archive_case_id": "p04-d548b82b"
+    },
+    {
+      "case_id": "P-06",
+      "category": "P",
+      "upstream_sha": "781d9b536598e0b770c1eabbe58d2ac76b285409",
+      "base_sha": "543570224e940826c38187f8eda013328d3e70d4",
+      "subject": "Remove leading newline in block attributes (#896)",
+      "date": "2025-10-05",
+      "tfm": "net9.0",
+      "dotnet_sdk": "9.0.316",
+      "target_filter": "FullyQualifiedName~TestExtensionsGenericAttributes|FullyQualifiedName~element|FullyQualifiedName~property",
+      "prod_src_files": [
+        "src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs"
+      ],
+      "test_src_files": [],
+      "spec_md_files": [
+        "src/Markdig.Tests/Specs/GenericAttributesSpecs.md"
+      ],
+      "archive_case_id": "p06-781d9b53"
+    },
+    {
+      "case_id": "P-07",
+      "category": "P",
+      "upstream_sha": "fcbf8170633e7e1025a37718af9c253698166b52",
+      "base_sha": "5dca4149a518a385f40dc7b11a2a86cd4452df4b",
+      "subject": "Fix CJK emphasis after HTML entity newlines (#941)",
+      "date": "2026-06-13",
+      "tfm": "net10.0",
+      "dotnet_sdk": "10.0.302",
+      "target_filter": "FullyQualifiedName~TestCjkFriendlyEmphasis",
+      "prod_src_files": [
+        "src/Markdig/Parsers/Inlines/EmphasisInlineParser.cs"
+      ],
+      "test_src_files": [
+        "src/Markdig.Tests/TestCjkFriendlyEmphasis.cs"
+      ],
+      "spec_md_files": [],
+      "archive_case_id": "p07-fcbf8170"
+    },
+    {
+      "case_id": "P-08",
+      "category": "P",
+      "upstream_sha": "5a3c206076621dd75c6f0ec36236f031ebbadea2",
+      "base_sha": "682c727288defba5dfab05ccb4ef847c760d412c",
+      "subject": "Fixes #878: render indent and 0 blocks",
+      "date": "2025-06-16",
+      "tfm": "net9.0",
+      "dotnet_sdk": "9.0.316",
+      "target_filter": "FullyQualifiedName~TestUnorderedList",
+      "prod_src_files": [
+        "src/Markdig/Renderers/Roundtrip/ListRenderer.cs"
+      ],
+      "test_src_files": [
+        "src/Markdig.Tests/RoundtripSpecs/TestUnorderedList.cs"
+      ],
+      "spec_md_files": [],
+      "archive_case_id": "p08-5a3c2060"
+    },
+    {
+      "case_id": "P-09",
+      "category": "P",
+      "upstream_sha": "800235ba7ab773ac3ea691d16e4bb17a1f9b0200",
+      "base_sha": "d5f8a809a00dd32975af3cf1c26609e5b7a7f7a3",
+      "subject": "Fix IndexOutOfRangeException in CodeInlineParser (#900)",
+      "date": "2025-10-16",
+      "tfm": "net9.0",
+      "dotnet_sdk": "9.0.316",
+      "target_filter": "FullyQualifiedName~TestCodeInline",
+      "prod_src_files": [
+        "src/Markdig/Parsers/Inlines/CodeInlineParser.cs",
+        "src/Markdig/Polyfills/SpanExtensions.cs"
+      ],
+      "test_src_files": [
+        "src/Markdig.Tests/TestCodeInline.cs"
+      ],
+      "spec_md_files": [],
+      "archive_case_id": "p09-800235ba"
+    },
+    {
+      "case_id": "P-11",
+      "category": "P",
+      "upstream_sha": "0f98267a8519ee6563dceae5ee31db3d60d2844f",
+      "base_sha": "fcbf8170633e7e1025a37718af9c253698166b52",
+      "subject": "Fix pipe table cells with unmatched subscript (#932)",
+      "date": "2026-06-13",
+      "tfm": "net10.0",
+      "dotnet_sdk": "10.0.302",
+      "target_filter": "FullyQualifiedName~TestPipeTable",
+      "prod_src_files": [
+        "src/Markdig/Extensions/Tables/PipeTableExtension.cs",
+        "src/Markdig/Extensions/Tables/PipeTableParser.cs"
+      ],
+      "test_src_files": [
+        "src/Markdig.Tests/TestPipeTable.cs"
+      ],
+      "spec_md_files": [],
+      "archive_case_id": "p11-0f98267a"
+    },
+    {
+      "case_id": "P-14",
+      "category": "P",
+      "upstream_sha": "b15cf582a538e0c0e016e70cb8a0f03d4f2d55d8",
+      "base_sha": "61e9be290b1dad611e8137251d249a3aae9664d3",
+      "subject": "Add 'search' HTML tag support",
+      "date": "2025-04-15",
+      "tfm": "net9.0",
+      "dotnet_sdk": "9.0.316",
+      "target_filter": "FullyQualifiedName~TestHtmlCodeBlocks",
+      "prod_src_files": [
+        "src/Markdig/Parsers/HtmlBlockParser.cs"
+      ],
+      "test_src_files": [
+        "src/Markdig.Tests/TestHtmlCodeBlocks.cs"
+      ],
+      "spec_md_files": [],
+      "archive_case_id": "p14-b15cf582"
+    },
+    {
+      "case_id": "P-15",
+      "category": "P",
+      "upstream_sha": "b83641351f67e2c2f240167f9314aeb354714dad",
+      "base_sha": "0f98267a8519ee6563dceae5ee31db3d60d2844f",
+      "subject": "Fix roundtrip autolink URLs (#919)",
+      "date": "2026-06-13",
+      "tfm": "net10.0",
+      "dotnet_sdk": "10.0.302",
+      "target_filter": "FullyQualifiedName~TestAutoLinkInline",
+      "prod_src_files": [
+        "src/Markdig/Renderers/Roundtrip/Inlines/LinkInlineRenderer.cs"
+      ],
+      "test_src_files": [
+        "src/Markdig.Tests/RoundtripSpecs/Inlines/TestAutoLinkInline.cs"
+      ],
+      "spec_md_files": [],
+      "archive_case_id": "p15-b8364135"
+    },
+    {
+      "case_id": "P-16",
+      "category": "P",
+      "upstream_sha": "d6e88f16f7d2d86a096a552250f89415513d09dc",
+      "base_sha": "03bdf6008631166ea8d288a647e2d1a2da0c389b",
+      "subject": "Fix pipe table parsing with a leading paragraph (#905)",
+      "date": "2025-10-20",
+      "tfm": "net9.0",
+      "dotnet_sdk": "9.0.316",
+      "target_filter": "FullyQualifiedName~TestExtensionsGridTable|FullyQualifiedName~TestExtensionsPipeTable|FullyQualifiedName~TestPipeTable",
+      "prod_src_files": [
+        "src/Markdig/Extensions/Tables/PipeTableParser.cs"
+      ],
+      "test_src_files": [
+        "src/Markdig.Tests/TestPipeTable.cs"
+      ],
+      "spec_md_files": [
+        "src/Markdig.Tests/Specs/GridTableSpecs.md",
+        "src/Markdig.Tests/Specs/PipeTableSpecs.md"
+      ],
+      "archive_case_id": "p16-d6e88f16"
+    },
+    {
+      "case_id": "P-17",
+      "category": "P",
+      "upstream_sha": "bc4e399087e19ddbbdf95dc698bec7f752b3c8e5",
+      "base_sha": "9dffce52b61068c4451399068f72cdad34f79bdb",
+      "subject": "Fix blockquote ordered list parsing (#887)",
+      "date": "2026-06-13",
+      "tfm": "net10.0",
+      "dotnet_sdk": "10.0.302",
+      "target_filter": "FullyQualifiedName~MiscTests",
+      "prod_src_files": [
+        "src/Markdig/Parsers/BlockProcessor.cs",
+        "src/Markdig/Parsers/ListBlockParser.cs"
+      ],
+      "test_src_files": [
+        "src/Markdig.Tests/MiscTests.cs"
+      ],
+      "spec_md_files": [],
+      "archive_case_id": "p17-bc4e3990"
+    },
+    {
+      "case_id": "N-01",
+      "category": "N",
+      "upstream_sha": "adfcf42529649e1e4bf5e95e152411577e9f7eec",
+      "base_sha": "dab1ca54837338f6d168f130c534d24c5b902500",
+      "subject": "Use FrozenDictionary in a couple places",
+      "date": "2025-03-16",
+      "tfm": "net9.0",
+      "dotnet_sdk": "9.0.316",
+      "target_filter": null,
+      "prod_src_files": [
+        "src/Markdig/Extensions/MediaLinks/HostProviderBuilder.cs",
+        "src/Markdig/Extensions/MediaLinks/MediaOptions.cs",
+        "src/Markdig/Globals.cs",
+        "src/Markdig/Helpers/CharHelper.cs",
+        "src/Markdig/Helpers/CharNormalizer.cs",
+        "src/Markdig/Helpers/CharacterMap.cs"
+      ],
+      "test_src_files": [],
+      "spec_md_files": [],
+      "archive_case_id": "n01-adfcf425"
+    },
+    {
+      "case_id": "N-02",
+      "category": "N",
+      "upstream_sha": "8269ff1af54456c97e58b53c5f6d3f4eaa24875b",
+      "base_sha": "0e6d0f4cb24cbf32a2f1f26cc43aeed7a7573edf",
+      "subject": "Improve AutoLinkParser overhead for false-positive opening chars",
+      "date": "2025-04-03",
+      "tfm": "net9.0",
+      "dotnet_sdk": "9.0.316",
+      "target_filter": null,
+      "prod_src_files": [
+        "src/Markdig/Extensions/AutoLinks/AutoLinkParser.cs",
+        "src/Markdig/Helpers/StringSlice.cs",
+        "src/Markdig/Polyfills/SpanExtensions.cs"
+      ],
+      "test_src_files": [],
+      "spec_md_files": [],
+      "archive_case_id": "n02-8269ff1a"
+    },
+    {
+      "case_id": "N-03",
+      "category": "N",
+      "upstream_sha": "ec2eef25b2a70dfab54e2636f50d14f2a0b8ca08",
+      "base_sha": "6261660d377e28430c0b01a0efc1f55476f86a45",
+      "subject": "Remove HtmlHelper.UnescapeNullable",
+      "date": "2025-06-04",
+      "tfm": "net9.0",
+      "dotnet_sdk": "9.0.316",
+      "target_filter": null,
+      "prod_src_files": [
+        "src/Markdig/Helpers/HtmlHelper.cs",
+        "src/Markdig/Parsers/Inlines/LinkInlineParser.cs"
+      ],
+      "test_src_files": [],
+      "spec_md_files": [],
+      "archive_case_id": "n03-ec2eef25"
+    },
+    {
+      "case_id": "N-04",
+      "category": "N",
+      "upstream_sha": "aab5543cb5b3bd78cf5222144e411f0f52672504",
+      "base_sha": "2e1d741aaf15ad1084334d397cc7abf63af323a4",
+      "subject": "Code cleanup",
+      "date": "2025-07-14",
+      "tfm": "net9.0",
+      "dotnet_sdk": "9.0.316",
+      "target_filter": null,
+      "prod_src_files": [
+        "src/Markdig/Parsers/BlockProcessor.cs"
+      ],
+      "test_src_files": [],
+      "spec_md_files": [],
+      "archive_case_id": "n04-aab5543c"
+    },
+    {
+      "case_id": "N-05",
+      "category": "N",
+      "upstream_sha": "14406bc60d515bfe3bc96b017560d22fb5b9805b",
+      "base_sha": "2aa6780a3071ed9234d4efc6ea8d52598af80c68",
+      "subject": "Fixes issue #845",
+      "date": "2025-09-06",
+      "tfm": "net9.0",
+      "dotnet_sdk": "9.0.316",
+      "target_filter": null,
+      "prod_src_files": [
+        "src/Markdig/Parsers/ListBlockParser.cs"
+      ],
+      "test_src_files": [],
+      "spec_md_files": [],
+      "archive_case_id": "n05-14406bc6"
+    },
+    {
+      "case_id": "N-06",
+      "category": "N",
+      "upstream_sha": "148278417f5aeee2e523ee9ad2fea4500320fa23",
+      "base_sha": "88c5b5cb410f7c8507e61dca4731e6e558bfa78b",
+      "subject": "Added error throwing when stack is empty and PopIndent() is called",
+      "date": "2025-01-14",
+      "tfm": "net9.0",
+      "dotnet_sdk": "10.0.302",
+      "target_filter": null,
+      "prod_src_files": [
+        "src/Markdig/Renderers/TextRendererBase.cs"
+      ],
+      "test_src_files": [],
+      "spec_md_files": [],
+      "archive_case_id": "n06-14827841"
+    },
+    {
+      "case_id": "N-07",
+      "category": "N",
+      "upstream_sha": "c488a27497199aa520df540ffecf1e159fbc06a1",
+      "base_sha": "58e8217ddb0d5a08f5ee235675e23a53bb835ec7",
+      "subject": "Document parser authoring contracts and migration risks",
+      "date": "2026-02-21",
+      "tfm": "net10.0",
+      "dotnet_sdk": "10.0.302",
+      "target_filter": null,
+      "prod_src_files": [
+        "src/Markdig/Parsers/BlockState.cs"
+      ],
+      "test_src_files": [],
+      "spec_md_files": [],
+      "archive_case_id": "n07-c488a274"
+    },
+    {
+      "case_id": "N-08",
+      "category": "N",
+      "upstream_sha": "90c73b775453734fbfb28cde78c19b5c9f6139e9",
+      "base_sha": "ee403ce28f1a18a1216e43fdfb3344c45b3f813f",
+      "subject": "Update src/Markdig/Helpers/LinkHelper.cs",
+      "date": "2025-03-18",
+      "tfm": "net9.0",
+      "dotnet_sdk": "9.0.316",
+      "target_filter": null,
+      "prod_src_files": [
+        "src/Markdig/Helpers/LinkHelper.cs"
+      ],
+      "test_src_files": [],
+      "spec_md_files": [],
+      "archive_case_id": "n08-90c73b77"
+    },
+    {
+      "case_id": "N-09",
+      "category": "N",
+      "upstream_sha": "3e0c72f0430cb58d7aa9caf325bd780325229e17",
+      "base_sha": "d1233ffe66dae3944375b78d2b05d966cd597070",
+      "subject": "Fixes exception in DefinitionListParser.GetCurrentDefinitionList()",
+      "date": "2025-01-03",
+      "tfm": "net9.0",
+      "dotnet_sdk": "10.0.302",
+      "target_filter": null,
+      "prod_src_files": [
+        "src/Markdig/Extensions/DefinitionLists/DefinitionListParser.cs"
+      ],
+      "test_src_files": [],
+      "spec_md_files": [],
+      "archive_case_id": "n09-3e0c72f0"
+    },
+    {
+      "case_id": "N-10",
+      "category": "N",
+      "upstream_sha": "6261660d377e28430c0b01a0efc1f55476f86a45",
+      "base_sha": "6d1fa96389c8cf04f235a9de06f1fb271610d95f",
+      "subject": "Explain why not to normalize link title into empty strings",
+      "date": "2025-05-31",
+      "tfm": "net9.0",
+      "dotnet_sdk": "9.0.316",
+      "target_filter": null,
+      "prod_src_files": [
+        "src/Markdig/Helpers/LinkHelper.cs"
+      ],
+      "test_src_files": [],
+      "spec_md_files": [],
+      "archive_case_id": "n10-6261660d"
+    }
+  ],
+  "counts": {
+    "S": 3,
+    "P": 10,
+    "N": 10
+  },
+  "case_count": 23
+}

@@ -1,0 +1,119 @@
+{
+  "case_id": "P-09",
+  "category": "P",
+  "expected_decision": "fix_production",
+  "attempt": 1,
+  "status": "evaluated",
+  "reason": "signal-pass",
+  "response": {
+    "first_line": "DECISION: fix_production",
+    "decision": "fix_production",
+    "decision_line_valid": true,
+    "body_empty": false,
+    "patch_present": true,
+    "raw_unified_diff_conformant": false,
+    "header_paths_safe": true,
+    "header_scope_valid": true,
+    "header_paths": [
+      "src/Markdig/Parsers/Inlines/CodeInlineParser.cs"
+    ],
+    "parse_reason": null,
+    "response_sha256": "1869bf70295d29d0cd6a90129485d30423c6297da71956669bb7aa03f971fe95",
+    "extracted_patch_sha256": "53c2c425bd0497ffaa220f4fc4a8edd8a09a0f413a41ab4b65ff9fcd101b3c1a"
+  },
+  "fixture": {
+    "base_sha": "d5f8a809a00dd32975af3cf1c26609e5b7a7f7a3",
+    "upstream_sha": "800235ba7ab773ac3ea691d16e4bb17a1f9b0200",
+    "tfm": "net9.0",
+    "target_filter": "FullyQualifiedName~TestCodeInline",
+    "constructed": true,
+    "committed": true
+  },
+  "model_patch": {
+    "apply_attempted": true,
+    "apply_attempts": [
+      {
+        "method": "git-apply",
+        "rc": 128
+      },
+      {
+        "method": "git-apply-recount",
+        "rc": 128
+      },
+      {
+        "method": "patch-fuzz",
+        "rc": 2
+      },
+      {
+        "method": "context-match",
+        "rc": 0
+      }
+    ],
+    "apply_method": "context-match",
+    "apply_succeeded": true,
+    "effective_change": true,
+    "actual_paths": [
+      "src/Markdig/Parsers/Inlines/CodeInlineParser.cs"
+    ],
+    "scope_valid": true,
+    "decision_side_valid": true,
+    "applied_diff": "applied-repair.diff",
+    "applied_diff_sha256": "cad8988914aef19c4e15cdd26f20c38c0fbdf83bf0d245ab66ed730ec9aa0a63"
+  },
+  "preservation": {
+    "checked": true,
+    "passed": true,
+    "rc": 0,
+    "method": "git apply --reverse --check fixture.patch"
+  },
+  "runs": [
+    {
+      "kind": "build",
+      "label": "after-model-action",
+      "command": "dotnet build src/Markdig.Tests/Markdig.Tests.csproj -c Release -f net9.0 -v q",
+      "rc": 0
+    },
+    {
+      "kind": "test",
+      "label": "target-after-model-action",
+      "command": "dotnet test src/Markdig.Tests/Markdig.Tests.csproj -c Release -f net9.0 --no-build --filter FullyQualifiedName~TestCodeInline",
+      "filter": "FullyQualifiedName~TestCodeInline",
+      "rc": 0,
+      "counts": {
+        "failed": 0,
+        "passed": 46,
+        "skipped": 0,
+        "total": 46
+      },
+      "failed_tests": []
+    },
+    {
+      "kind": "test",
+      "label": "full-suite-after-model-action",
+      "command": "dotnet test src/Markdig.Tests/Markdig.Tests.csproj -c Release -f net9.0 --no-build",
+      "filter": null,
+      "rc": 0,
+      "counts": {
+        "failed": 0,
+        "passed": 3552,
+        "skipped": 1,
+        "total": 3553
+      },
+      "failed_tests": []
+    }
+  ],
+  "decision_correct": true,
+  "response_contract_valid": true,
+  "behavior_validation_pass": true,
+  "repair_success": true,
+  "strict_signal_pass": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "evaluated",
+      "reason": "signal-pass",
+      "record": "result.json"
+    }
+  ],
+  "archive_case_id": "p09-800235ba"
+}

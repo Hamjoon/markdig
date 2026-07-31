@@ -1,0 +1,33 @@
+diff --git a/src/Markdig/Extensions/AutoLinks/AutoLinkParser.cs b/src/Markdig/Extensions/AutoLinks/AutoLinkParser.cs
+index 0b0fba26..70373adf 100644
+--- a/src/Markdig/Extensions/AutoLinks/AutoLinkParser.cs
++++ b/src/Markdig/Extensions/AutoLinks/AutoLinkParser.cs
+@@ -55,13 +55,16 @@ public override bool Match(InlineProcessor processor, ref StringSlice slice)
+         Debug.Assert(span[0] is 'h' or 'f' or 'm' or 't' or 'w');
+ 
+         // Precheck URL
++        // Pre‑check the URL using a case‑insensitive comparison, matching the original
++        // behaviour which accepted schemes like \"HTTP://\" or \"WWW.\"
+         bool mayBeValid = span.Length >= 4 && span[0] switch
+         {
+-            'h' => span.StartsWith("https://", StringComparison.Ordinal) || span.StartsWith("http://", StringComparison.Ordinal),
+-            'w' => span.StartsWith("www.", StringComparison.Ordinal), // We won't match http:/www. or /www.xxx
+-            'f' => span.StartsWith("ftp://", StringComparison.Ordinal),
+-            'm' => span.StartsWith("mailto:", StringComparison.Ordinal),
+-            _ => span.StartsWith("tel:", StringComparison.Ordinal),
++            'h' => span.StartsWith("https://", StringComparison.OrdinalIgnoreCase) ||
++                   span.StartsWith("http://", StringComparison.OrdinalIgnoreCase),
++            'w' => span.StartsWith("www.", StringComparison.OrdinalIgnoreCase), // We won't match http:/www. or /www.xxx
++            'f' => span.StartsWith("ftp://", StringComparison.OrdinalIgnoreCase),
++            'm' => span.StartsWith("mailto:", StringComparison.OrdinalIgnoreCase),
++            _   => span.StartsWith("tel:", StringComparison.OrdinalIgnoreCase),
+         };
+ 
+         return mayBeValid && MatchCore(processor, ref slice);
+@@ -255,4 +258,4 @@ private static bool IsAutoLinkValidInCurrentContext(InlineProcessor processor, r
+ 
+         return countBrackets <= 0;
+     }
+-}
+\ No newline at end of file
++}

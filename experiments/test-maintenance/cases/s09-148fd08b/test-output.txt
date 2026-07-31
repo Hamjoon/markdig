@@ -1,0 +1,107 @@
+Test run for <worktree>/src/Markdig.Tests/bin/Release/net10.0/Markdig.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+  Failed TestDefinitionList [16 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  String lengths are both 165. Strings differ at index 53.
+  Expected: "definitionlist ( 0, 0)  0-10\ndefinitionitem ( 1, 0)  3-10\ndef..."
+  But was:  "definitionlist ( 0, 0)  0-10\ndefinitionitem ( 1, 0)  0-10\ndef..."
+  -----------------------------------------------------------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue, DiffStyle diffStyle, TextWriter output) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 86
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 22
+   at Markdig.Tests.TestSourcePosition.Check(String text, String expectedResult, String extensions, Boolean trackTrivia) in <worktree>/src/Markdig.Tests/TestSourcePosition.cs:line 991
+   at Markdig.Tests.TestSourcePosition.TestDefinitionList() in <worktree>/src/Markdig.Tests/TestSourcePosition.cs:line 581
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue, DiffStyle diffStyle, TextWriter output) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 86
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 22
+   at Markdig.Tests.TestSourcePosition.Check(String text, String expectedResult, String extensions, Boolean trackTrivia) in <worktree>/src/Markdig.Tests/TestSourcePosition.cs:line 991
+   at Markdig.Tests.TestSourcePosition.TestDefinitionList() in <worktree>/src/Markdig.Tests/TestSourcePosition.cs:line 581
+
+
+  Standard Output Messages:
+ ```````````````````Source
+ a0
+ :···1234
+ ```````````````````Result
+ definitionlist ( 0, 0)  0-10
+ definitionitem ( 1, 0)  0-10
+ definitionterm ( 0, 0)  0-1
+ literal      ( 0, 0)  0-1
+ paragraph    ( 1, 4)  7-10
+ literal      ( 1, 4)  7-10
+ ```````````````````Expected
+ definitionlist ( 0, 0)  0-10
+ definitionitem ( 1, 0)  3-10
+ definitionterm ( 0, 0)  0-1
+ literal      ( 0, 0)  0-1
+ paragraph    ( 1, 4)  7-10
+ literal      ( 1, 4)  7-10
+ ```````````````````
+
+
+ Index    Expected     Actual
+ ----------------------------
+ >>> 53     51   3     48   0
+
+
+  Failed TestDefinitionList2 [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  String lengths are both 248. Strings differ at index 53.
+  Expected: "definitionlist ( 0, 0)  0-20\ndefinitionitem ( 1, 0)  3-10\ndef..."
+  But was:  "definitionlist ( 0, 0)  0-20\ndefinitionitem ( 1, 0)  0-10\ndef..."
+  -----------------------------------------------------------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue, DiffStyle diffStyle, TextWriter output) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 86
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 22
+   at Markdig.Tests.TestSourcePosition.Check(String text, String expectedResult, String extensions, Boolean trackTrivia) in <worktree>/src/Markdig.Tests/TestSourcePosition.cs:line 991
+   at Markdig.Tests.TestSourcePosition.TestDefinitionList2() in <worktree>/src/Markdig.Tests/TestSourcePosition.cs:line 595
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue, DiffStyle diffStyle, TextWriter output) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 86
+   at Markdig.Tests.TextAssert.AreEqual(String expectedValue, String actualValue) in <worktree>/src/Markdig.Tests/TextAssert.cs:line 22
+   at Markdig.Tests.TestSourcePosition.Check(String text, String expectedResult, String extensions, Boolean trackTrivia) in <worktree>/src/Markdig.Tests/TestSourcePosition.cs:line 991
+   at Markdig.Tests.TestSourcePosition.TestDefinitionList2() in <worktree>/src/Markdig.Tests/TestSourcePosition.cs:line 595
+
+
+  Standard Output Messages:
+ ```````````````````Source
+ a0
+ :···1234
+ :····5678
+ ```````````````````Result
+ definitionlist ( 0, 0)  0-20
+ definitionitem ( 1, 0)  0-10
+ definitionterm ( 0, 0)  0-1
+ literal      ( 0, 0)  0-1
+ paragraph    ( 1, 4)  7-10
+ literal      ( 1, 4)  7-10
+ definitionitem ( 2, 4) 12-20
+ paragraph    ( 2, 5) 17-20
+ literal      ( 2, 5) 17-20
+ ```````````````````Expected
+ definitionlist ( 0, 0)  0-20
+ definitionitem ( 1, 0)  3-10
+ definitionterm ( 0, 0)  0-1
+ literal      ( 0, 0)  0-1
+ paragraph    ( 1, 4)  7-10
+ literal      ( 1, 4)  7-10
+ definitionitem ( 2, 4) 12-20
+ paragraph    ( 2, 5) 17-20
+ literal      ( 2, 5) 17-20
+ ```````````````````
+
+
+ Index    Expected     Actual
+ ----------------------------
+ >>> 53     51   3     48   0
+
+
+
+Failed!  - Failed:     2, Passed:    63, Skipped:     0, Total:    65, Duration: 96 ms - Markdig.Tests.dll (net10.0)

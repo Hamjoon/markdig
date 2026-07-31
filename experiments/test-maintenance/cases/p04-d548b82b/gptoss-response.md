@@ -1,0 +1,20 @@
+DECISION: fix_production
+```diff
+*** a/src/Markdig/Extensions/Tables/PipeTableParser.cs
+@@
+-        if (processor.Inline != null && (localLineIndex > 0 || c == '\n' || c == '\r'))
+-        {
+-            return false;
+-        }
++        // If we already have inline content on the current line (i.e., we are still on the first
++        // line of the paragraph and the current character is not a line break), this cannot be
++        // the start of a pipe table. However, when we are on a subsequent line (localLineIndex > 0)
++        // we should allow a table to start even if the previous line contained inline content.
++        // The original condition rejected tables that were preceded by any inline content,
++        // which broke cases like \"a\\r| S | T |\\r|---|---|\" where a line with plain text is
++        // followed by a table. We now only reject when inline content exists on the same line.
++        if (processor.Inline != null && localLineIndex == 0 && c != '\n' && c != '\r')
++        {
++            return false;
++        }
+```

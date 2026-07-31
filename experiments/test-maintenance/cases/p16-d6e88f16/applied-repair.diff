@@ -1,0 +1,29 @@
+diff --git a/src/Markdig/Extensions/Tables/PipeTableParser.cs b/src/Markdig/Extensions/Tables/PipeTableParser.cs
+index 8453d134..47e4e92e 100644
+--- a/src/Markdig/Extensions/Tables/PipeTableParser.cs
++++ b/src/Markdig/Extensions/Tables/PipeTableParser.cs
+@@ -82,7 +82,16 @@ public override bool Match(InlineProcessor processor, ref StringSlice slice)
+ 
+         if (c == '\n' || c == '\r')
+         {
+-            if (!isFirstLineEmpty && !tableState.LineHasPipe)
++            // If we have already started collecting delimiters for a potential table
++            // (i.e., we have seen at least one pipe delimiter) and the current line
++            // does not contain a pipe, then the table is considered invalid.
++            // The original logic also marked the table as invalid when encountering
++            // the first newline after normal paragraph text, which prevented tables
++            // from being recognized when they start immediately after a paragraph
++            // without a blank line. We now ensure that we only flag the table as
++            // invalid after we have begun processing a table (i.e., when there are
++            // already collected delimiters).
++            if (!isFirstLineEmpty && !tableState.LineHasPipe && tableState.ColumnAndLineDelimiters.Count > 0)
+             {
+                 tableState.IsInvalidTable = true;
+             }
+@@ -690,4 +699,4 @@ private sealed class TableState
+ 
+         public List<Inline> EndOfLines { get; } = [];
+     }
+-}
+\ No newline at end of file
++}

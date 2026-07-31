@@ -1,0 +1,24 @@
+diff --git a/src/Markdig/Renderers/TextRendererBase.cs b/src/Markdig/Renderers/TextRendererBase.cs
+index cb2b0da1..0ef19e11 100644
+--- a/src/Markdig/Renderers/TextRendererBase.cs
++++ b/src/Markdig/Renderers/TextRendererBase.cs
+@@ -176,8 +176,10 @@ public void PopIndent()
+     {
+         if (this.indents.Count > 0)
+             indents.RemoveAt(indents.Count - 1);
+-        else
+-            throw new InvalidOperationException("No indent to pop");
++        // Previously, PopIndent silently did nothing when there was no indent.
++        // The recent change introduced an exception, which breaks callers that
++        // expect the original tolerant behavior. Restoring the original semantics
++        // ensures compatibility with existing tests and library usage.
+     }
+ 
+     public void ClearIndent() => indents.Clear();
+@@ -402,4 +404,4 @@ public T WriteLeafInline(LeafBlock leafBlock)
+ 
+         return (T)this;
+     }
+-}
+\ No newline at end of file
++}

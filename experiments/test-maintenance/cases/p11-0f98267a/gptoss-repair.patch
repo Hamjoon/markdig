@@ -1,0 +1,32 @@
+--- a/src/Markdig/Extensions/Tables/PipeTableParser.cs
++++ b/src/Markdig/Extensions/Tables/PipeTableParser.cs
+@@
+-        if (Options.RequireHeaderSeparator && aligns is null)
+-        {
+-            // No valid header separator found - convert all pipe delimiters to literals
+-            foreach (var inline in delimiters)
+-            {
+-                if (inline is PipeTableDelimiterInline pipeDelimiter)
+-                {
+-                    pipeDelimiter.ReplaceByLiteral();
+-                }
+-            }
+-            return true;
+-        }
++        // If a header separator is required but none could be parsed (e.g., due to
++        // unmatched emphasis/subscript delimiters), we still want to treat the
++        // content as a pipe table. Previously the parser would replace all pipe
++        // delimiters with literal text and abort table parsing, causing the whole
++        // block to be rendered as a paragraph. This broke cases like a table
++        // containing an unmatched subscript delimiter (e.g., "~$0.0015").
++        // By skipping the early return and not converting the delimiters, the
++        // parser will continue building the table without column alignments.
++        // The table will simply have no explicit column definitions, which is
++        // acceptable for Markdown tables.
++        if (Options.RequireHeaderSeparator && aligns is null)
++        {
++            // No valid header separator found – continue parsing as a table
++            // without treating the first row as a header and without column
++            // alignment information.
++            // Aligns remains null; later logic will handle this case.
++        }

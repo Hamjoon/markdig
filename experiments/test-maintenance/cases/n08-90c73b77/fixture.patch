@@ -1,0 +1,13 @@
+diff --git a/src/Markdig/Helpers/LinkHelper.cs b/src/Markdig/Helpers/LinkHelper.cs
+index a994b3f2..82b3ff84 100644
+--- a/src/Markdig/Helpers/LinkHelper.cs
++++ b/src/Markdig/Helpers/LinkHelper.cs
+@@ -1006,7 +1006,7 @@ private static bool IsEndOfUri(char c, bool isAutoLink)
+         return c == '\0' || c.IsSpaceOrTab() || c.IsControl() || (isAutoLink && c == '<'); // TODO: specs unclear. space is strict or relaxed? (includes tabs?)
+     }
+ 
+-    public static bool IsValidDomain(string link, int prefixLength, bool allowDomainWithoutPeriod)
++    public static bool IsValidDomain(string link, int prefixLength, bool allowDomainWithoutPeriod = false)
+     {
+         // https://github.github.com/gfm/#extended-www-autolink
+         // A valid domain consists of alphanumeric characters, underscores (_), hyphens (-) and periods (.).

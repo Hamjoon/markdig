@@ -1,0 +1,14 @@
+--- a/src/Markdig/Parsers/HtmlBlockParser.cs
++++ b/src/Markdig/Parsers/HtmlBlockParser.cs
+@@
+-        private static readonly CompactPrefixTree<int> HtmlTags = new(66, 94, 83)
++        // Updated capacity to include the "search" tag
++        private static readonly CompactPrefixTree<int> HtmlTags = new(67, 94, 83)
+         {
+@@
+-        { "ul", 65 }
++        { "ul", 65 },
++        { "search", 66 } // Added missing simple HTML tag
+         };
+     }
+ }

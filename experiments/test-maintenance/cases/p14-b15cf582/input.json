@@ -1,0 +1,21 @@
+{
+  "case_id": "P-14",
+  "category": "P",
+  "base_sha": "61e9be290b1dad611e8137251d249a3aae9664d3",
+  "upstream_sha": "b15cf582a538e0c0e016e70cb8a0f03d4f2d55d8",
+  "model": "openai/gpt-oss-120b",
+  "temperature": 0,
+  "allowed_files": [
+    "src/Markdig.Tests/TestHtmlCodeBlocks.cs",
+    "src/Markdig/Parsers/HtmlBlockParser.cs"
+  ],
+  "fixture_paths": [
+    "src/Markdig.Tests/TestHtmlCodeBlocks.cs"
+  ],
+  "test_revision": "b15cf582a538e0c0e016e70cb8a0f03d4f2d55d8",
+  "production_revision": "61e9be290b1dad611e8137251d249a3aae9664d3",
+  "prompt_sha256": "8b0e5127807a941dfe0c452e0c6937bf52420c7c5ff1328cc8994468e2961f6d",
+  "fixture_patch_sha256": "c8e07b5a9ececa642bff620dcb826aaf7ab422af0ba531336eb2f853c431076c",
+  "test_output_sha256": "56cda8ca43929fe675c335ccf1904b1cfe4e42f8d12cb4ca6c5e7a507eded784",
+  "prompt_characters": 7633
+}

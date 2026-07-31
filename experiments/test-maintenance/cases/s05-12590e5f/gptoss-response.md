@@ -1,0 +1,98 @@
+DECISION: fix_production
+```diff
+--- a/src/Markdig/Helpers/LinkHelper.cs
++++ b/src/Markdig/Helpers/LinkHelper.cs
+@@
+-            // Handle German umlauts and Norwegian/Danish characters explicitly (they don't decompose properly)
+-            ReadOnlySpan<char> normalized;
+-            if (IsSpecialScandinavianOrGermanChar(c))
+-            {
+-                normalized = NormalizeScandinavianOrGermanChar(c);
+-            }
+-            else
+-            {
+-                normalized = allowOnlyAscii ? CharNormalizer.ConvertToAscii(c) : null;
+-            }
+-
+-            for (int j = 0; j < (normalized.Length < 1 ? 1 : normalized.Length); j++)
+-            {
+-                if (normalized != null)
+-                {
+-                    c = normalized[j];
+-                }
+-
+-                if (char.IsLetter(c))
+-                {
+-                    if (allowOnlyAscii && (c < ' ' || c >= 127))
+-                    {
+-                        continue;
+-                    }
+-                    c = char.IsUpper(c) ? char.ToLowerInvariant(c) : c;
+-                    headingBuffer.Append(c);
+-                    hasLetter = true;
+-                    previousIsSpace = false;
+-                }
+-                else if (hasLetter)
+-                {
+-                    if (IsReservedPunctuation(c))
+-                    {
+-                        if (previousIsSpace)
+-                        {
+-                            headingBuffer.Length--;
+-                        }
+-                        headingBuffer.Append('-');
+-                        previousIsSpace = true;
+-                    }
+-                }
+-            }
++            // Handle conversion only when we are in ASCII‑only mode.
++            // For non‑ASCII mode we must keep the original character unchanged.
++            ReadOnlySpan<char> normalized = default;
++            if (allowOnlyAscii)
++            {
++                // Handle German umlauts and Norwegian/Danish characters explicitly (they don't decompose properly)
++                if (IsSpecialScandinavianOrGermanChar(c))
++                {
++                    normalized = NormalizeScandinavianOrGermanChar(c);
++                }
++                else
++                {
++                    normalized = CharNormalizer.ConvertToAscii(c);
++                }
++            }
++
++            // If we have a normalized replacement, iterate over its characters,
++            // otherwise process the original character once.
++            int iterCount = (normalized.Length < 1) ? 1 : normalized.Length;
++            for (int j = 0; j < iterCount; j++)
++            {
++                if (allowOnlyAscii && normalized.Length > 0)
++                {
++                    c = normalized[j];
++                }
++
++                if (char.IsLetter(c))
++                {
++                    if (allowOnlyAscii && (c < ' ' || c >= 127))
++                    {
++                        continue;
++                    }
++                    c = char.IsUpper(c) ? char.ToLowerInvariant(c) : c;
++                    headingBuffer.Append(c);
++                    hasLetter = true;
++                    previousIsSpace = false;
++                }
++                else if (hasLetter)
++                {
++                    if (IsReservedPunctuation(c))
++                    {
++                        if (previousIsSpace)
++                        {
++                            headingBuffer.Length--;
++                        }
++                        headingBuffer.Append('-');
++                        previousIsSpace = true;
++                    }
++                }
++            }
+```

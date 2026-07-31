@@ -1,0 +1,57 @@
+Test run for <worktree>/src/Markdig.Tests/bin/Release/net10.0/Markdig.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+  Failed AutoLinksKeepUrlWhenRoundTripped("http://example.com/","[http://example.com/](http://example.com/)") [11 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 42 but was 23. Strings differ at index 22.
+  Expected: "[http://example.com/](http://example.com/)"
+  But was:  "[http://example.com/]()"
+  ---------------------------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.RoundtripSpecs.Inlines.TestAutoLinkInline.AutoLinksKeepUrlWhenRoundTripped(String markdown, String expected) in <worktree>/src/Markdig.Tests/RoundtripSpecs/Inlines/TestAutoLinkInline.cs:line 42
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.RoundtripSpecs.Inlines.TestAutoLinkInline.AutoLinksKeepUrlWhenRoundTripped(String markdown, String expected) in <worktree>/src/Markdig.Tests/RoundtripSpecs/Inlines/TestAutoLinkInline.cs:line 42
+
+
+  Failed AutoLinksKeepUrlWhenRoundTripped("www.example.com","[www.example.com](http://www.example.com)") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 41 but was 19. Strings differ at index 18.
+  Expected: "[www.example.com](http://www.example.com)"
+  But was:  "[www.example.com]()"
+  -----------------------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.RoundtripSpecs.Inlines.TestAutoLinkInline.AutoLinksKeepUrlWhenRoundTripped(String markdown, String expected) in <worktree>/src/Markdig.Tests/RoundtripSpecs/Inlines/TestAutoLinkInline.cs:line 42
+   at InvokeStub_TestAutoLinkInline.AutoLinksKeepUrlWhenRoundTripped(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.RoundtripSpecs.Inlines.TestAutoLinkInline.AutoLinksKeepUrlWhenRoundTripped(String markdown, String expected) in <worktree>/src/Markdig.Tests/RoundtripSpecs/Inlines/TestAutoLinkInline.cs:line 42
+   at InvokeStub_TestAutoLinkInline.AutoLinksKeepUrlWhenRoundTripped(Object, Span`1)
+
+
+  Failed AutoLinksKeepUrlWhenRoundTripped("mailto:user@example.com","[user@example.com](mailto:user@example.com)") [< 1 ms]
+  Error Message:
+     Assert.That(actual, Is.EqualTo(expected))
+  Expected string length 43 but was 20. Strings differ at index 19.
+  Expected: "[user@example.com](mailto:user@example.com)"
+  But was:  "[user@example.com]()"
+  ------------------------------^
+
+  Stack Trace:
+     at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.RoundtripSpecs.Inlines.TestAutoLinkInline.AutoLinksKeepUrlWhenRoundTripped(String markdown, String expected) in <worktree>/src/Markdig.Tests/RoundtripSpecs/Inlines/TestAutoLinkInline.cs:line 42
+   at InvokeStub_TestAutoLinkInline.AutoLinksKeepUrlWhenRoundTripped(Object, Span`1)
+
+1)    at NUnit.Framework.Legacy.ClassicAssert.AreEqual(Object expected, Object actual)
+   at Markdig.Tests.RoundtripSpecs.Inlines.TestAutoLinkInline.AutoLinksKeepUrlWhenRoundTripped(String markdown, String expected) in <worktree>/src/Markdig.Tests/RoundtripSpecs/Inlines/TestAutoLinkInline.cs:line 42
+   at InvokeStub_TestAutoLinkInline.AutoLinksKeepUrlWhenRoundTripped(Object, Span`1)
+
+
+  Skipped ListUnorderedLooseTop [< 1 ms]
+
+Failed!  - Failed:     3, Passed:  3775, Skipped:     1, Total:  3779, Duration: 930 ms - Markdig.Tests.dll (net10.0)

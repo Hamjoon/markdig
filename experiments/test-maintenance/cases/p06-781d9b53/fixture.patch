@@ -1,0 +1,17 @@
+diff --git a/src/Markdig.Tests/Specs/GenericAttributesSpecs.md b/src/Markdig.Tests/Specs/GenericAttributesSpecs.md
+index a0c46e40..3fee4340 100644
+--- a/src/Markdig.Tests/Specs/GenericAttributesSpecs.md
++++ b/src/Markdig.Tests/Specs/GenericAttributesSpecs.md
+@@ -61,3 +61,12 @@ Attribute values can be one character long
+ <p><a href="url" data-x="1">Foo</a></p>
+ <p><a href="url" data-x="11">Foo</a></p>
+ ````````````````````````````````
++
++Attributes that occur immediately before a block element, on a line by themselves, affect that element
++
++```````````````````````````````` example
++{.center}
++A paragraph
++.
++<p class="center">A paragraph</p>
++````````````````````````````````
