@@ -21,6 +21,12 @@ therefore not “no executable patches.” It is that context-applicable code wa
 common, while successful required repair was rare: **2/13 required repairs
 (15.4%)**.
 
+A post-hoc Zod-equivalent coverage audit then reran the frozen target tests for
+the two successful repairs. Both covered their net changed production file,
+so the coverage-qualified strict signal remains **9/23 (39.1%)**. This
+supplement used the existing responses and repairs; it was not part of the
+original preregistered signal.
+
 ## Research Question
 
 Given a recent change diff, current test output, bounded relevant code
@@ -94,6 +100,8 @@ recent change remained present. No model response was changed or regenerated.
 | Patch applied | 13/16 (81.3%) | 2/3 | 8/10 | 3/3 fix responses |
 | Required repair success | 2/13 (15.4%) | 0/3 | 2/10 | not applicable |
 | Strict signal success | 9/23 (39.1%) | 0/3 | 2/10 | 7/10 |
+| Coverage-confirmed successful repair | 2/2 (100.0%) | not applicable | 2/2 | not applicable |
+| Coverage-qualified strict signal | 9/23 (39.1%) | 0/3 | 2/10 | 7/10 |
 
 Decision confusion was unchanged:
 
@@ -115,6 +123,29 @@ The three false-positive N fixes applied and left the full suite green, but all
 three failed recent-change preservation by reversing the intended normal
 production change. A test-only green judgment would have incorrectly counted
 them as acceptable actions.
+
+## Post-Hoc Coverage Audit
+
+Coverage was collected after the original evaluation because the Markdig run
+had omitted the final coverage stage retained by Zod Week 4. No model response
+or repair was regenerated. Only the two already-successful repairs were
+applicable, and each frozen target filter was rerun under `dotnet-coverage`
+18.9.0.
+
+| Case | Frozen target | Net changed production file | Covered lines | Result |
+|---|---:|---|---:|---|
+| P-06 | 4/4 | `GenericAttributesParser.cs` | 108/115 (93.91%) | signal preserved |
+| P-09 | 46/46 | `CodeInlineParser.cs` | 63/66 (95.45%) | signal preserved |
+
+The production scope follows Zod's validated-tree rule: files are qualified
+only when they remain in the net production diff from the frozen base after
+the fixture and model repair are applied. P-09's upstream candidate
+`SpanExtensions.cs` was recorded but excluded because it had no such net diff;
+under the frozen `net9.0` target its relevant polyfill branch is inactive.
+
+Both applicable repairs therefore preserved the coverage signal. The original
+strict result remains 9/23, and the coverage-qualified strict result is also
+**9/23 (39.1%)**.
 
 ## Interpretation
 
@@ -145,9 +176,14 @@ re-ran the reverse check, re-parsed stored test summaries, verified allowed
 paths and raw-response hashes, and reconciled every aggregate and report row.
 Pipeline errors and infrastructure retries were both zero.
 
+The supplemental collector is also pinned to that Zod commit's net production
+diff criterion and to `dotnet-coverage` 18.9.0. It reconstructed both
+successful repairs, rechecked target counts and preservation, retained only
+sanitized summaries/logs, and discarded path-bearing Cobertura XML.
+
 After the completed local audit, the experiment branch was published for
 review at
-`https://github.com/agent-eli/markdig/tree/experiment/2026-07-week5-markdig-30case-archive`.
+`https://github.com/Hamjoon/markdig/tree/experiment/2026-07-week5-markdig-30case-archive`.
 The repository is a fork of `xoofx/markdig`. No upstream PR was opened.
 
 Mutation testing was intentionally excluded from this experiment. No mutation
@@ -167,6 +203,9 @@ score or mutation-derived judgment is reported.
   equivalence.
 - Green target and full suites do not prove correctness outside tested
   behavior.
+- Coverage was added post hoc and runs only the frozen target filter. It
+  confirms execution of each net changed production file, not complete branch
+  coverage or causal adequacy of every changed line.
 - Mutation testing was out of scope, so this experiment does not estimate
   assertion strength against injected faults.
 
@@ -177,3 +216,5 @@ decision accuracy and 39.1% strict signal success. Thirteen of 16 proposed
 fixes applied under the Zod-equivalent cascade, but only two of 13 required
 repairs succeeded without undoing the recent change. The decisive gap was
 semantic and directional repair quality, not raw patch applicability alone.
+Both successful repairs retained file-level target-test coverage in the
+post-hoc Zod-equivalent audit.

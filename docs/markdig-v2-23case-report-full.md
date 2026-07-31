@@ -28,6 +28,9 @@ model execution: S = `fix_tests`, P = `fix_production`, and N = `no_change`.
 - **Strict signal success** requires the exact expected decision and a
   successful corresponding action. Correct N decisions require a green full
   suite and preservation; S/P decisions require repair success.
+- **Coverage-qualified strict signal** retains strict passes only when an
+  applicable successful repair also preserves file-level target-test coverage
+  over the validated tree's net production diff.
 
 Mutation testing is excluded by instruction.
 
@@ -42,6 +45,8 @@ Mutation testing is excluded by instruction.
 | Behavior validation | 12/23 (52.2%) | 0/3 | 2/10 | 10/10 |
 | Successful required repair | 2/13 (15.4%) | 0/3 | 2/10 | not applicable |
 | Strict signal success | 9/23 (39.1%) | 0/3 (0.0%) | 2/10 (20.0%) | 7/10 (70.0%) |
+| Coverage-confirmed successful repair | 2/2 (100.0%) | not applicable | 2/2 | not applicable |
+| Coverage-qualified strict signal | 9/23 (39.1%) | 0/3 (0.0%) | 2/10 (20.0%) | 7/10 (70.0%) |
 
 Pipeline errors: 0. Infrastructure retries: 0. All 23 cases completed on the
 first infrastructure attempt.
@@ -107,6 +112,36 @@ the full suite green. However, each failed
 recent production change. They are not successful actions. This is exactly the
 false-green condition that Zod's preservation gate is designed to catch.
 
+## Post-Hoc Zod-Equivalent Coverage
+
+The original Markdig evaluation did not collect coverage. After the omission
+was identified, a coverage-only supplement was frozen and run against the same
+immutable model responses and normalized repairs. No model call, decision, or
+repair judgment changed.
+
+As in Zod Week 4, coverage applies only after patch application, target
+validation, and preservation have all succeeded. Each successful case was
+reconstructed from its frozen base, fixture, and archived normalized repair;
+the frozen target was revalidated and then rerun under `dotnet-coverage`
+18.9.0. Raw Cobertura XML remained temporary because it contains local source
+paths.
+
+| Case | Target recheck | Net production scope | Line coverage | Coverage verdict |
+|---|---:|---|---:|---|
+| P-06 | 4/4 | `src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs` | 108/115 (93.91%) | signal preserved |
+| P-09 | 46/46 | `src/Markdig/Parsers/Inlines/CodeInlineParser.cs` | 63/66 (95.45%) | signal preserved |
+
+The scope is derived from the validated repaired tree's net production diff
+against the frozen base, matching Zod's `compute-mutate.py` semantics. For
+P-09, `src/Markdig/Polyfills/SpanExtensions.cs` was a frozen upstream
+candidate but had no net diff after the model's alternative repair and is
+inactive under the frozen `net9.0` target. It is retained in the summary as an
+excluded candidate rather than treated as a missing covered file.
+
+Coverage verdicts were therefore signal-preserved for **2/2 applicable
+repairs**, with zero weakened or unknown cases. The coverage-qualified strict
+signal is **9/23 (39.1%)**, unchanged from the original strict count.
+
 ## Per-Case Results
 
 | Case | Expected | Predicted | Decision correct | Apply method | Behavior valid | Preserved | Repair success | Strict signal | Outcome |
@@ -149,6 +184,9 @@ false-green condition that Zod's preservation gate is designed to catch.
   counts also match the earlier fixture verification exactly.
 - All temporary worktrees were removed and the evidence scan found no local
   path, credential, username, hostname, or workspace identifier.
+- The two coverage summaries reproduce the frozen target counts, identify two
+  covered net production scopes, and contain no raw Cobertura, `.coverage`, or
+  machine-specific path artifact.
 
 ## Interpretation
 
@@ -161,3 +199,9 @@ Exact decision accuracy still overstates end-to-end performance: 73.9% versus
 39.1% strict signal success. The 34.8-point gap now reflects semantic repair,
 build/test, and preservation failures rather than an artificial format-only
 stop rule.
+
+The supplemental result does not raise that score: it confirms that both
+successful repairs execute their net changed production file under the frozen
+target tests. Because coverage was collected post hoc and at file-level line
+granularity, it should be read as supporting evidence rather than a new model
+trial or a claim of complete behavioral adequacy.

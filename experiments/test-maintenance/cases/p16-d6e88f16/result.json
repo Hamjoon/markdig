@@ -119,5 +119,12 @@
       "record": "result.json"
     }
   ],
-  "archive_case_id": "p16-d6e88f16"
+  "archive_case_id": "p16-d6e88f16",
+  "coverage": {
+    "applicable": false,
+    "reason": "repair-incomplete",
+    "coverage_verdict": "partial_repair",
+    "production_files": []
+  },
+  "coverage_qualified_strict_signal_pass": false
 }

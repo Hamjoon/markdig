@@ -99,5 +99,12 @@
       "record": "result.json"
     }
   ],
-  "archive_case_id": "n06-14827841"
+  "archive_case_id": "n06-14827841",
+  "coverage": {
+    "applicable": false,
+    "reason": "no-repair-required",
+    "coverage_verdict": "not_applicable",
+    "production_files": []
+  },
+  "coverage_qualified_strict_signal_pass": false
 }

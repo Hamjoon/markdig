@@ -87,5 +87,12 @@
       "record": "result.json"
     }
   ],
-  "archive_case_id": "p17-bc4e3990"
+  "archive_case_id": "p17-bc4e3990",
+  "coverage": {
+    "applicable": false,
+    "reason": "repair-incomplete",
+    "coverage_verdict": "partial_repair",
+    "production_files": []
+  },
+  "coverage_qualified_strict_signal_pass": false
 }

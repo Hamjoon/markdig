@@ -80,5 +80,12 @@
       "record": "result.json"
     }
   ],
-  "archive_case_id": "n03-ec2eef25"
+  "archive_case_id": "n03-ec2eef25",
+  "coverage": {
+    "applicable": false,
+    "reason": "no-repair-required",
+    "coverage_verdict": "not_applicable",
+    "production_files": []
+  },
+  "coverage_qualified_strict_signal_pass": true
 }

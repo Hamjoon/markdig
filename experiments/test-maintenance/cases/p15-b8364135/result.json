@@ -123,5 +123,12 @@
       "record": "result.json"
     }
   ],
-  "archive_case_id": "p15-b8364135"
+  "archive_case_id": "p15-b8364135",
+  "coverage": {
+    "applicable": false,
+    "reason": "repair-incomplete",
+    "coverage_verdict": "partial_repair",
+    "production_files": []
+  },
+  "coverage_qualified_strict_signal_pass": false
 }

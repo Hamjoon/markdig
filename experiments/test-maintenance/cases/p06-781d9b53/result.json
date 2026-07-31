@@ -115,5 +115,32 @@
       "record": "result.json"
     }
   ],
-  "archive_case_id": "p06-781d9b53"
+  "archive_case_id": "p06-781d9b53",
+  "coverage": {
+    "applicable": true,
+    "reason": null,
+    "coverage_verdict": "signal_preserved",
+    "production_scope": {
+      "basis": "net validated-tree diff from frozen base",
+      "candidate_production_files": [
+        "src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs"
+      ],
+      "excluded_candidate_production_files": []
+    },
+    "production_files": [
+      {
+        "production_file": "src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs",
+        "available": true,
+        "matched_class_file_count": 1,
+        "lines": {
+          "total": 115,
+          "covered": 108,
+          "pct": 93.91
+        },
+        "covered": true
+      }
+    ],
+    "artifact": "coverage/coverage-summary.json"
+  },
+  "coverage_qualified_strict_signal_pass": true
 }

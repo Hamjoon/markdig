@@ -511,3 +511,19 @@ Chronological log. All times local, 2026-07-31.
   `compute-mutate.py` semantics: coverage scope is the net production diff
   from the frozen base. The generated dry-run coverage outputs were discarded;
   no model response, repair result, or original signal was changed.
+
+## 2026-08-01 — Supplemental coverage execution
+
+- Reconstructed and reran the two previously successful repairs with
+  `dotnet-coverage` 18.9.0. P-06 revalidated 4/4 target tests and covered
+  108/115 lines (93.91%) in `GenericAttributesParser.cs`; P-09 revalidated
+  46/46 and covered 63/66 lines (95.45%) in `CodeInlineParser.cs`.
+- Both applicable cases are `signal_preserved`; weakened 0, unknown 0. The
+  coverage-qualified strict signal is 9/23 (39.1%), equal to the original
+  strict signal rather than a replacement for it.
+- P-09's `SpanExtensions.cs` candidate is explicitly recorded as excluded
+  because it has no net production diff in the validated repaired tree under
+  the frozen `net9.0` target.
+- Archived only sanitized per-case summaries and logs. No raw Cobertura XML,
+  `.coverage` file, mutation result, model retry, or new model response was
+  produced.

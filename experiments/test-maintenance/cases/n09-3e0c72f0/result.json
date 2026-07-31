@@ -101,5 +101,12 @@
       "record": "result.json"
     }
   ],
-  "archive_case_id": "n09-3e0c72f0"
+  "archive_case_id": "n09-3e0c72f0",
+  "coverage": {
+    "applicable": false,
+    "reason": "no-repair-required",
+    "coverage_verdict": "not_applicable",
+    "production_files": []
+  },
+  "coverage_qualified_strict_signal_pass": false
 }

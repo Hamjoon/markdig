@@ -77,5 +77,12 @@
       "record": "result.json"
     }
   ],
-  "archive_case_id": "p08-5a3c2060"
+  "archive_case_id": "p08-5a3c2060",
+  "coverage": {
+    "applicable": false,
+    "reason": "repair-incomplete",
+    "coverage_verdict": "partial_repair",
+    "production_files": []
+  },
+  "coverage_qualified_strict_signal_pass": false
 }

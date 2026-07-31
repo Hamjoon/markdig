@@ -17,7 +17,7 @@ the case belonged to.
 - [Full report](./docs/markdig-v2-23case-report-full.md) — execution details and all per-case results
 - [Case selection record](./docs/markdig-23case-screening.md) — candidate mining and screening
 - [Fixture verification record](./docs/markdig-23case-verification-results.md) — fresh reconstruction of all 23 fixtures
-- [Evaluation protocol](./docs/markdig-23case-evaluation-protocol.md) — frozen decision, patch-application, and preservation rules
+- [Evaluation protocol](./docs/markdig-23case-evaluation-protocol.md) — frozen decision, patch-application, preservation, and supplemental coverage rules
 
 ## Repository layout
 
@@ -28,6 +28,8 @@ the case belonged to.
 
 Each case lives under `experiments/test-maintenance/cases/<case>-<sha8>/`,
 matching the case-centered layout used by the preceding Zod experiment.
+Successful repair packets also contain a sanitized post-hoc coverage summary
+and execution log.
 
 ## Result snapshot
 
@@ -36,10 +38,14 @@ matching the case-centered layout used by the preceding Zod experiment.
 - Patch application: 13/16 (81.3%)
 - Required repair success: 2/13 (15.4%)
 - Strict signal success: 9/23 (39.1%)
+- Post-hoc coverage signal: 2/2 successful repairs preserved
+- Coverage-qualified strict signal: 9/23 (39.1%)
 - Pipeline errors and infrastructure retries: 0
 
 The model under test was `openai/gpt-oss-120b`, one request per case at
-temperature 0. Mutation testing was excluded by instruction.
+temperature 0. Line coverage was collected afterward as a Zod-equivalent
+supplement without another model call. Mutation testing was excluded by
+instruction.
 
 This is an orphan archive branch: it contains only the public experiment
 package and does not inherit the Markdig source tree. The complete execution

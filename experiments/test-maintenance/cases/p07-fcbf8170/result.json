@@ -123,5 +123,12 @@
       "record": "result.json"
     }
   ],
-  "archive_case_id": "p07-fcbf8170"
+  "archive_case_id": "p07-fcbf8170",
+  "coverage": {
+    "applicable": false,
+    "reason": "repair-incomplete",
+    "coverage_verdict": "partial_repair",
+    "production_files": []
+  },
+  "coverage_qualified_strict_signal_pass": false
 }

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "case_id": "P-09",
+  "category": "P",
+  "post_hoc": true,
+  "repair_success": true,
+  "target_filter": "FullyQualifiedName~TestCodeInline",
+  "target_validation": {
+    "status": 0,
+    "counts": {
+      "failed": 0,
+      "passed": 46,
+      "skipped": 0,
+      "total": 46
+    }
+  },
+  "preservation_rechecked": true,
+  "coverage_tool": {
+    "name": "dotnet-coverage",
+    "version": "18.9.0",
+    "output_format": "cobertura"
+  },
+  "production_scope": {
+    "basis": "net validated-tree diff from frozen base",
+    "candidate_production_files": [
+      "src/Markdig/Parsers/Inlines/CodeInlineParser.cs",
+      "src/Markdig/Polyfills/SpanExtensions.cs"
+    ],
+    "excluded_candidate_production_files": [
+      {
+        "production_file": "src/Markdig/Polyfills/SpanExtensions.cs",
+        "reason": "no-net-production-diff-in-validated-tree"
+      }
+    ]
+  },
+  "production_files": [
+    {
+      "production_file": "src/Markdig/Parsers/Inlines/CodeInlineParser.cs",
+      "available": true,
+      "matched_class_file_count": 1,
+      "lines": {
+        "total": 66,
+        "covered": 63,
+        "pct": 95.45
+      },
+      "covered": true
+    }
+  ],
+  "all_production_files_available": true,
+  "all_production_files_covered": true,
+  "coverage_verdict": "signal_preserved",
+  "zod_reference": {
+    "commit": "53aaeb99d50a253d83f5dc18791b118c480ea8db",
+    "run_zod_signal_eval_sha256": "62a3b96892b00a9433c7b5c1f17539ff660b02eae99ffe3ba260390eaf1a30bc",
+    "signal_case_sha256": "df5a508508c866e17e6dd5474bbee6ff7c6c4f4573c578250cde695b952f119d"
+  }
+}

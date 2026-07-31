@@ -43,6 +43,29 @@ CORE_JSON_FILES = {
     "results-summary.json",
     "screening_queues.json",
 }
+COVERAGE_EXPECTED = {
+    "P-06": {
+        "target": {"failed": 0, "passed": 4, "skipped": 0, "total": 4},
+        "file": "src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs",
+        "total": 115,
+        "covered": 108,
+        "pct": 93.91,
+        "excluded": [],
+    },
+    "P-09": {
+        "target": {"failed": 0, "passed": 46, "skipped": 0, "total": 46},
+        "file": "src/Markdig/Parsers/Inlines/CodeInlineParser.cs",
+        "total": 66,
+        "covered": 63,
+        "pct": 95.45,
+        "excluded": [
+            {
+                "production_file": "src/Markdig/Polyfills/SpanExtensions.cs",
+                "reason": "no-net-production-diff-in-validated-tree",
+            }
+        ],
+    },
+}
 
 
 def load_json(path):
@@ -178,6 +201,7 @@ def main():
 
     artifact_counts = Counter()
     case_failures = []
+    coverage_failures = []
     usage_totals = Counter()
     run_statuses = Counter()
     requested_models = Counter()
@@ -232,6 +256,10 @@ def main():
             "preservation_passed": record["preservation"]["passed"],
             "repair_success": record["repair_success"],
             "strict_signal_pass": record["strict_signal_pass"],
+            "coverage": record.get("coverage"),
+            "coverage_qualified_strict_signal_pass": record.get(
+                "coverage_qualified_strict_signal_pass"
+            ),
             "status": record["status"],
             "reason": record["reason"],
         }
@@ -261,6 +289,50 @@ def main():
         elif test_runs and test_counts(validation_path.read_text()) != test_runs[-1]["counts"]:
             case_failures.append(f"{case_id}: validation counts mismatch")
 
+        coverage_dir = case_dir / "coverage"
+        if case_id in COVERAGE_EXPECTED:
+            expected = COVERAGE_EXPECTED[case_id]
+            summary_path = coverage_dir / "coverage-summary.json"
+            log_path = coverage_dir / "coverage.log"
+            if not summary_path.is_file() or not log_path.is_file():
+                coverage_failures.append(f"{case_id}: coverage artifact missing")
+            else:
+                summary = load_json(summary_path)
+                files = summary.get("production_files", [])
+                excluded = summary.get("production_scope", {}).get(
+                    "excluded_candidate_production_files"
+                )
+                valid_file = len(files) == 1 and (
+                    files[0].get("production_file") == expected["file"]
+                    and files[0].get("available") is True
+                    and files[0].get("covered") is True
+                    and files[0].get("lines") == {
+                        "total": expected["total"],
+                        "covered": expected["covered"],
+                        "pct": expected["pct"],
+                    }
+                )
+                if not (
+                    summary.get("case_id") == case_id
+                    and summary.get("post_hoc") is True
+                    and summary.get("repair_success") is True
+                    and summary.get("target_validation", {}).get("counts")
+                    == expected["target"]
+                    and summary.get("preservation_rechecked") is True
+                    and summary.get("coverage_tool", {}).get("version") == "18.9.0"
+                    and summary.get("production_scope", {}).get("basis")
+                    == "net validated-tree diff from frozen base"
+                    and excluded == expected["excluded"]
+                    and valid_file
+                    and summary.get("coverage_verdict") == "signal_preserved"
+                    and record.get("coverage", {}).get("coverage_verdict")
+                    == "signal_preserved"
+                    and record.get("coverage_qualified_strict_signal_pass") is True
+                ):
+                    coverage_failures.append(f"{case_id}: coverage evidence mismatch")
+        elif coverage_dir.exists():
+            coverage_failures.append(f"{case_id}: unexpected coverage directory")
+
         for key in ("prompt_tokens", "completion_tokens", "total_tokens"):
             usage_totals[key] += usage.get(key, 0)
         usage_totals["cost_usd"] += usage.get("cost", 0)
@@ -273,6 +345,7 @@ def main():
             artifact_counts[name] += 1
 
     check("case-packet-integrity", not case_failures)
+    check("coverage-case-integrity", not coverage_failures)
     check(
         "case-artifact-counts",
         artifact_counts["fixture.patch"] == 23
@@ -296,6 +369,22 @@ def main():
         and finish_reasons == {"stop": 23}
         and transport_retries == 0,
     )
+    coverage_audit = results.get("coverage_audit", {})
+    check(
+        "coverage-aggregate",
+        results.get("coverage_qualified_strict_signal_pass") == 9
+        and coverage_audit.get("schema_version") == 1
+        and coverage_audit.get("post_hoc") is True
+        and coverage_audit.get("tool")
+        == {"name": "dotnet-coverage", "version": "18.9.0"}
+        and coverage_audit.get("applicable_case_count") == 2
+        and coverage_audit.get("signal_preserved_case_count") == 2
+        and coverage_audit.get("signal_weakened_case_count") == 0
+        and coverage_audit.get("signal_unknown_case_count") == 0
+        and coverage_audit.get("production_file_scope_count") == 2
+        and coverage_audit.get("covered_production_file_scope_count") == 2
+        and coverage_audit.get("mutation_testing") == "excluded-by-instruction",
+    )
 
     json_failures = []
     for path in root.rglob("*.json"):
@@ -304,6 +393,13 @@ def main():
         except json.JSONDecodeError:
             json_failures.append(str(path.relative_to(root)))
     check("json-parse", not json_failures)
+
+    raw_coverage_artifacts = [
+        str(path.relative_to(root))
+        for suffix in ("*.xml", "*.coverage", "*.cobertura")
+        for path in root.rglob(suffix)
+    ]
+    check("no-raw-coverage-artifacts", not raw_coverage_artifacts)
 
     empty_files = [
         str(path.relative_to(root))
@@ -343,6 +439,10 @@ def main():
         "13/16",
         "2/13 required repairs (15.4%)",
         "9/23 (39.1%)",
+        "2/2",
+        "108/115 (93.91%)",
+        "63/66 (95.45%)",
+        "Coverage-qualified strict signal",
     )
     normalized_reports = " ".join((report + full_report).split())
     check("report-claims", all(claim in normalized_reports for claim in required_claims))
@@ -354,8 +454,10 @@ def main():
         "failures": failures,
         "case_count": len(cases),
         "case_failures": case_failures,
+        "coverage_failures": coverage_failures,
         "artifact_counts": dict(sorted(artifact_counts.items())),
         "json_failures": json_failures,
+        "raw_coverage_artifacts": raw_coverage_artifacts,
         "empty_files": empty_files,
         "leak_matches": leak_matches,
     }

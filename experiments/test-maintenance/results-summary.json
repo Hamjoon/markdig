@@ -102,7 +102,14 @@
       "repair_success": false,
       "strict_signal_pass": false,
       "status": "evaluated",
-      "reason": "model-patch-does-not-apply"
+      "reason": "model-patch-does-not-apply",
+      "coverage": {
+        "applicable": false,
+        "reason": "repair-target-misclassified",
+        "coverage_verdict": "signal_unknown",
+        "production_files": []
+      },
+      "coverage_qualified_strict_signal_pass": false
     },
     {
       "case_id": "S-07",
@@ -124,7 +131,14 @@
       "repair_success": false,
       "strict_signal_pass": false,
       "status": "evaluated",
-      "reason": "build-failed-after-model-action"
+      "reason": "build-failed-after-model-action",
+      "coverage": {
+        "applicable": false,
+        "reason": "repair-target-misclassified",
+        "coverage_verdict": "signal_unknown",
+        "production_files": []
+      },
+      "coverage_qualified_strict_signal_pass": false
     },
     {
       "case_id": "S-09",
@@ -146,7 +160,14 @@
       "repair_success": false,
       "strict_signal_pass": false,
       "status": "evaluated",
-      "reason": "build-failed-after-model-action"
+      "reason": "build-failed-after-model-action",
+      "coverage": {
+        "applicable": false,
+        "reason": "repair-target-misclassified",
+        "coverage_verdict": "signal_unknown",
+        "production_files": []
+      },
+      "coverage_qualified_strict_signal_pass": false
     },
     {
       "case_id": "P-04",
@@ -168,7 +189,14 @@
       "repair_success": false,
       "strict_signal_pass": false,
       "status": "evaluated",
-      "reason": "executable-validation-failed"
+      "reason": "executable-validation-failed",
+      "coverage": {
+        "applicable": false,
+        "reason": "repair-incomplete",
+        "coverage_verdict": "partial_repair",
+        "production_files": []
+      },
+      "coverage_qualified_strict_signal_pass": false
     },
     {
       "case_id": "P-06",
@@ -190,7 +218,34 @@
       "repair_success": true,
       "strict_signal_pass": true,
       "status": "evaluated",
-      "reason": "signal-pass"
+      "reason": "signal-pass",
+      "coverage": {
+        "applicable": true,
+        "reason": null,
+        "coverage_verdict": "signal_preserved",
+        "production_scope": {
+          "basis": "net validated-tree diff from frozen base",
+          "candidate_production_files": [
+            "src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs"
+          ],
+          "excluded_candidate_production_files": []
+        },
+        "production_files": [
+          {
+            "production_file": "src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs",
+            "available": true,
+            "matched_class_file_count": 1,
+            "lines": {
+              "total": 115,
+              "covered": 108,
+              "pct": 93.91
+            },
+            "covered": true
+          }
+        ],
+        "artifact": "coverage/coverage-summary.json"
+      },
+      "coverage_qualified_strict_signal_pass": true
     },
     {
       "case_id": "P-07",
@@ -212,7 +267,14 @@
       "repair_success": false,
       "strict_signal_pass": false,
       "status": "evaluated",
-      "reason": "executable-validation-failed"
+      "reason": "executable-validation-failed",
+      "coverage": {
+        "applicable": false,
+        "reason": "repair-incomplete",
+        "coverage_verdict": "partial_repair",
+        "production_files": []
+      },
+      "coverage_qualified_strict_signal_pass": false
     },
     {
       "case_id": "P-08",
@@ -232,7 +294,14 @@
       "repair_success": false,
       "strict_signal_pass": false,
       "status": "evaluated",
-      "reason": "model-patch-does-not-apply"
+      "reason": "model-patch-does-not-apply",
+      "coverage": {
+        "applicable": false,
+        "reason": "repair-incomplete",
+        "coverage_verdict": "partial_repair",
+        "production_files": []
+      },
+      "coverage_qualified_strict_signal_pass": false
     },
     {
       "case_id": "P-09",
@@ -254,7 +323,40 @@
       "repair_success": true,
       "strict_signal_pass": true,
       "status": "evaluated",
-      "reason": "signal-pass"
+      "reason": "signal-pass",
+      "coverage": {
+        "applicable": true,
+        "reason": null,
+        "coverage_verdict": "signal_preserved",
+        "production_scope": {
+          "basis": "net validated-tree diff from frozen base",
+          "candidate_production_files": [
+            "src/Markdig/Parsers/Inlines/CodeInlineParser.cs",
+            "src/Markdig/Polyfills/SpanExtensions.cs"
+          ],
+          "excluded_candidate_production_files": [
+            {
+              "production_file": "src/Markdig/Polyfills/SpanExtensions.cs",
+              "reason": "no-net-production-diff-in-validated-tree"
+            }
+          ]
+        },
+        "production_files": [
+          {
+            "production_file": "src/Markdig/Parsers/Inlines/CodeInlineParser.cs",
+            "available": true,
+            "matched_class_file_count": 1,
+            "lines": {
+              "total": 66,
+              "covered": 63,
+              "pct": 95.45
+            },
+            "covered": true
+          }
+        ],
+        "artifact": "coverage/coverage-summary.json"
+      },
+      "coverage_qualified_strict_signal_pass": true
     },
     {
       "case_id": "P-11",
@@ -276,7 +378,14 @@
       "repair_success": false,
       "strict_signal_pass": false,
       "status": "evaluated",
-      "reason": "executable-validation-failed"
+      "reason": "executable-validation-failed",
+      "coverage": {
+        "applicable": false,
+        "reason": "repair-incomplete",
+        "coverage_verdict": "partial_repair",
+        "production_files": []
+      },
+      "coverage_qualified_strict_signal_pass": false
     },
     {
       "case_id": "P-14",
@@ -296,7 +405,14 @@
       "repair_success": false,
       "strict_signal_pass": false,
       "status": "evaluated",
-      "reason": "model-patch-does-not-apply"
+      "reason": "model-patch-does-not-apply",
+      "coverage": {
+        "applicable": false,
+        "reason": "repair-incomplete",
+        "coverage_verdict": "partial_repair",
+        "production_files": []
+      },
+      "coverage_qualified_strict_signal_pass": false
     },
     {
       "case_id": "P-15",
@@ -318,7 +434,14 @@
       "repair_success": false,
       "strict_signal_pass": false,
       "status": "evaluated",
-      "reason": "executable-validation-failed"
+      "reason": "executable-validation-failed",
+      "coverage": {
+        "applicable": false,
+        "reason": "repair-incomplete",
+        "coverage_verdict": "partial_repair",
+        "production_files": []
+      },
+      "coverage_qualified_strict_signal_pass": false
     },
     {
       "case_id": "P-16",
@@ -340,7 +463,14 @@
       "repair_success": false,
       "strict_signal_pass": false,
       "status": "evaluated",
-      "reason": "executable-validation-failed"
+      "reason": "executable-validation-failed",
+      "coverage": {
+        "applicable": false,
+        "reason": "repair-incomplete",
+        "coverage_verdict": "partial_repair",
+        "production_files": []
+      },
+      "coverage_qualified_strict_signal_pass": false
     },
     {
       "case_id": "P-17",
@@ -362,7 +492,14 @@
       "repair_success": false,
       "strict_signal_pass": false,
       "status": "evaluated",
-      "reason": "build-failed-after-model-action"
+      "reason": "build-failed-after-model-action",
+      "coverage": {
+        "applicable": false,
+        "reason": "repair-incomplete",
+        "coverage_verdict": "partial_repair",
+        "production_files": []
+      },
+      "coverage_qualified_strict_signal_pass": false
     },
     {
       "case_id": "N-01",
@@ -382,7 +519,14 @@
       "repair_success": false,
       "strict_signal_pass": true,
       "status": "evaluated",
-      "reason": "signal-pass"
+      "reason": "signal-pass",
+      "coverage": {
+        "applicable": false,
+        "reason": "no-repair-required",
+        "coverage_verdict": "not_applicable",
+        "production_files": []
+      },
+      "coverage_qualified_strict_signal_pass": true
     },
     {
       "case_id": "N-02",
@@ -404,7 +548,14 @@
       "repair_success": false,
       "strict_signal_pass": false,
       "status": "evaluated",
-      "reason": "recent-change-not-preserved"
+      "reason": "recent-change-not-preserved",
+      "coverage": {
+        "applicable": false,
+        "reason": "no-repair-required",
+        "coverage_verdict": "not_applicable",
+        "production_files": []
+      },
+      "coverage_qualified_strict_signal_pass": false
     },
     {
       "case_id": "N-03",
@@ -424,7 +575,14 @@
       "repair_success": false,
       "strict_signal_pass": true,
       "status": "evaluated",
-      "reason": "signal-pass"
+      "reason": "signal-pass",
+      "coverage": {
+        "applicable": false,
+        "reason": "no-repair-required",
+        "coverage_verdict": "not_applicable",
+        "production_files": []
+      },
+      "coverage_qualified_strict_signal_pass": true
     },
     {
       "case_id": "N-04",
@@ -444,7 +602,14 @@
       "repair_success": false,
       "strict_signal_pass": true,
       "status": "evaluated",
-      "reason": "signal-pass"
+      "reason": "signal-pass",
+      "coverage": {
+        "applicable": false,
+        "reason": "no-repair-required",
+        "coverage_verdict": "not_applicable",
+        "production_files": []
+      },
+      "coverage_qualified_strict_signal_pass": true
     },
     {
       "case_id": "N-05",
@@ -464,7 +629,14 @@
       "repair_success": false,
       "strict_signal_pass": true,
       "status": "evaluated",
-      "reason": "signal-pass"
+      "reason": "signal-pass",
+      "coverage": {
+        "applicable": false,
+        "reason": "no-repair-required",
+        "coverage_verdict": "not_applicable",
+        "production_files": []
+      },
+      "coverage_qualified_strict_signal_pass": true
     },
     {
       "case_id": "N-06",
@@ -486,7 +658,14 @@
       "repair_success": false,
       "strict_signal_pass": false,
       "status": "evaluated",
-      "reason": "recent-change-not-preserved"
+      "reason": "recent-change-not-preserved",
+      "coverage": {
+        "applicable": false,
+        "reason": "no-repair-required",
+        "coverage_verdict": "not_applicable",
+        "production_files": []
+      },
+      "coverage_qualified_strict_signal_pass": false
     },
     {
       "case_id": "N-07",
@@ -506,7 +685,14 @@
       "repair_success": false,
       "strict_signal_pass": true,
       "status": "evaluated",
-      "reason": "signal-pass"
+      "reason": "signal-pass",
+      "coverage": {
+        "applicable": false,
+        "reason": "no-repair-required",
+        "coverage_verdict": "not_applicable",
+        "production_files": []
+      },
+      "coverage_qualified_strict_signal_pass": true
     },
     {
       "case_id": "N-08",
@@ -526,7 +712,14 @@
       "repair_success": false,
       "strict_signal_pass": true,
       "status": "evaluated",
-      "reason": "signal-pass"
+      "reason": "signal-pass",
+      "coverage": {
+        "applicable": false,
+        "reason": "no-repair-required",
+        "coverage_verdict": "not_applicable",
+        "production_files": []
+      },
+      "coverage_qualified_strict_signal_pass": true
     },
     {
       "case_id": "N-09",
@@ -548,7 +741,14 @@
       "repair_success": false,
       "strict_signal_pass": false,
       "status": "evaluated",
-      "reason": "recent-change-not-preserved"
+      "reason": "recent-change-not-preserved",
+      "coverage": {
+        "applicable": false,
+        "reason": "no-repair-required",
+        "coverage_verdict": "not_applicable",
+        "production_files": []
+      },
+      "coverage_qualified_strict_signal_pass": false
     },
     {
       "case_id": "N-10",
@@ -568,7 +768,263 @@
       "repair_success": false,
       "strict_signal_pass": true,
       "status": "evaluated",
-      "reason": "signal-pass"
+      "reason": "signal-pass",
+      "coverage": {
+        "applicable": false,
+        "reason": "no-repair-required",
+        "coverage_verdict": "not_applicable",
+        "production_files": []
+      },
+      "coverage_qualified_strict_signal_pass": true
     }
-  ]
+  ],
+  "coverage_audit": {
+    "schema_version": 1,
+    "post_hoc": true,
+    "criterion": "Zod Week 4 file-level line coverage on the repaired tree, running frozen target tests only",
+    "tool": {
+      "name": "dotnet-coverage",
+      "version": "18.9.0"
+    },
+    "applicable_case_count": 2,
+    "signal_preserved_case_count": 2,
+    "signal_weakened_case_count": 0,
+    "signal_unknown_case_count": 0,
+    "production_file_scope_count": 2,
+    "covered_production_file_scope_count": 2,
+    "mutation_testing": "excluded-by-instruction",
+    "results": [
+      {
+        "case_id": "S-05",
+        "category": "S",
+        "applicable": false,
+        "reason": "repair-target-misclassified",
+        "coverage_verdict": "signal_unknown",
+        "production_files": []
+      },
+      {
+        "case_id": "S-07",
+        "category": "S",
+        "applicable": false,
+        "reason": "repair-target-misclassified",
+        "coverage_verdict": "signal_unknown",
+        "production_files": []
+      },
+      {
+        "case_id": "S-09",
+        "category": "S",
+        "applicable": false,
+        "reason": "repair-target-misclassified",
+        "coverage_verdict": "signal_unknown",
+        "production_files": []
+      },
+      {
+        "case_id": "P-04",
+        "category": "P",
+        "applicable": false,
+        "reason": "repair-incomplete",
+        "coverage_verdict": "partial_repair",
+        "production_files": []
+      },
+      {
+        "case_id": "P-06",
+        "category": "P",
+        "applicable": true,
+        "reason": null,
+        "coverage_verdict": "signal_preserved",
+        "production_scope": {
+          "basis": "net validated-tree diff from frozen base",
+          "candidate_production_files": [
+            "src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs"
+          ],
+          "excluded_candidate_production_files": []
+        },
+        "production_files": [
+          {
+            "production_file": "src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs",
+            "available": true,
+            "matched_class_file_count": 1,
+            "lines": {
+              "total": 115,
+              "covered": 108,
+              "pct": 93.91
+            },
+            "covered": true
+          }
+        ],
+        "artifact": "coverage/coverage-summary.json"
+      },
+      {
+        "case_id": "P-07",
+        "category": "P",
+        "applicable": false,
+        "reason": "repair-incomplete",
+        "coverage_verdict": "partial_repair",
+        "production_files": []
+      },
+      {
+        "case_id": "P-08",
+        "category": "P",
+        "applicable": false,
+        "reason": "repair-incomplete",
+        "coverage_verdict": "partial_repair",
+        "production_files": []
+      },
+      {
+        "case_id": "P-09",
+        "category": "P",
+        "applicable": true,
+        "reason": null,
+        "coverage_verdict": "signal_preserved",
+        "production_scope": {
+          "basis": "net validated-tree diff from frozen base",
+          "candidate_production_files": [
+            "src/Markdig/Parsers/Inlines/CodeInlineParser.cs",
+            "src/Markdig/Polyfills/SpanExtensions.cs"
+          ],
+          "excluded_candidate_production_files": [
+            {
+              "production_file": "src/Markdig/Polyfills/SpanExtensions.cs",
+              "reason": "no-net-production-diff-in-validated-tree"
+            }
+          ]
+        },
+        "production_files": [
+          {
+            "production_file": "src/Markdig/Parsers/Inlines/CodeInlineParser.cs",
+            "available": true,
+            "matched_class_file_count": 1,
+            "lines": {
+              "total": 66,
+              "covered": 63,
+              "pct": 95.45
+            },
+            "covered": true
+          }
+        ],
+        "artifact": "coverage/coverage-summary.json"
+      },
+      {
+        "case_id": "P-11",
+        "category": "P",
+        "applicable": false,
+        "reason": "repair-incomplete",
+        "coverage_verdict": "partial_repair",
+        "production_files": []
+      },
+      {
+        "case_id": "P-14",
+        "category": "P",
+        "applicable": false,
+        "reason": "repair-incomplete",
+        "coverage_verdict": "partial_repair",
+        "production_files": []
+      },
+      {
+        "case_id": "P-15",
+        "category": "P",
+        "applicable": false,
+        "reason": "repair-incomplete",
+        "coverage_verdict": "partial_repair",
+        "production_files": []
+      },
+      {
+        "case_id": "P-16",
+        "category": "P",
+        "applicable": false,
+        "reason": "repair-incomplete",
+        "coverage_verdict": "partial_repair",
+        "production_files": []
+      },
+      {
+        "case_id": "P-17",
+        "category": "P",
+        "applicable": false,
+        "reason": "repair-incomplete",
+        "coverage_verdict": "partial_repair",
+        "production_files": []
+      },
+      {
+        "case_id": "N-01",
+        "category": "N",
+        "applicable": false,
+        "reason": "no-repair-required",
+        "coverage_verdict": "not_applicable",
+        "production_files": []
+      },
+      {
+        "case_id": "N-02",
+        "category": "N",
+        "applicable": false,
+        "reason": "no-repair-required",
+        "coverage_verdict": "not_applicable",
+        "production_files": []
+      },
+      {
+        "case_id": "N-03",
+        "category": "N",
+        "applicable": false,
+        "reason": "no-repair-required",
+        "coverage_verdict": "not_applicable",
+        "production_files": []
+      },
+      {
+        "case_id": "N-04",
+        "category": "N",
+        "applicable": false,
+        "reason": "no-repair-required",
+        "coverage_verdict": "not_applicable",
+        "production_files": []
+      },
+      {
+        "case_id": "N-05",
+        "category": "N",
+        "applicable": false,
+        "reason": "no-repair-required",
+        "coverage_verdict": "not_applicable",
+        "production_files": []
+      },
+      {
+        "case_id": "N-06",
+        "category": "N",
+        "applicable": false,
+        "reason": "no-repair-required",
+        "coverage_verdict": "not_applicable",
+        "production_files": []
+      },
+      {
+        "case_id": "N-07",
+        "category": "N",
+        "applicable": false,
+        "reason": "no-repair-required",
+        "coverage_verdict": "not_applicable",
+        "production_files": []
+      },
+      {
+        "case_id": "N-08",
+        "category": "N",
+        "applicable": false,
+        "reason": "no-repair-required",
+        "coverage_verdict": "not_applicable",
+        "production_files": []
+      },
+      {
+        "case_id": "N-09",
+        "category": "N",
+        "applicable": false,
+        "reason": "no-repair-required",
+        "coverage_verdict": "not_applicable",
+        "production_files": []
+      },
+      {
+        "case_id": "N-10",
+        "category": "N",
+        "applicable": false,
+        "reason": "no-repair-required",
+        "coverage_verdict": "not_applicable",
+        "production_files": []
+      }
+    ]
+  },
+  "coverage_qualified_strict_signal_pass": 9
 }

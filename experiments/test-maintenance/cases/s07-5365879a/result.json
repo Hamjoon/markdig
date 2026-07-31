@@ -87,5 +87,12 @@
       "record": "result.json"
     }
   ],
-  "archive_case_id": "s07-5365879a"
+  "archive_case_id": "s07-5365879a",
+  "coverage": {
+    "applicable": false,
+    "reason": "repair-target-misclassified",
+    "coverage_verdict": "signal_unknown",
+    "production_files": []
+  },
+  "coverage_qualified_strict_signal_pass": false
 }

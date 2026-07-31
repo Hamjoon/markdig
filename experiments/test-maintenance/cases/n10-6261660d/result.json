@@ -80,5 +80,12 @@
       "record": "result.json"
     }
   ],
-  "archive_case_id": "n10-6261660d"
+  "archive_case_id": "n10-6261660d",
+  "coverage": {
+    "applicable": false,
+    "reason": "no-repair-required",
+    "coverage_verdict": "not_applicable",
+    "production_files": []
+  },
+  "coverage_qualified_strict_signal_pass": true
 }
