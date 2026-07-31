@@ -86,35 +86,60 @@ recent change remained present.
 
 ## Results
 
-| Metric | Overall | S | P | N |
-|---|---:|---:|---:|---:|
-| Exact decision | 17/23 (73.9%) | 0/3 | 10/10 | 7/10 |
-| Response-shape contract | 23/23 (100.0%) | 3/3 | 10/10 | 10/10 |
-| Patch applied | 13/16 (81.3%) | 2/3 | 8/10 | 3/3 fix responses |
-| Required repair success | 2/13 (15.4%) | 0/3 | 2/10 | not applicable |
-| Strict signal success | 9/23 (39.1%) | 0/3 | 2/10 | 7/10 |
-| Coverage signal | 2/2 (100.0%) | not applicable | 2/2 | not applicable |
+**Repair** is a binary outcome: **yes** means the model action applied, the
+target and full test suites passed, and the complete recent change remained
+present. **No** covers a non-applying patch, build/test failure, or a passing
+tree that removed part of the recent change.
 
-Decision confusion was:
+### Case Matrix — stale-test cases (expected DECISION: fix_tests)
 
-- all 3 S cases were predicted `fix_production`, not `fix_tests`;
-- all 10 P cases were predicted `fix_production` correctly;
-- 7 N cases were predicted `no_change` correctly;
-- 3 N cases were predicted `fix_production` incorrectly;
-- `fix_tests` was never selected.
+| ID | Base | Recent change | DECISION | Repair |
+|---|---|---|---|---|
+| [S-05](../experiments/test-maintenance/cases/s05-12590e5f/) | [8c01cf05](https://github.com/xoofx/markdig/commit/8c01cf05) | [12590e5f](https://github.com/xoofx/markdig/commit/12590e5f) link-helper ASCII normalization | fix_production ❌ | no |
+| [S-07](../experiments/test-maintenance/cases/s07-5365879a/) | [a9bd7c6a](https://github.com/xoofx/markdig/commit/a9bd7c6a) | [5365879a](https://github.com/xoofx/markdig/commit/5365879a) abbreviation emphasis resolution | fix_production ❌ | no |
+| [S-09](../experiments/test-maintenance/cases/s09-148fd08b/) | [c488a274](https://github.com/xoofx/markdig/commit/c488a274) | [148fd08b](https://github.com/xoofx/markdig/commit/148fd08b) span validation/update APIs | fix_production ❌ | no |
 
-The Zod cascade attempted all 16 fixes and applied 13 through context matching.
-Three patches (S-05, P-08, P-14) matched no frozen candidate pre-image.
+### Case Matrix — production-regression cases (expected DECISION: fix_production)
 
-P-06 and P-09 were the two successful required repairs. Both changed only the
-allowed production file, preserved the recent test-oracle change, passed their
-non-empty target tests, and passed the full suite. Of the other applied P
-patches, five built but left target/full failures and one failed to build.
+| ID | Base | Recent change | DECISION | Repair |
+|---|---|---|---|---|
+| [P-04](../experiments/test-maintenance/cases/p04-d548b82b/) | [7ff8db90](https://github.com/xoofx/markdig/commit/7ff8db90) | [d548b82b](https://github.com/xoofx/markdig/commit/d548b82b) table without preceding blank line | fix_production ✅ | no |
+| [P-06](../experiments/test-maintenance/cases/p06-781d9b53/) | [54357022](https://github.com/xoofx/markdig/commit/54357022) | [781d9b53](https://github.com/xoofx/markdig/commit/781d9b53) block-attribute leading newline | fix_production ✅ | **yes** |
+| [P-07](../experiments/test-maintenance/cases/p07-fcbf8170/) | [5dca4149](https://github.com/xoofx/markdig/commit/5dca4149) | [fcbf8170](https://github.com/xoofx/markdig/commit/fcbf8170) CJK emphasis after entity newline | fix_production ✅ | no |
+| [P-08](../experiments/test-maintenance/cases/p08-5a3c2060/) | [682c7272](https://github.com/xoofx/markdig/commit/682c7272) | [5a3c2060](https://github.com/xoofx/markdig/commit/5a3c2060) indented and zero blocks | fix_production ✅ | no |
+| [P-09](../experiments/test-maintenance/cases/p09-800235ba/) | [d5f8a809](https://github.com/xoofx/markdig/commit/d5f8a809) | [800235ba](https://github.com/xoofx/markdig/commit/800235ba) CodeInlineParser bounds handling | fix_production ✅ | **yes** |
+| [P-11](../experiments/test-maintenance/cases/p11-0f98267a/) | [fcbf8170](https://github.com/xoofx/markdig/commit/fcbf8170) | [0f98267a](https://github.com/xoofx/markdig/commit/0f98267a) pipe-table unmatched subscript | fix_production ✅ | no |
+| [P-14](../experiments/test-maintenance/cases/p14-b15cf582/) | [61e9be29](https://github.com/xoofx/markdig/commit/61e9be29) | [b15cf582](https://github.com/xoofx/markdig/commit/b15cf582) HTML `search` tag support | fix_production ✅ | no |
+| [P-15](../experiments/test-maintenance/cases/p15-b8364135/) | [0f98267a](https://github.com/xoofx/markdig/commit/0f98267a) | [b8364135](https://github.com/xoofx/markdig/commit/b8364135) autolink URL roundtrip | fix_production ✅ | no |
+| [P-16](../experiments/test-maintenance/cases/p16-d6e88f16/) | [03bdf600](https://github.com/xoofx/markdig/commit/03bdf600) | [d6e88f16](https://github.com/xoofx/markdig/commit/d6e88f16) pipe table after leading paragraph | fix_production ✅ | no |
+| [P-17](../experiments/test-maintenance/cases/p17-bc4e3990/) | [9dffce52](https://github.com/xoofx/markdig/commit/9dffce52) | [bc4e3990](https://github.com/xoofx/markdig/commit/bc4e3990) blockquote ordered-list parsing | fix_production ✅ | no |
 
-The three false-positive N fixes applied and left the full suite green, but all
-three failed recent-change preservation by reversing the intended normal
-production change. A test-only green judgment would have incorrectly counted
-them as acceptable actions.
+### Case Matrix — normal cases (expected DECISION: no_change)
+
+| ID | Base | Recent change | DECISION | Unnecessary edit |
+|---|---|---|---|---|
+| [N-01](../experiments/test-maintenance/cases/n01-adfcf425/) | [dab1ca54](https://github.com/xoofx/markdig/commit/dab1ca54) | [adfcf425](https://github.com/xoofx/markdig/commit/adfcf425) FrozenDictionary adoption | no_change ✅ | none |
+| [N-02](../experiments/test-maintenance/cases/n02-8269ff1a/) | [0e6d0f4c](https://github.com/xoofx/markdig/commit/0e6d0f4c) | [8269ff1a](https://github.com/xoofx/markdig/commit/8269ff1a) AutoLinkParser false-positive overhead | fix_production ❌ | **yes** |
+| [N-03](../experiments/test-maintenance/cases/n03-ec2eef25/) | [6261660d](https://github.com/xoofx/markdig/commit/6261660d) | [ec2eef25](https://github.com/xoofx/markdig/commit/ec2eef25) remove UnescapeNullable | no_change ✅ | none |
+| [N-04](../experiments/test-maintenance/cases/n04-aab5543c/) | [2e1d741a](https://github.com/xoofx/markdig/commit/2e1d741a) | [aab5543c](https://github.com/xoofx/markdig/commit/aab5543c) code cleanup | no_change ✅ | none |
+| [N-05](../experiments/test-maintenance/cases/n05-14406bc6/) | [2aa6780a](https://github.com/xoofx/markdig/commit/2aa6780a) | [14406bc6](https://github.com/xoofx/markdig/commit/14406bc6) issue #845 fix | no_change ✅ | none |
+| [N-06](../experiments/test-maintenance/cases/n06-14827841/) | [88c5b5cb](https://github.com/xoofx/markdig/commit/88c5b5cb) | [14827841](https://github.com/xoofx/markdig/commit/14827841) empty-stack PopIndent error | fix_production ❌ | **yes** |
+| [N-07](../experiments/test-maintenance/cases/n07-c488a274/) | [58e8217d](https://github.com/xoofx/markdig/commit/58e8217d) | [c488a274](https://github.com/xoofx/markdig/commit/c488a274) parser authoring contracts | no_change ✅ | none |
+| [N-08](../experiments/test-maintenance/cases/n08-90c73b77/) | [ee403ce2](https://github.com/xoofx/markdig/commit/ee403ce2) | [90c73b77](https://github.com/xoofx/markdig/commit/90c73b77) LinkHelper update | no_change ✅ | none |
+| [N-09](../experiments/test-maintenance/cases/n09-3e0c72f0/) | [d1233ffe](https://github.com/xoofx/markdig/commit/d1233ffe) | [3e0c72f0](https://github.com/xoofx/markdig/commit/3e0c72f0) DefinitionListParser exception | fix_production ❌ | **yes** |
+| [N-10](../experiments/test-maintenance/cases/n10-6261660d/) | [6d1fa963](https://github.com/xoofx/markdig/commit/6d1fa963) | [6261660d](https://github.com/xoofx/markdig/commit/6261660d) link-title normalization rationale | no_change ✅ | none |
+
+### Headline numbers
+
+- DECISION agreement: **17 / 23** (stale-test 0/3, production-regression
+  10/10, normal 7/10)
+- Repair success: **2 / 13** of the cases that required a fix (stale-test 0/3,
+  production-regression 2/10)
+- Coverage (2 successful repairs): **2 / 2** — the repaired target tests
+  execute the net changed production file in both successful repairs
+- Unnecessary edits on normal cases: **3 / 10**
+- Strict signal success: **9 / 23** (stale-test 0/3,
+  production-regression 2/10, normal 7/10)
 
 ## Coverage Signal
 

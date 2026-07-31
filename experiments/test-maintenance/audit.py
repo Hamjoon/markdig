@@ -477,6 +477,43 @@ def main():
     )
     normalized_reports = " ".join((report + full_report).split())
     check("report-claims", all(claim in normalized_reports for claim in required_claims))
+    matrix_rows = {}
+    for line in report.splitlines():
+        match = re.match(r"\| \[([SPN]-\d{2})\]", line)
+        if match:
+            matrix_rows[match.group(1)] = line
+    matrix_ok = len(matrix_rows) == 23
+    for case in cases:
+        case_id = case["case_id"]
+        row = result_rows[case_id]
+        line = matrix_rows.get(case_id, "")
+        decision_marker = "✅" if row["decision_correct"] else "❌"
+        final_cell = (
+            "none"
+            if case["category"] == "N" and row["decision"] == "no_change"
+            else "**yes**"
+            if case["category"] == "N" or row["repair_success"]
+            else "no"
+        )
+        matrix_ok = matrix_ok and all(
+            token in line
+            for token in (
+                f"[{case_id}](../experiments/test-maintenance/cases/"
+                f"{case['archive_case_id']}/)",
+                f"[{case['base_sha'][:8]}](https://github.com/xoofx/markdig/"
+                f"commit/{case['base_sha'][:8]})",
+                f"[{case['upstream_sha'][:8]}](https://github.com/xoofx/"
+                f"markdig/commit/{case['upstream_sha'][:8]})",
+                f"| {row['decision']} {decision_marker} | {final_cell} |",
+            )
+        )
+    check(
+        "summary-case-matrix",
+        matrix_ok
+        and report.count("### Case Matrix —") == 3
+        and "### Headline numbers" in report
+        and "Unnecessary edits on normal cases: **3 / 10**" in report,
+    )
     public_prose = (root / "README.md").read_text() + "\n" + "\n".join(
         path.read_text() for path in docs.glob("*.md")
     )
