@@ -83,6 +83,5 @@
     "reason": "repair-target-misclassified",
     "coverage_verdict": "signal_unknown",
     "production_files": []
-  },
-  "coverage_qualified_strict_signal_pass": false
+  }
 }

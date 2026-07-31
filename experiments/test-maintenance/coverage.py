@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Run the post-hoc Zod-equivalent coverage check for successful repairs.
+"""Run the Markdig coverage signal stage for successful repairs.
 
 Coverage is collected only for cases whose frozen result has
 ``repair_success=true``. Each case is reconstructed from its base commit,
 fixture patch, and normalized applied repair. The frozen target tests are then
-validated and rerun under dotnet-coverage. Raw Cobertura XML stays temporary;
-only path-sanitized summaries and logs enter the archive.
+validated and rerun through the Microsoft.NET.Test.Sdk built-in collector.
+Raw Cobertura XML stays temporary; only path-sanitized summaries and logs
+enter the archive.
 """
 
 import argparse
@@ -16,15 +17,14 @@ import re
 import shutil
 import socket
 import subprocess
+import sys
 import tempfile
-import xml.etree.ElementTree as ET
 from pathlib import Path
 
 
-DOTNET_COVERAGE_VERSION = "18.9.0"
-ZOD_REFERENCE_COMMIT = "53aaeb99d50a253d83f5dc18791b118c480ea8db"
-ZOD_RUNNER_SHA256 = "62a3b96892b00a9433c7b5c1f17539ff660b02eae99ffe3ba260390eaf1a30bc"
-ZOD_SIGNAL_CASE_SHA256 = "df5a508508c866e17e6dd5474bbee6ff7c6c4f4573c578250cde695b952f119d"
+MARKDIG_WEEK4_COMMIT = "caf6195e3c3a25b3b153329cb29ae7270bce5b57"
+MARKDIG_WEEK4_SIGNAL_SHA256 = "acdf6b3ca65f8cf3d9ad45e4ddedfea7c7f0d504c07e3da857e99db0a75273cf"
+PARSE_COBERTURA_SHA256 = "622740d5aabcbd282d6680230cfa2cc3bcde5a41ad8006d530a93507453a6e18"
 PROJECT = "src/Markdig.Tests/Markdig.Tests.csproj"
 SUMMARY_RE = re.compile(
     r"Failed:\s*(\d+),\s*Passed:\s*(\d+),\s*Skipped:\s*(\d+),\s*Total:\s*(\d+)"
@@ -149,12 +149,6 @@ def expected_target_counts(record):
     return matches[0]["counts"]
 
 
-def matches_source(filename, production_file):
-    filename = filename.replace("\\", "/").lstrip("./")
-    production_file = production_file.replace("\\", "/").lstrip("./")
-    return filename == production_file or filename.endswith("/" + production_file)
-
-
 def is_production_path(path):
     normalized = path.replace("\\", "/").lstrip("./")
     return normalized.startswith("src/Markdig/") and normalized.endswith(".cs")
@@ -196,46 +190,6 @@ def production_scope(worktree, base_sha, case, record, env):
     return candidates, included, excluded
 
 
-def summarize_cobertura(path, production_files):
-    root = ET.parse(path).getroot()
-    per_file = {production_file: {} for production_file in production_files}
-    matched_names = {production_file: set() for production_file in production_files}
-    for class_node in root.findall(".//class"):
-        filename = class_node.get("filename", "")
-        targets = [
-            item for item in production_files if matches_source(filename, item)
-        ]
-        for production_file in targets:
-            matched_names[production_file].add(filename)
-            for line in class_node.findall("./lines/line"):
-                number = int(line.get("number", "0"))
-                hits = int(line.get("hits", "0"))
-                if number:
-                    per_file[production_file][number] = max(
-                        hits, per_file[production_file].get(number, 0)
-                    )
-
-    summaries = []
-    for production_file in production_files:
-        lines = per_file[production_file]
-        total = len(lines)
-        covered = sum(hits > 0 for hits in lines.values())
-        summaries.append(
-            {
-                "production_file": production_file,
-                "available": bool(matched_names[production_file]) and total > 0,
-                "matched_class_file_count": len(matched_names[production_file]),
-                "lines": {
-                    "total": total,
-                    "covered": covered,
-                    "pct": round(covered * 100 / total, 2) if total else 0,
-                },
-                "covered": covered > 0,
-            }
-        )
-    return summaries
-
-
 def run_checked(command, cwd, env, label):
     result = run(command, cwd=cwd, env=env)
     if result.returncode:
@@ -244,7 +198,7 @@ def run_checked(command, cwd, env, label):
     return result
 
 
-def reconstruct_and_cover(repo, exp, case, coverage_tool, dotnet, replace):
+def reconstruct_and_cover(repo, exp, case, parser_path, dotnet, replace):
     case_id = case["case_id"]
     case_dir = case_directory(exp, case)
     result_path = case_dir / "result.json"
@@ -356,19 +310,13 @@ def reconstruct_and_cover(repo, exp, case, coverage_tool, dotnet, replace):
                 f"{case_id}: target validation mismatch: {counts}"
             )
 
-        loaded_assembly = (
-            worktree / "src" / "Markdig.Tests" / "bin" / "Release"
-            / case["tfm"] / "Markdig.dll"
-        )
-        if not loaded_assembly.is_file():
-            raise CoverageError(f"{case_id}: loaded Markdig.dll not found")
-
         with tempfile.TemporaryDirectory(prefix=f"coverage-{case_id}-") as temp:
-            cobertura = Path(temp) / "coverage.cobertura.xml"
+            results_directory = Path(temp) / "results"
             coverage_command = [
-                str(coverage_tool), "collect", "--output", str(cobertura),
-                "--output-format", "cobertura", "--include-files",
-                str(loaded_assembly), "--nologo", "--", *target_command,
+                str(dotnet), "test", PROJECT, "-c", "Release", "-f", case["tfm"],
+                "--filter", case["target_filter"],
+                "--collect:Code Coverage;Format=cobertura",
+                "--results-directory", str(results_directory), "--nologo",
             ]
             coverage = run(
                 coverage_command, cwd=worktree, env=env, timeout=1200)
@@ -376,18 +324,47 @@ def reconstruct_and_cover(repo, exp, case, coverage_tool, dotnet, replace):
                 coverage_command, coverage, repo, worktree, exp
             )
             sanitized_temp = sanitize(str(Path(temp)), repo, worktree, exp)
+            coverage_counts = test_counts(coverage.stdout + coverage.stderr)
+            cobertura_files = sorted(results_directory.rglob("*.cobertura.xml"))
+            if (
+                coverage.returncode
+                or coverage_counts != expected_target_counts(record)
+                or len(cobertura_files) != 1
+            ):
+                raise CoverageError(f"{case_id}: coverage collection failed")
+            cobertura = cobertura_files[0]
+            sanitized_cobertura = sanitize(str(cobertura), repo, worktree, exp)
             coverage_log = (
                 coverage_log
-                .replace(str(coverage_tool), "<dotnet-coverage>")
+                .replace(str(cobertura), "<temporary>/coverage.cobertura.xml")
+                .replace(sanitized_cobertura, "<temporary>/coverage.cobertura.xml")
                 .replace(str(Path(temp)), "<temporary>")
                 .replace(sanitized_temp, "<temporary>")
             )
             log_parts.append(coverage_log)
-            if coverage.returncode or not cobertura.is_file():
-                raise CoverageError(f"{case_id}: coverage collection failed")
-            files = summarize_cobertura(cobertura, production_files)
+            parser_command = [
+                sys.executable, str(parser_path), str(cobertura), *production_files
+            ]
+            parsed = run(parser_command, cwd=worktree, env=env)
+            parser_log = command_log(
+                parser_command, parsed, repo, worktree, exp
+            ).replace(sys.executable, "<python3>")
+            parser_log = (
+                parser_log
+                .replace(str(cobertura), "<temporary>/coverage.cobertura.xml")
+                .replace(sanitized_cobertura, "<temporary>/coverage.cobertura.xml")
+                .replace(str(Path(temp)), "<temporary>")
+                .replace(sanitized_temp, "<temporary>")
+            )
+            log_parts.append(parser_log)
+            if parsed.returncode:
+                raise CoverageError(f"{case_id}: parse-cobertura failed")
+            try:
+                files = json.loads(parsed.stdout)
+            except json.JSONDecodeError as error:
+                raise CoverageError(f"{case_id}: parse-cobertura invalid JSON") from error
 
-        all_available = all(item["available"] for item in files)
+        all_available = all(item["lines_valid"] > 0 for item in files)
         all_covered = all(item["covered"] for item in files)
         verdict = (
             "signal_preserved" if all_available and all_covered
@@ -398,15 +375,18 @@ def reconstruct_and_cover(repo, exp, case, coverage_tool, dotnet, replace):
             "schema_version": 1,
             "case_id": case_id,
             "category": case["category"],
-            "post_hoc": True,
             "repair_success": True,
             "target_filter": case["target_filter"],
             "target_validation": {"status": target.returncode, "counts": counts},
             "preservation_rechecked": True,
-            "coverage_tool": {
-                "name": "dotnet-coverage",
-                "version": DOTNET_COVERAGE_VERSION,
+            "coverage_collector": {
+                "name": "Microsoft.NET.Test.Sdk built-in Code Coverage collector",
+                "command": "dotnet test --collect:Code Coverage;Format=cobertura",
                 "output_format": "cobertura",
+            },
+            "coverage_parser": {
+                "path": "scripts/parse-cobertura.py",
+                "sha256": PARSE_COBERTURA_SHA256,
             },
             "production_scope": {
                 "basis": "net validated-tree diff from frozen base",
@@ -417,10 +397,10 @@ def reconstruct_and_cover(repo, exp, case, coverage_tool, dotnet, replace):
             "all_production_files_available": all_available,
             "all_production_files_covered": all_covered,
             "coverage_verdict": verdict,
-            "zod_reference": {
-                "commit": ZOD_REFERENCE_COMMIT,
-                "run_zod_signal_eval_sha256": ZOD_RUNNER_SHA256,
-                "signal_case_sha256": ZOD_SIGNAL_CASE_SHA256,
+            "markdig_week4_reference": {
+                "commit": MARKDIG_WEEK4_COMMIT,
+                "signal_sha256": MARKDIG_WEEK4_SIGNAL_SHA256,
+                "parse_cobertura_sha256": PARSE_COBERTURA_SHA256,
             },
         }
         write_json(output / "coverage-summary.json", summary)
@@ -456,7 +436,6 @@ def update_results(exp, manifest, completed):
     aggregate = load_json(aggregate_path)
     rows = {row["case_id"]: row for row in aggregate["results"]}
     coverage_rows = []
-    coverage_qualified = 0
     for case in manifest["cases"]:
         case_dir = case_directory(exp, case)
         record_path = case_dir / "result.json"
@@ -473,7 +452,7 @@ def update_results(exp, manifest, completed):
             }
         else:
             coverage = non_applicable_result(case, record)
-        qualified = bool(
+        signal_pass = bool(
             record["strict_signal_pass"]
             and (
                 not coverage["applicable"]
@@ -481,11 +460,10 @@ def update_results(exp, manifest, completed):
             )
         )
         record["coverage"] = coverage
-        record["coverage_qualified_strict_signal_pass"] = qualified
+        record["strict_signal_pass"] = signal_pass
         write_json(record_path, record)
         rows[case["case_id"]]["coverage"] = coverage
-        rows[case["case_id"]]["coverage_qualified_strict_signal_pass"] = qualified
-        coverage_qualified += qualified
+        rows[case["case_id"]]["strict_signal_pass"] = signal_pass
         coverage_rows.append(
             {
                 "case_id": case["case_id"],
@@ -500,12 +478,24 @@ def update_results(exp, manifest, completed):
     ]
     aggregate["coverage_audit"] = {
         "schema_version": 1,
-        "post_hoc": True,
         "criterion": (
-            "Zod Week 4 file-level line coverage on the repaired tree, "
+            "Markdig Week 4 file-level line coverage on the repaired tree, "
             "running frozen target tests only"
         ),
-        "tool": {"name": "dotnet-coverage", "version": DOTNET_COVERAGE_VERSION},
+        "collector": {
+            "name": "Microsoft.NET.Test.Sdk built-in Code Coverage collector",
+            "command": "dotnet test --collect:Code Coverage;Format=cobertura",
+            "output_format": "cobertura",
+        },
+        "parser": {
+            "path": "scripts/parse-cobertura.py",
+            "sha256": PARSE_COBERTURA_SHA256,
+        },
+        "markdig_week4_reference": {
+            "commit": MARKDIG_WEEK4_COMMIT,
+            "signal_sha256": MARKDIG_WEEK4_SIGNAL_SHA256,
+            "parse_cobertura_sha256": PARSE_COBERTURA_SHA256,
+        },
         "applicable_case_count": len(applicable),
         "signal_preserved_case_count": sum(
             row["coverage_verdict"] == "signal_preserved" for row in applicable
@@ -523,7 +513,9 @@ def update_results(exp, manifest, completed):
         "mutation_testing": "excluded-by-instruction",
         "results": coverage_rows,
     }
-    aggregate["coverage_qualified_strict_signal_pass"] = coverage_qualified
+    aggregate["strict_signal_pass"] = sum(
+        row["strict_signal_pass"] for row in rows.values()
+    )
     write_json(aggregate_path, aggregate)
 
 
@@ -531,7 +523,6 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--repo", required=True)
     parser.add_argument("--exp", default="experiments/test-maintenance")
-    parser.add_argument("--coverage-tool", required=True)
     parser.add_argument("--dotnet", default=str(Path.home() / ".dotnet" / "dotnet"))
     parser.add_argument("--case")
     parser.add_argument("--replace", action="store_true")
@@ -539,17 +530,12 @@ def main():
 
     repo = Path(args.repo).resolve()
     exp = Path(args.exp).resolve()
-    coverage_tool = Path(args.coverage_tool).resolve()
+    parser_path = exp / "scripts" / "parse-cobertura.py"
     dotnet = Path(args.dotnet).resolve()
-    if not coverage_tool.is_file() or not dotnet.is_file():
-        raise SystemExit("coverage tool or dotnet executable missing")
-    version = run(
-        [str(coverage_tool), "--version"],
-        cwd=repo,
-        env=dotnet_env(dotnet),
-    )
-    if version.returncode or not version.stdout.startswith(DOTNET_COVERAGE_VERSION):
-        raise SystemExit(f"unexpected dotnet-coverage version: {version.stdout.strip()}")
+    if not parser_path.is_file() or not dotnet.is_file():
+        raise SystemExit("parse-cobertura.py or dotnet executable missing")
+    if sha256_text(parser_path.read_text()) != PARSE_COBERTURA_SHA256:
+        raise SystemExit("unexpected parse-cobertura.py hash")
 
     manifest = load_json(exp / "cases.json")
     selected = [
@@ -566,7 +552,7 @@ def main():
         print(f"COVERAGE: START {case['case_id']}", flush=True)
         try:
             completed[case["case_id"]] = reconstruct_and_cover(
-                repo, exp, case, coverage_tool, dotnet, args.replace
+                repo, exp, case, parser_path, dotnet, args.replace
             )
         except CoverageError as error:
             print(f"COVERAGE: ERROR {case['case_id']} {error}", flush=True)

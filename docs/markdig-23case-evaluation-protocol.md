@@ -121,20 +121,15 @@ preservation result, sanitized logs, test counts, and final flags. Reconcile
 the aggregate JSON and English reports, commit locally, and stop. Publication
 requires a separate explicit approval after the evaluation is complete.
 
-## Post-Hoc Supplemental Coverage Protocol
+## Coverage Signal Protocol
 
-Coverage was not part of the original frozen evaluation. After that omission
-was identified, this supplemental protocol was frozen before collecting any
-coverage result. It does not change a model response, repair judgment, or the
-original strict-signal result.
-
-The procedure follows the coverage criterion in Zod Week 4 commit
-`53aaeb99d50a253d83f5dc18791b118c480ea8db`: coverage applies only to cases
-whose repair already passed patch application, target validation, and recent-
-change preservation. The pinned Zod runner SHA-256 is
-`62a3b96892b00a9433c7b5c1f17539ff660b02eae99ffe3ba260390eaf1a30bc`;
-the pinned `signal-case.sh` SHA-256 is
-`df5a508508c866e17e6dd5474bbee6ff7c6c4f4573c578250cde695b952f119d`.
+Coverage applies only to cases whose repair passed patch application, target
+validation, and recent-change preservation. The collection and parsing path
+is pinned to Markdig Week 4 commit
+`caf6195e3c3a25b3b153329cb29ae7270bce5b57`: `signal.sh` SHA-256
+`acdf6b3ca65f8cf3d9ad45e4ddedfea7c7f0d504c07e3da857e99db0a75273cf`
+and byte-identical `parse-cobertura.py` SHA-256
+`622740d5aabcbd282d6680230cfa2cc3bcde5a41ad8006d530a93507453a6e18`.
 
 For each successful repair:
 
@@ -142,14 +137,16 @@ For each successful repair:
    the archived normalized `applied-repair.diff` without inference.
 2. Recheck the frozen target counts and `git apply --reverse --check` fixture
    preservation.
-3. Run only the frozen target filter under `dotnet-coverage` 18.9.0 and emit
-   temporary Cobertura XML.
+3. Run only the frozen target filter with the Microsoft.NET.Test.Sdk built-in
+   collector: `dotnet test --collect:"Code Coverage;Format=cobertura"`. No
+   project-file modification is made.
 4. Match Zod's production-scope rule: form candidates from the frozen
    `prod_src_files` plus the model repair's actual production paths, then keep
    only files present in the validated repaired tree's net diff from the
    frozen base. Record excluded candidates and their reason.
-5. For every in-scope production file, union instrumented source lines across
-   reported classes and record covered lines, total lines, and percent.
+5. Run the pinned `scripts/parse-cobertura.py` against the temporary Cobertura
+   XML and every in-scope production file. Retain its `lines_covered`,
+   `lines_valid`, and `covered` fields without reinterpretation.
 6. Mark the case `signal_preserved` only when every in-scope production file is
    present in the report and has at least one covered line. A present file with
    zero covered lines is `signal_weakened`; missing or failed tooling is

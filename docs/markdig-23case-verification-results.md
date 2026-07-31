@@ -77,5 +77,5 @@ All checks passed:
 ## Freeze Boundary
 
 This verification freezes the fixture inputs and executable expectations. It
-does not contain a model response, repair attempt, or post-hoc change to a
+does not contain a model response, repair attempt, or later change to a
 candidate, queue, category, or acceptance rule.

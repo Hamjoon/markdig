@@ -47,17 +47,15 @@ COVERAGE_EXPECTED = {
     "P-06": {
         "target": {"failed": 0, "passed": 4, "skipped": 0, "total": 4},
         "file": "src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs",
-        "total": 115,
-        "covered": 108,
-        "pct": 93.91,
+        "lines_valid": 115,
+        "lines_covered": 108,
         "excluded": [],
     },
     "P-09": {
         "target": {"failed": 0, "passed": 46, "skipped": 0, "total": 46},
         "file": "src/Markdig/Parsers/Inlines/CodeInlineParser.cs",
-        "total": 66,
-        "covered": 63,
-        "pct": 95.45,
+        "lines_valid": 66,
+        "lines_covered": 63,
         "excluded": [
             {
                 "production_file": "src/Markdig/Polyfills/SpanExtensions.cs",
@@ -138,6 +136,13 @@ def main():
             path.name for path in (exp / "metadata").iterdir()
             if path.is_file()
         } == {"experiment.json"},
+    )
+    coverage_parser = exp / "scripts" / "parse-cobertura.py"
+    check(
+        "coverage-parser",
+        coverage_parser.is_file()
+        and sha256_text(coverage_parser.read_text())
+        == "622740d5aabcbd282d6680230cfa2cc3bcde5a41ad8006d530a93507453a6e18",
     )
 
     manifest = load_json(exp / "cases.json")
@@ -257,9 +262,6 @@ def main():
             "repair_success": record["repair_success"],
             "strict_signal_pass": record["strict_signal_pass"],
             "coverage": record.get("coverage"),
-            "coverage_qualified_strict_signal_pass": record.get(
-                "coverage_qualified_strict_signal_pass"
-            ),
             "status": record["status"],
             "reason": record["reason"],
         }
@@ -303,23 +305,33 @@ def main():
                     "excluded_candidate_production_files"
                 )
                 valid_file = len(files) == 1 and (
-                    files[0].get("production_file") == expected["file"]
-                    and files[0].get("available") is True
+                    files[0].get("file") == expected["file"]
+                    and files[0].get("lines_valid") == expected["lines_valid"]
+                    and files[0].get("lines_covered") == expected["lines_covered"]
                     and files[0].get("covered") is True
-                    and files[0].get("lines") == {
-                        "total": expected["total"],
-                        "covered": expected["covered"],
-                        "pct": expected["pct"],
-                    }
                 )
+                coverage_log = log_path.read_text()
                 if not (
                     summary.get("case_id") == case_id
-                    and summary.get("post_hoc") is True
+                    and "post_hoc" not in summary
                     and summary.get("repair_success") is True
                     and summary.get("target_validation", {}).get("counts")
                     == expected["target"]
                     and summary.get("preservation_rechecked") is True
-                    and summary.get("coverage_tool", {}).get("version") == "18.9.0"
+                    and summary.get("coverage_collector") == {
+                        "name": "Microsoft.NET.Test.Sdk built-in Code Coverage collector",
+                        "command": "dotnet test --collect:Code Coverage;Format=cobertura",
+                        "output_format": "cobertura",
+                    }
+                    and summary.get("coverage_parser") == {
+                        "path": "scripts/parse-cobertura.py",
+                        "sha256": "622740d5aabcbd282d6680230cfa2cc3bcde5a41ad8006d530a93507453a6e18",
+                    }
+                    and summary.get("markdig_week4_reference") == {
+                        "commit": "caf6195e3c3a25b3b153329cb29ae7270bce5b57",
+                        "signal_sha256": "acdf6b3ca65f8cf3d9ad45e4ddedfea7c7f0d504c07e3da857e99db0a75273cf",
+                        "parse_cobertura_sha256": "622740d5aabcbd282d6680230cfa2cc3bcde5a41ad8006d530a93507453a6e18",
+                    }
                     and summary.get("production_scope", {}).get("basis")
                     == "net validated-tree diff from frozen base"
                     and excluded == expected["excluded"]
@@ -327,7 +339,11 @@ def main():
                     and summary.get("coverage_verdict") == "signal_preserved"
                     and record.get("coverage", {}).get("coverage_verdict")
                     == "signal_preserved"
-                    and record.get("coverage_qualified_strict_signal_pass") is True
+                    and record.get("coverage", {}).get("production_files") == files
+                    and record.get("strict_signal_pass") is True
+                    and "--collect:Code Coverage;Format=cobertura" in coverage_log
+                    and "<experiment>/scripts/parse-cobertura.py" in coverage_log
+                    and "<temporary>/coverage.cobertura.xml" in coverage_log
                 ):
                     coverage_failures.append(f"{case_id}: coverage evidence mismatch")
         elif coverage_dir.exists():
@@ -372,11 +388,24 @@ def main():
     coverage_audit = results.get("coverage_audit", {})
     check(
         "coverage-aggregate",
-        results.get("coverage_qualified_strict_signal_pass") == 9
+        results.get("strict_signal_pass") == 9
+        and "coverage_qualified_strict_signal_pass" not in results
         and coverage_audit.get("schema_version") == 1
-        and coverage_audit.get("post_hoc") is True
-        and coverage_audit.get("tool")
-        == {"name": "dotnet-coverage", "version": "18.9.0"}
+        and "post_hoc" not in coverage_audit
+        and coverage_audit.get("collector") == {
+            "name": "Microsoft.NET.Test.Sdk built-in Code Coverage collector",
+            "command": "dotnet test --collect:Code Coverage;Format=cobertura",
+            "output_format": "cobertura",
+        }
+        and coverage_audit.get("parser") == {
+            "path": "scripts/parse-cobertura.py",
+            "sha256": "622740d5aabcbd282d6680230cfa2cc3bcde5a41ad8006d530a93507453a6e18",
+        }
+        and coverage_audit.get("markdig_week4_reference") == {
+            "commit": "caf6195e3c3a25b3b153329cb29ae7270bce5b57",
+            "signal_sha256": "acdf6b3ca65f8cf3d9ad45e4ddedfea7c7f0d504c07e3da857e99db0a75273cf",
+            "parse_cobertura_sha256": "622740d5aabcbd282d6680230cfa2cc3bcde5a41ad8006d530a93507453a6e18",
+        }
         and coverage_audit.get("applicable_case_count") == 2
         and coverage_audit.get("signal_preserved_case_count") == 2
         and coverage_audit.get("signal_weakened_case_count") == 0
@@ -442,10 +471,23 @@ def main():
         "2/2",
         "108/115 (93.91%)",
         "63/66 (95.45%)",
-        "Coverage-qualified strict signal",
+        "Coverage Signal",
+        'dotnet test --collect:"Code Coverage;Format=cobertura"',
+        "parse-cobertura.py",
     )
     normalized_reports = " ".join((report + full_report).split())
     check("report-claims", all(claim in normalized_reports for claim in required_claims))
+    public_prose = (root / "README.md").read_text() + "\n" + "\n".join(
+        path.read_text() for path in docs.glob("*.md")
+    )
+    check(
+        "coverage-wording",
+        not re.search(
+            r"post-hoc|supplemental|coverage-qualified|accident",
+            public_prose,
+            re.IGNORECASE,
+        ),
+    )
 
     audit = {
         "schema_version": 1,

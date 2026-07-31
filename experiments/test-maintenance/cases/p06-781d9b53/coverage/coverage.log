@@ -36,7 +36,7 @@ Build succeeded.
     1 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:03.50
+Time Elapsed 00:00:03.63
 
 
 ## stderr
@@ -53,16 +53,40 @@ Passed!  - Failed:     0, Passed:     4, Skipped:     0, Total:     4, Duration:
 
 ## stderr
 
-$ <dotnet-coverage> collect --output <temporary>/coverage.cobertura.xml --output-format cobertura --include-files <worktree>/src/Markdig.Tests/bin/Release/net9.0/Markdig.dll --nologo -- <home>/.dotnet/dotnet test src/Markdig.Tests/Markdig.Tests.csproj -c Release -f net9.0 --no-build --filter FullyQualifiedName~TestExtensionsGenericAttributes|FullyQualifiedName~element|FullyQualifiedName~property
+$ <home>/.dotnet/dotnet test src/Markdig.Tests/Markdig.Tests.csproj -c Release -f net9.0 --filter FullyQualifiedName~TestExtensionsGenericAttributes|FullyQualifiedName~element|FullyQualifiedName~property --collect:Code Coverage;Format=cobertura --results-directory <temporary>/results --nologo
 status=0
 
 ## stdout
-SessionId: 27f91744-b5e7-4c96-a3f2-92d2dd0169b5
+  Determining projects to restore...
+<home>/.dotnet/sdk/10.0.302/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.EolTargetFrameworks.targets(32,5): warning NETSDK1138: The target framework 'net6.0' is out of support and will not receive security updates in the future. Please refer to https://aka.ms/dotnet-core-support for more information about the support policy. [<worktree>/src/SpecFileGen/SpecFileGen.csproj::TargetFramework=net6.0]
+<home>/.dotnet/sdk/10.0.302/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.EolTargetFrameworks.targets(32,5): warning NETSDK1138: The target framework 'net6.0' is out of support and will not receive security updates in the future. Please refer to https://aka.ms/dotnet-core-support for more information about the support policy. [<worktree>/src/Markdig.Tests/Markdig.Tests.csproj::TargetFramework=net6.0]
+  All projects are up-to-date for restore.
+  SpecFileGen -> <worktree>/src/SpecFileGen/bin/Release/net9.0/SpecFileGen.dll
+  Markdig -> <worktree>/src/Markdig/bin/Release/net9.0/Markdig.dll
+  Markdig.Tests -> <worktree>/src/Markdig.Tests/bin/Release/net9.0/Markdig.Tests.dll
 Test run for <worktree>/src/Markdig.Tests/bin/Release/net9.0/Markdig.Tests.dll (.NETCoreApp,Version=v9.0)
 A total of 1 test files matched the specified pattern.
 
-Passed!  - Failed:     0, Passed:     4, Skipped:     0, Total:     4, Duration: 51 ms - Markdig.Tests.dll (net9.0)
-코드 검사 결과: <temporary>/coverage.cobertura.xml.
+Passed!  - Failed:     0, Passed:     4, Skipped:     0, Total:     4, Duration: 56 ms - Markdig.Tests.dll (net9.0)
+
+Attachments:
+  <temporary>/coverage.cobertura.xml
+
+
+## stderr
+
+$ <python3> <experiment>/scripts/parse-cobertura.py <temporary>/coverage.cobertura.xml src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs
+status=0
+
+## stdout
+[
+  {
+    "file": "src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs",
+    "lines_covered": 108,
+    "lines_valid": 115,
+    "covered": true
+  }
+]
 
 
 ## stderr

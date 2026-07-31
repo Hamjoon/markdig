@@ -108,8 +108,7 @@
         "reason": "repair-target-misclassified",
         "coverage_verdict": "signal_unknown",
         "production_files": []
-      },
-      "coverage_qualified_strict_signal_pass": false
+      }
     },
     {
       "case_id": "S-07",
@@ -137,8 +136,7 @@
         "reason": "repair-target-misclassified",
         "coverage_verdict": "signal_unknown",
         "production_files": []
-      },
-      "coverage_qualified_strict_signal_pass": false
+      }
     },
     {
       "case_id": "S-09",
@@ -166,8 +164,7 @@
         "reason": "repair-target-misclassified",
         "coverage_verdict": "signal_unknown",
         "production_files": []
-      },
-      "coverage_qualified_strict_signal_pass": false
+      }
     },
     {
       "case_id": "P-04",
@@ -195,8 +192,7 @@
         "reason": "repair-incomplete",
         "coverage_verdict": "partial_repair",
         "production_files": []
-      },
-      "coverage_qualified_strict_signal_pass": false
+      }
     },
     {
       "case_id": "P-06",
@@ -232,20 +228,14 @@
         },
         "production_files": [
           {
-            "production_file": "src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs",
-            "available": true,
-            "matched_class_file_count": 1,
-            "lines": {
-              "total": 115,
-              "covered": 108,
-              "pct": 93.91
-            },
+            "file": "src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs",
+            "lines_covered": 108,
+            "lines_valid": 115,
             "covered": true
           }
         ],
         "artifact": "coverage/coverage-summary.json"
-      },
-      "coverage_qualified_strict_signal_pass": true
+      }
     },
     {
       "case_id": "P-07",
@@ -273,8 +263,7 @@
         "reason": "repair-incomplete",
         "coverage_verdict": "partial_repair",
         "production_files": []
-      },
-      "coverage_qualified_strict_signal_pass": false
+      }
     },
     {
       "case_id": "P-08",
@@ -300,8 +289,7 @@
         "reason": "repair-incomplete",
         "coverage_verdict": "partial_repair",
         "production_files": []
-      },
-      "coverage_qualified_strict_signal_pass": false
+      }
     },
     {
       "case_id": "P-09",
@@ -343,20 +331,14 @@
         },
         "production_files": [
           {
-            "production_file": "src/Markdig/Parsers/Inlines/CodeInlineParser.cs",
-            "available": true,
-            "matched_class_file_count": 1,
-            "lines": {
-              "total": 66,
-              "covered": 63,
-              "pct": 95.45
-            },
+            "file": "src/Markdig/Parsers/Inlines/CodeInlineParser.cs",
+            "lines_covered": 63,
+            "lines_valid": 66,
             "covered": true
           }
         ],
         "artifact": "coverage/coverage-summary.json"
-      },
-      "coverage_qualified_strict_signal_pass": true
+      }
     },
     {
       "case_id": "P-11",
@@ -384,8 +366,7 @@
         "reason": "repair-incomplete",
         "coverage_verdict": "partial_repair",
         "production_files": []
-      },
-      "coverage_qualified_strict_signal_pass": false
+      }
     },
     {
       "case_id": "P-14",
@@ -411,8 +392,7 @@
         "reason": "repair-incomplete",
         "coverage_verdict": "partial_repair",
         "production_files": []
-      },
-      "coverage_qualified_strict_signal_pass": false
+      }
     },
     {
       "case_id": "P-15",
@@ -440,8 +420,7 @@
         "reason": "repair-incomplete",
         "coverage_verdict": "partial_repair",
         "production_files": []
-      },
-      "coverage_qualified_strict_signal_pass": false
+      }
     },
     {
       "case_id": "P-16",
@@ -469,8 +448,7 @@
         "reason": "repair-incomplete",
         "coverage_verdict": "partial_repair",
         "production_files": []
-      },
-      "coverage_qualified_strict_signal_pass": false
+      }
     },
     {
       "case_id": "P-17",
@@ -498,8 +476,7 @@
         "reason": "repair-incomplete",
         "coverage_verdict": "partial_repair",
         "production_files": []
-      },
-      "coverage_qualified_strict_signal_pass": false
+      }
     },
     {
       "case_id": "N-01",
@@ -525,8 +502,7 @@
         "reason": "no-repair-required",
         "coverage_verdict": "not_applicable",
         "production_files": []
-      },
-      "coverage_qualified_strict_signal_pass": true
+      }
     },
     {
       "case_id": "N-02",
@@ -554,8 +530,7 @@
         "reason": "no-repair-required",
         "coverage_verdict": "not_applicable",
         "production_files": []
-      },
-      "coverage_qualified_strict_signal_pass": false
+      }
     },
     {
       "case_id": "N-03",
@@ -581,8 +556,7 @@
         "reason": "no-repair-required",
         "coverage_verdict": "not_applicable",
         "production_files": []
-      },
-      "coverage_qualified_strict_signal_pass": true
+      }
     },
     {
       "case_id": "N-04",
@@ -608,8 +582,7 @@
         "reason": "no-repair-required",
         "coverage_verdict": "not_applicable",
         "production_files": []
-      },
-      "coverage_qualified_strict_signal_pass": true
+      }
     },
     {
       "case_id": "N-05",
@@ -635,8 +608,7 @@
         "reason": "no-repair-required",
         "coverage_verdict": "not_applicable",
         "production_files": []
-      },
-      "coverage_qualified_strict_signal_pass": true
+      }
     },
     {
       "case_id": "N-06",
@@ -664,8 +636,7 @@
         "reason": "no-repair-required",
         "coverage_verdict": "not_applicable",
         "production_files": []
-      },
-      "coverage_qualified_strict_signal_pass": false
+      }
     },
     {
       "case_id": "N-07",
@@ -691,8 +662,7 @@
         "reason": "no-repair-required",
         "coverage_verdict": "not_applicable",
         "production_files": []
-      },
-      "coverage_qualified_strict_signal_pass": true
+      }
     },
     {
       "case_id": "N-08",
@@ -718,8 +688,7 @@
         "reason": "no-repair-required",
         "coverage_verdict": "not_applicable",
         "production_files": []
-      },
-      "coverage_qualified_strict_signal_pass": true
+      }
     },
     {
       "case_id": "N-09",
@@ -747,8 +716,7 @@
         "reason": "no-repair-required",
         "coverage_verdict": "not_applicable",
         "production_files": []
-      },
-      "coverage_qualified_strict_signal_pass": false
+      }
     },
     {
       "case_id": "N-10",
@@ -774,17 +742,25 @@
         "reason": "no-repair-required",
         "coverage_verdict": "not_applicable",
         "production_files": []
-      },
-      "coverage_qualified_strict_signal_pass": true
+      }
     }
   ],
   "coverage_audit": {
     "schema_version": 1,
-    "post_hoc": true,
-    "criterion": "Zod Week 4 file-level line coverage on the repaired tree, running frozen target tests only",
-    "tool": {
-      "name": "dotnet-coverage",
-      "version": "18.9.0"
+    "criterion": "Markdig Week 4 file-level line coverage on the repaired tree, running frozen target tests only",
+    "collector": {
+      "name": "Microsoft.NET.Test.Sdk built-in Code Coverage collector",
+      "command": "dotnet test --collect:Code Coverage;Format=cobertura",
+      "output_format": "cobertura"
+    },
+    "parser": {
+      "path": "scripts/parse-cobertura.py",
+      "sha256": "622740d5aabcbd282d6680230cfa2cc3bcde5a41ad8006d530a93507453a6e18"
+    },
+    "markdig_week4_reference": {
+      "commit": "caf6195e3c3a25b3b153329cb29ae7270bce5b57",
+      "signal_sha256": "acdf6b3ca65f8cf3d9ad45e4ddedfea7c7f0d504c07e3da857e99db0a75273cf",
+      "parse_cobertura_sha256": "622740d5aabcbd282d6680230cfa2cc3bcde5a41ad8006d530a93507453a6e18"
     },
     "applicable_case_count": 2,
     "signal_preserved_case_count": 2,
@@ -841,14 +817,9 @@
         },
         "production_files": [
           {
-            "production_file": "src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs",
-            "available": true,
-            "matched_class_file_count": 1,
-            "lines": {
-              "total": 115,
-              "covered": 108,
-              "pct": 93.91
-            },
+            "file": "src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs",
+            "lines_covered": 108,
+            "lines_valid": 115,
             "covered": true
           }
         ],
@@ -891,14 +862,9 @@
         },
         "production_files": [
           {
-            "production_file": "src/Markdig/Parsers/Inlines/CodeInlineParser.cs",
-            "available": true,
-            "matched_class_file_count": 1,
-            "lines": {
-              "total": 66,
-              "covered": 63,
-              "pct": 95.45
-            },
+            "file": "src/Markdig/Parsers/Inlines/CodeInlineParser.cs",
+            "lines_covered": 63,
+            "lines_valid": 66,
             "covered": true
           }
         ],
@@ -1025,6 +991,5 @@
         "production_files": []
       }
     ]
-  },
-  "coverage_qualified_strict_signal_pass": 9
+  }
 }

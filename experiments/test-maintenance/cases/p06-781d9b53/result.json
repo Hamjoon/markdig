@@ -129,18 +129,12 @@
     },
     "production_files": [
       {
-        "production_file": "src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs",
-        "available": true,
-        "matched_class_file_count": 1,
-        "lines": {
-          "total": 115,
-          "covered": 108,
-          "pct": 93.91
-        },
+        "file": "src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs",
+        "lines_covered": 108,
+        "lines_valid": 115,
         "covered": true
       }
     ],
     "artifact": "coverage/coverage-summary.json"
-  },
-  "coverage_qualified_strict_signal_pass": true
+  }
 }

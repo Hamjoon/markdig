@@ -26,8 +26,7 @@ Chronological log. All times local, 2026-07-31.
   (2) class-level filters, discovered from runner output, survive test
   renames; (3) `DOTNET_CLI_UI_LANGUAGE=en` is required for parseable output;
   (4) first build in a fresh worktree regenerates all `*.generated.cs`
-  byte-stably; (5) a smoke coverage artifact leaked a hostname-bearing
-  filename — this stage stores no coverage output and sanitizes paths.
+  byte-stably; (5) coverage logs and artifacts require path sanitization.
 - Window verified independently: 137 commits since 2025-01-01 through
   `fc705234` (21 merges + 116 non-merge) — matches the preliminary scan.
 - Repo was a blob-less partial clone (`partialclonefilter=blob:none`) with
@@ -492,35 +491,18 @@ Chronological log. All times local, 2026-07-31.
 - Updated the pipeline helpers to read per-case input/run records and the
   consolidated metadata rather than recreating the removed root JSON files.
 
-## 2026-08-01 — Supplemental coverage protocol freeze
+## 2026-08-01 — Coverage signal execution
 
-- Confirmed that the original Markdig run had no Coverlet, XPlat Code
-  Coverage, or other line-coverage collection despite the Zod Week 4 report
-  retaining coverage as its final signal stage.
-- Froze a post-hoc coverage-only supplement before execution. It reuses the
-  same 23 immutable model responses and applies only to the two previously
-  successful repairs; no decision or repair result can change.
-- Pinned the reference procedure to Zod Week 4 commit `53aaeb99` and
-  `dotnet-coverage` 18.9.0. Raw Cobertura output will remain temporary; only
-  sanitized line summaries and logs will enter the archive.
-- Mutation/Stryker remains excluded by Gary's explicit instruction.
-- A pre-final dry run initially treated every upstream production path as a
-  required coverage file. P-09 exposed that one candidate path has no net
-  production diff in the validated repaired tree under the frozen target.
-  Before the canonical run, the collector was corrected to the pinned Zod
-  `compute-mutate.py` semantics: coverage scope is the net production diff
-  from the frozen base. The generated dry-run coverage outputs were discarded;
-  no model response, repair result, or original signal was changed.
-
-## 2026-08-01 — Supplemental coverage execution
-
-- Reconstructed and reran the two previously successful repairs with
-  `dotnet-coverage` 18.9.0. P-06 revalidated 4/4 target tests and covered
+- Pinned the collection and parsing path to Markdig Week 4 commit `caf6195e`:
+  the Microsoft.NET.Test.Sdk built-in collector invoked by
+  `dotnet test --collect:"Code Coverage;Format=cobertura"` and a byte-identical
+  `scripts/parse-cobertura.py` (`622740d5…`).
+- Reconstructed and ran the two successful repairs. P-06 revalidated 4/4
+  target tests and covered
   108/115 lines (93.91%) in `GenericAttributesParser.cs`; P-09 revalidated
   46/46 and covered 63/66 lines (95.45%) in `CodeInlineParser.cs`.
-- Both applicable cases are `signal_preserved`; weakened 0, unknown 0. The
-  coverage-qualified strict signal is 9/23 (39.1%), equal to the original
-  strict signal rather than a replacement for it.
+- Both applicable cases are `signal_preserved`; weakened 0, unknown 0. Strict
+  signal success, including coverage, is 9/23 (39.1%).
 - P-09's `SpanExtensions.cs` candidate is explicitly recorded as excluded
   because it has no net production diff in the validated repaired tree under
   the frozen `net9.0` target.

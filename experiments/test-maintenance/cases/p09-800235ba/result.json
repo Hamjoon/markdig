@@ -135,18 +135,12 @@
     },
     "production_files": [
       {
-        "production_file": "src/Markdig/Parsers/Inlines/CodeInlineParser.cs",
-        "available": true,
-        "matched_class_file_count": 1,
-        "lines": {
-          "total": 66,
-          "covered": 63,
-          "pct": 95.45
-        },
+        "file": "src/Markdig/Parsers/Inlines/CodeInlineParser.cs",
+        "lines_covered": 63,
+        "lines_valid": 66,
         "covered": true
       }
     ],
     "artifact": "coverage/coverage-summary.json"
-  },
-  "coverage_qualified_strict_signal_pass": true
+  }
 }

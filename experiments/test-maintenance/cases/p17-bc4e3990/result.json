@@ -93,6 +93,5 @@
     "reason": "repair-incomplete",
     "coverage_verdict": "partial_repair",
     "production_files": []
-  },
-  "coverage_qualified_strict_signal_pass": false
+  }
 }
