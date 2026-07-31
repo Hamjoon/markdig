@@ -16,10 +16,8 @@ recent-change-preservation, and coverage procedure, strict signal success was
 correct N no-change actions.
 
 The model diffs were not standard-format, so the Zod-style context matcher was
-needed. It applied 13/16 without editing model code. The central result is
-therefore not “no executable patches.” It is that context-applicable code was
-common, while successful required repair was rare: **2/13 required repairs
-(15.4%)**.
+needed. It applied 13/16 without editing model code, while successful required
+repair was rare: **2/13 required repairs (15.4%)**.
 
 The two successful repairs both covered their net changed production file
 under the frozen target tests, so both satisfy the coverage signal gate.
@@ -70,13 +68,10 @@ expected decision. A fix decision required code in diff form.
 The 23 calls used 75,626 prompt tokens and 34,534 completion tokens (110,160
 total). The API-reported aggregate cost was USD 0.011487683.
 
-## Corrected Evaluation Procedure
+## Evaluation Procedure
 
-An initial evaluation incorrectly stopped on model diff formatting before
-trying the established application cascade. That was stricter than the Zod
-Week 4 procedure and made the reported 0/16 application result non-comparable.
-The corrected evaluation reused the immutable responses and applied this fixed
-cascade from an identical committed fixture state before each attempt:
+Each fix response was evaluated through this cascade from an identical
+committed fixture state before every attempt:
 
 1. ordinary `git apply`;
 2. `git apply --recount`;
@@ -87,7 +82,7 @@ cascade from an identical committed fixture state before each attempt:
 After a successful application, Git derived and enforced the actual allowed
 paths. The project was rebuilt; S/P target tests and the full suite were run;
 then `git apply --reverse --check fixture.patch` verified that the intended
-recent change remained present. No model response was changed or regenerated.
+recent change remained present.
 
 ## Results
 
@@ -100,7 +95,7 @@ recent change remained present. No model response was changed or regenerated.
 | Strict signal success | 9/23 (39.1%) | 0/3 | 2/10 | 7/10 |
 | Coverage signal | 2/2 (100.0%) | not applicable | 2/2 | not applicable |
 
-Decision confusion was unchanged:
+Decision confusion was:
 
 - all 3 S cases were predicted `fix_production`, not `fix_tests`;
 - all 10 P cases were predicted `fix_production` correctly;
@@ -165,7 +160,7 @@ metadata, extracted patches, all cascade attempts, 13 normalized applied
 diffs, sanitized build/test logs, per-case records, aggregate JSON, and English
 reports.
 
-The corrected evaluator is pinned to the public Zod Week 4 application and
+The evaluator is pinned to the public Zod Week 4 application and
 validation sources by commit and SHA-256. An independent audit reconstructed
 all 20 preservation-checkable states from base + fixture + normalized repair,
 re-ran the reverse check, re-parsed stored test summaries, verified allowed

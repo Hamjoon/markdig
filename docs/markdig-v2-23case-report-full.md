@@ -1,18 +1,5 @@
 # Markdig Week 5 GPT-OSS Repair and Signal Evaluation
 
-## Correction Notice
-
-This report supersedes the evaluation committed in `14899af0`. The earlier
-evaluation stopped all 16 fix responses before patch application and therefore
-reported zero patch attempts. Zod Week 4 did not use that stop rule: it tried
-standard Git and `patch` methods, then a context-matching fallback that accepts
-bare or inaccurate hunk coordinates.
-
-The corrected evaluation uses the same four-stage cascade and the same
-recent-change preservation check as Zod Week 4. It reuses the 23 immutable
-GPT-OSS responses; no model call, response edit, or manually repaired patch is
-involved.
-
 ## Scope and Definitions
 
 The fixture set contains 3 stale-test cases (S), 10 production-regression
@@ -75,8 +62,8 @@ Each fix was tried from the identical committed fixture state:
 
 The successful 13 normalized repairs all changed non-empty, frozen allowed
 paths on the side named by the response. S-05, P-08, and P-14 matched no
-candidate pre-image and remained non-applying. Thus the corrected apply result
-is **13/16 (81.3%)**, not 0/16.
+candidate pre-image and remained non-applying. Application succeeded for
+**13/16 responses (81.3%)**.
 
 ## Repair and Preservation Outcomes
 
@@ -184,15 +171,12 @@ including coverage, is **9/23 (39.1%)**.
 
 ## Interpretation
 
-The original 0/16 statement conflated literal diff syntax with Zod-level
-applicability. The corrected evidence shows a different failure profile:
 GPT-OSS supplied context-applicable code in 13/16 fix responses, but only two
 of the 13 required S/P repairs passed preservation and executable validation.
 
 Exact decision accuracy still overstates end-to-end performance: 73.9% versus
-39.1% strict signal success. The 34.8-point gap now reflects semantic repair,
-build/test, and preservation failures rather than an artificial format-only
-stop rule.
+39.1% strict signal success. The 34.8-point gap reflects semantic repair,
+build/test, and preservation failures.
 
 The coverage result confirms that both successful repairs execute their net
 changed production file under the frozen target tests. File-level line

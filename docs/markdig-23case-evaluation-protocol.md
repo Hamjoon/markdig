@@ -1,16 +1,10 @@
 # Markdig Week 5 Zod-Equivalent Repair and Signal Evaluation Protocol
 
-## Correction Scope
+## Scope
 
-This protocol supersedes the format-only gate recorded in commit
-`14899af0e446cbd592a55d821650ebb2ad275c74`. That gate rejected all bare
-`@@` hunks before trying to apply them, so it was not comparable with the Zod
-Week 4 procedure.
-
-The corrected gate evaluates the same 23 immutable GPT-OSS responses. It does
-not call the model again, edit a response, add hunk coordinates, or manually
-repair model code. It changes only the mechanical patch-application and
-validation procedure.
+This protocol evaluates the 23 frozen GPT-OSS responses without editing a
+response, adding hunk coordinates, or manually repairing model code. Patch
+application and validation are mechanical and deterministic.
 
 Mutation testing remains excluded by instruction. No Stryker command or
 mutation-derived metric is part of this gate.

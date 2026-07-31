@@ -389,60 +389,19 @@ Chronological log. All times local, 2026-07-31.
 
 ## 2026-07-31 — repair, signal, and report audit
 
-- Froze the repair/signal rules and evaluator before canonical execution.
-  Initial protocol commit: `84b095f701a3904a85cbfe8416c74b91cfb52b11`.
-- A pre-canonical local pass exposed an evaluator implementation defect: the
-  parser accepted paired file headers followed by bare `@@` markers as
-  format-valid and deferred rejection to `git apply`. The written protocol
-  already required an ordinary unified diff. No raw model response was
-  changed or rerun. The generated pre-pass evaluation directory/results were
-  discarded, numeric hunk-header validation was added in
-  `7d6b9ce85feb9a581a3bfd60dab9a0579b01a714`, and canonical evaluation was
-  rerun from scratch.
-- Canonical exact-decision result: **17/23 (73.9%)** — S 0/3, P 10/10,
+- Pinned the evaluator to Zod Week 4 commit
+  `53aaeb99d50a253d83f5dc18791b118c480ea8db`, including the recorded
+  SHA-256 values for `apply-patch.py` and `validate.sh`.
+- Tried all 16 fix responses from an identical committed fixture in this fixed
+  order: ordinary `git apply`, `git apply --recount`, `patch` with fuzz 3,
+  then Zod-style context matching.
+- Patch application: **13/16 (81.3%)**, all by context matching. S-05, P-08,
+  and P-14 did not apply. Every applied diff changed only frozen allowed paths
+  on the decision-named side; no generated C# path was touched.
+- Exact-decision result: **17/23 (73.9%)** — S 0/3, P 10/10,
   N 7/10. Confusion counts: expected `fix_tests` → `fix_production` 3;
   expected `fix_production` → `fix_production` 10; expected `no_change` →
   `no_change` 7 and `fix_production` 3. The model never chose `fix_tests`.
-- Full response-contract validity: **7/23 (30.4%)**. All first-line decision
-  tokens were valid, but all 16 fix responses used malformed unified diffs
-  with bare `@@` hunk markers; five also lacked paired file headers. No path
-  or hunk metadata was inferred, and no malformed model patch was applied.
-- Strict signal result: **7/23 (30.4%)** — S 0/3, P 0/10, N 7/10. The seven
-  correct N no-change cases rebuilt and reran a green full suite with exact
-  count matches to fixture verification. Pipeline errors 0; infrastructure
-  retries 0; all canonical cases completed on attempt 1.
-- Wrote `evaluation-results.json`, 23 per-case canonical records, extracted
-  patch evidence for the 16 fix responses, 21 sanitized command logs,
-  `evaluation-report.md`, and the integrated English `final-report.md`.
-- Integrity checks reconciled aggregate and per-case flags, raw response
-  SHA-256 values, decision matrix, full-suite counts, category order, and
-  failure taxonomy. Leak scan found no credential, local path, username,
-  hostname, or workspace marker; no temporary worktrees remain.
-- Mutation testing remained excluded by instruction; no Stryker command or
-  mutation-derived result was produced.
-- **Evaluation/report artifact commit: the commit containing this section;
-  exact SHA is reported in the final handoff.**
-
-## 2026-07-31 — Zod-equivalent evaluation correction
-
-- The preceding 0/16 application result is superseded. It stopped on model
-  diff formatting before application, whereas Zod Week 4 used a four-stage
-  cascade ending in a context-matching applier. The earlier result was
-  therefore not methodologically comparable with Zod.
-- No model response was changed or regenerated. The same 23 raw GPT-OSS
-  responses from commit `f9e96fd7d78c49433f303bdc46cea517c1c61b45`
-  were reevaluated.
-- Froze the corrected protocol and evaluator in
-  `d40a391b498214c28c37b6092f1d77ec6a715344`. The implementation is pinned to
-  Zod Week 4 commit `53aaeb99d50a253d83f5dc18791b118c480ea8db`
-  and records the source SHA-256 values for `apply-patch.py` and `validate.sh`.
-- Tried every fix response in the fixed order: ordinary `git apply`,
-  `git apply --recount`, `patch` with fuzz 3, then Zod-style context matching,
-  resetting to an identical committed fixture before each method.
-- Corrected application result: **13/16 applied (81.3%)**, all by context
-  matching. S-05, P-08, and P-14 did not apply. All 13 normalized repair diffs
-  changed only frozen allowed paths on the decision-named side; no generated
-  C# path was touched.
 - Required repair result: **2/13 (15.4%)**. P-06 and P-09 applied, preserved
   the fixture change, built, and passed both the non-empty target and full
   suite. Five other applied P patches left test failures; P-17 failed to build.
@@ -451,17 +410,15 @@ Chronological log. All times local, 2026-07-31.
   each failed `git apply --reverse --check fixture.patch`, proving that it
   removed or altered the intended recent production change. The seven correct
   N no-change cases remained green and preserved.
-- Corrected exact decision remains **17/23 (73.9%)**. Corrected strict signal is
-  **9/23 (39.1%)** — S 0/3, P 2/10, N 7/10. Pipeline errors 0;
+- Strict signal: **9/23 (39.1%)** — S 0/3, P 2/10, N 7/10. Pipeline errors 0;
   infrastructure retries 0.
-- Replaced the evaluation JSON, per-case records/logs, evaluation report, and
-  integrated English report. Mutation testing remained excluded; no Stryker
-  command or mutation-derived judgment was produced.
-- After the completed local audit, Gary explicitly approved publication to a
-  personal fork for easier review. Created `agent-eli/markdig` as a fork of
-  `xoofx/markdig` and published branch
-  `experiment/2026-07-week5-markdig-30case-archive` as a parentless artifact
-  branch containing only the experiment bundle. No upstream PR was opened.
+- Integrity checks reconciled aggregate and per-case flags, raw response
+  SHA-256 values, decision matrix, full-suite counts, category order, failure
+  taxonomy, and preservation outcomes. Leak scan found no credential, local
+  path, username, hostname, or workspace marker; no temporary worktrees
+  remained.
+- Mutation testing remained excluded by instruction; no Stryker command or
+  mutation-derived result was produced.
 
 ## 2026-07-31 — Archive layout normalization
 

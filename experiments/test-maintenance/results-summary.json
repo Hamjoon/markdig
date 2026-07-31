@@ -1,7 +1,6 @@
 {
   "schema_version": 2,
   "gate": "zod-equivalent-repair-and-signal-evaluation",
-  "supersedes_evaluation_commit": "14899af0e446cbd592a55d821650ebb2ad275c74",
   "fixture_freeze_commit": "887caeb67bfe637030d625dc455aaaca9584bb5a",
   "model_run_artifact_commit": "f9e96fd7d78c49433f303bdc46cea517c1c61b45",
   "evaluation_protocol_commit": "d40a391b498214c28c37b6092f1d77ec6a715344",

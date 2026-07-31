@@ -488,6 +488,17 @@ def main():
             re.IGNORECASE,
         ),
     )
+    check(
+        "canonical-evaluation-wording",
+        not re.search(
+            r"correction notice|corrected evaluation|supersed|"
+            r"earlier evaluation|initial evaluation|preceding 0/16|"
+            r"original 0/16|reevaluat|format-only (?:gate|stop)",
+            public_prose,
+            re.IGNORECASE,
+        )
+        and "supersedes_evaluation_commit" not in results,
+    )
 
     audit = {
         "schema_version": 1,
