@@ -84,7 +84,7 @@
   "mutation_testing": "excluded_by_instruction",
   "results": [
     {
-      "case_id": "S-05",
+      "case_id": "S-01",
       "category": "S",
       "expected_decision": "fix_tests",
       "decision": "fix_production",
@@ -110,7 +110,7 @@
       }
     },
     {
-      "case_id": "S-07",
+      "case_id": "S-02",
       "category": "S",
       "expected_decision": "fix_tests",
       "decision": "fix_production",
@@ -138,7 +138,7 @@
       }
     },
     {
-      "case_id": "S-09",
+      "case_id": "S-03",
       "category": "S",
       "expected_decision": "fix_tests",
       "decision": "fix_production",
@@ -166,7 +166,7 @@
       }
     },
     {
-      "case_id": "P-04",
+      "case_id": "P-01",
       "category": "P",
       "expected_decision": "fix_production",
       "decision": "fix_production",
@@ -194,7 +194,7 @@
       }
     },
     {
-      "case_id": "P-06",
+      "case_id": "P-02",
       "category": "P",
       "expected_decision": "fix_production",
       "decision": "fix_production",
@@ -237,7 +237,7 @@
       }
     },
     {
-      "case_id": "P-07",
+      "case_id": "P-03",
       "category": "P",
       "expected_decision": "fix_production",
       "decision": "fix_production",
@@ -265,7 +265,7 @@
       }
     },
     {
-      "case_id": "P-08",
+      "case_id": "P-04",
       "category": "P",
       "expected_decision": "fix_production",
       "decision": "fix_production",
@@ -291,7 +291,7 @@
       }
     },
     {
-      "case_id": "P-09",
+      "case_id": "P-05",
       "category": "P",
       "expected_decision": "fix_production",
       "decision": "fix_production",
@@ -340,7 +340,7 @@
       }
     },
     {
-      "case_id": "P-11",
+      "case_id": "P-06",
       "category": "P",
       "expected_decision": "fix_production",
       "decision": "fix_production",
@@ -368,7 +368,7 @@
       }
     },
     {
-      "case_id": "P-14",
+      "case_id": "P-07",
       "category": "P",
       "expected_decision": "fix_production",
       "decision": "fix_production",
@@ -394,7 +394,7 @@
       }
     },
     {
-      "case_id": "P-15",
+      "case_id": "P-08",
       "category": "P",
       "expected_decision": "fix_production",
       "decision": "fix_production",
@@ -422,7 +422,7 @@
       }
     },
     {
-      "case_id": "P-16",
+      "case_id": "P-09",
       "category": "P",
       "expected_decision": "fix_production",
       "decision": "fix_production",
@@ -450,7 +450,7 @@
       }
     },
     {
-      "case_id": "P-17",
+      "case_id": "P-10",
       "category": "P",
       "expected_decision": "fix_production",
       "decision": "fix_production",
@@ -770,7 +770,7 @@
     "mutation_testing": "excluded-by-instruction",
     "results": [
       {
-        "case_id": "S-05",
+        "case_id": "S-01",
         "category": "S",
         "applicable": false,
         "reason": "repair-target-misclassified",
@@ -778,7 +778,7 @@
         "production_files": []
       },
       {
-        "case_id": "S-07",
+        "case_id": "S-02",
         "category": "S",
         "applicable": false,
         "reason": "repair-target-misclassified",
@@ -786,7 +786,7 @@
         "production_files": []
       },
       {
-        "case_id": "S-09",
+        "case_id": "S-03",
         "category": "S",
         "applicable": false,
         "reason": "repair-target-misclassified",
@@ -794,7 +794,7 @@
         "production_files": []
       },
       {
-        "case_id": "P-04",
+        "case_id": "P-01",
         "category": "P",
         "applicable": false,
         "reason": "repair-incomplete",
@@ -802,7 +802,7 @@
         "production_files": []
       },
       {
-        "case_id": "P-06",
+        "case_id": "P-02",
         "category": "P",
         "applicable": true,
         "reason": null,
@@ -825,7 +825,7 @@
         "artifact": "coverage/coverage-summary.json"
       },
       {
-        "case_id": "P-07",
+        "case_id": "P-03",
         "category": "P",
         "applicable": false,
         "reason": "repair-incomplete",
@@ -833,7 +833,7 @@
         "production_files": []
       },
       {
-        "case_id": "P-08",
+        "case_id": "P-04",
         "category": "P",
         "applicable": false,
         "reason": "repair-incomplete",
@@ -841,7 +841,7 @@
         "production_files": []
       },
       {
-        "case_id": "P-09",
+        "case_id": "P-05",
         "category": "P",
         "applicable": true,
         "reason": null,
@@ -870,7 +870,7 @@
         "artifact": "coverage/coverage-summary.json"
       },
       {
-        "case_id": "P-11",
+        "case_id": "P-06",
         "category": "P",
         "applicable": false,
         "reason": "repair-incomplete",
@@ -878,7 +878,7 @@
         "production_files": []
       },
       {
-        "case_id": "P-14",
+        "case_id": "P-07",
         "category": "P",
         "applicable": false,
         "reason": "repair-incomplete",
@@ -886,7 +886,7 @@
         "production_files": []
       },
       {
-        "case_id": "P-15",
+        "case_id": "P-08",
         "category": "P",
         "applicable": false,
         "reason": "repair-incomplete",
@@ -894,7 +894,7 @@
         "production_files": []
       },
       {
-        "case_id": "P-16",
+        "case_id": "P-09",
         "category": "P",
         "applicable": false,
         "reason": "repair-incomplete",
@@ -902,7 +902,7 @@
         "production_files": []
       },
       {
-        "case_id": "P-17",
+        "case_id": "P-10",
         "category": "P",
         "applicable": false,
         "reason": "repair-incomplete",

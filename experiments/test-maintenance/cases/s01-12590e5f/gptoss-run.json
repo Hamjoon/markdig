@@ -1,0 +1,21 @@
+{
+  "case_id": "S-01",
+  "status": "response_received",
+  "model_requested": "openai/gpt-oss-120b",
+  "model_returned": "openai/gpt-oss-120b",
+  "temperature": 0,
+  "response_id": "gen-1785501758-usqpqjC7LPdpcqM8pQB5",
+  "created": 1785501758,
+  "finish_reason": "stop",
+  "attempt_count": 1,
+  "attempts": [
+    {
+      "attempt": 1,
+      "result": "response_received"
+    }
+  ],
+  "elapsed_seconds": 46.797,
+  "prompt_sha256": "97d8dab469ceed1898f38f665f5a1483d506c10e7d101c08b79181d267b54ef9",
+  "response_sha256": "6d79c72139e6b4088a010ede1b3e347d21157253a8dd3dad718871c63fedcebe",
+  "first_line": "DECISION: fix_production"
+}

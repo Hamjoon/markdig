@@ -44,14 +44,14 @@ CORE_JSON_FILES = {
     "screening_queues.json",
 }
 COVERAGE_EXPECTED = {
-    "P-06": {
+    "P-02": {
         "target": {"failed": 0, "passed": 4, "skipped": 0, "total": 4},
         "file": "src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs",
         "lines_valid": 115,
         "lines_covered": 108,
         "excluded": [],
     },
-    "P-09": {
+    "P-05": {
         "target": {"failed": 0, "passed": 46, "skipped": 0, "total": 46},
         "file": "src/Markdig/Parsers/Inlines/CodeInlineParser.cs",
         "lines_valid": 66,

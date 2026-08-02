@@ -466,3 +466,33 @@ Chronological log. All times local, 2026-07-31.
 - Archived only sanitized per-case summaries and logs. No raw Cobertura XML,
   `.coverage` file, mutation result, model retry, or new model response was
   produced.
+
+## 2026-08-02 — Case ID renumbering to acceptance order
+
+- Renamed the 23 frozen case IDs from screening-queue positions to
+  per-category acceptance order, matching the Zod Week 4 archive convention:
+  the k-th accepted candidate in a category becomes `C-0k`.
+- Mapping: S-05→S-01, S-07→S-02, S-09→S-03; P-04→P-01, P-06→P-02, P-07→P-03,
+  P-08→P-04, P-09→P-05, P-11→P-06, P-14→P-07, P-15→P-08, P-16→P-09,
+  P-17→P-10. N-01…N-10 are unchanged because queue positions 1–10 were all
+  accepted without rejection.
+- Renamed the case packet directories and updated identifiers in
+  `cases.json` (each case now also retains its original position in a
+  `queue_id` field), per-case `input.json`, `gptoss-run.json`, and
+  `result.json`, the two coverage summaries and sanitized coverage-log paths,
+  `results-summary.json`, the fixture-verification records in
+  `metadata/experiment.json`, `audit.py` coverage expectations, and the
+  summary, full, screening, and verification reports.
+- Screening records keep queue-based identifiers: `screening_queues.json` is
+  byte-identical, the screening results in `metadata/experiment.json` are
+  unchanged, and earlier entries in this stage log retain the IDs that were
+  current when they were written. The mapping above translates them.
+- No fixture, prompt, model response, patch, test log, metric, or verdict
+  changed; this is an identifier-and-path-only change. The immutable
+  prompt/response hash audit and the full `audit.py` reconciliation pass
+  after renumbering.
+- Updated recorded digests: `cases.json` SHA-256 is now
+  `f240da2c1a9107ef65f59905484bb07f7b2acbe4d12aabdf6c77d25f4e50538d`;
+  `metadata/experiment.json` SHA-256 is now
+  `fc09a2b8bad969c05cd74fade4a2078e98e6189cbd75c8d1d1e8ddaff4fb5855`.
+  Digests quoted in earlier entries describe the pre-renumbering states.

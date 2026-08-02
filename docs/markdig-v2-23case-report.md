@@ -95,24 +95,24 @@ tree that removed part of the recent change.
 
 | ID | Base | Recent change | DECISION | Repair |
 |---|---|---|---|---|
-| [S-05](../experiments/test-maintenance/cases/s05-12590e5f/) | [8c01cf05](https://github.com/xoofx/markdig/commit/8c01cf05) | [12590e5f](https://github.com/xoofx/markdig/commit/12590e5f) link-helper ASCII normalization | fix_production ❌ | no |
-| [S-07](../experiments/test-maintenance/cases/s07-5365879a/) | [a9bd7c6a](https://github.com/xoofx/markdig/commit/a9bd7c6a) | [5365879a](https://github.com/xoofx/markdig/commit/5365879a) abbreviation emphasis resolution | fix_production ❌ | no |
-| [S-09](../experiments/test-maintenance/cases/s09-148fd08b/) | [c488a274](https://github.com/xoofx/markdig/commit/c488a274) | [148fd08b](https://github.com/xoofx/markdig/commit/148fd08b) span validation/update APIs | fix_production ❌ | no |
+| [S-01](../experiments/test-maintenance/cases/s01-12590e5f/) | [8c01cf05](https://github.com/xoofx/markdig/commit/8c01cf05) | [12590e5f](https://github.com/xoofx/markdig/commit/12590e5f) link-helper ASCII normalization | fix_production ❌ | no |
+| [S-02](../experiments/test-maintenance/cases/s02-5365879a/) | [a9bd7c6a](https://github.com/xoofx/markdig/commit/a9bd7c6a) | [5365879a](https://github.com/xoofx/markdig/commit/5365879a) abbreviation emphasis resolution | fix_production ❌ | no |
+| [S-03](../experiments/test-maintenance/cases/s03-148fd08b/) | [c488a274](https://github.com/xoofx/markdig/commit/c488a274) | [148fd08b](https://github.com/xoofx/markdig/commit/148fd08b) span validation/update APIs | fix_production ❌ | no |
 
 ### Case Matrix — production-regression cases (expected DECISION: fix_production)
 
 | ID | Base | Recent change | DECISION | Repair |
 |---|---|---|---|---|
-| [P-04](../experiments/test-maintenance/cases/p04-d548b82b/) | [7ff8db90](https://github.com/xoofx/markdig/commit/7ff8db90) | [d548b82b](https://github.com/xoofx/markdig/commit/d548b82b) table without preceding blank line | fix_production ✅ | no |
-| [P-06](../experiments/test-maintenance/cases/p06-781d9b53/) | [54357022](https://github.com/xoofx/markdig/commit/54357022) | [781d9b53](https://github.com/xoofx/markdig/commit/781d9b53) block-attribute leading newline | fix_production ✅ | **yes** |
-| [P-07](../experiments/test-maintenance/cases/p07-fcbf8170/) | [5dca4149](https://github.com/xoofx/markdig/commit/5dca4149) | [fcbf8170](https://github.com/xoofx/markdig/commit/fcbf8170) CJK emphasis after entity newline | fix_production ✅ | no |
-| [P-08](../experiments/test-maintenance/cases/p08-5a3c2060/) | [682c7272](https://github.com/xoofx/markdig/commit/682c7272) | [5a3c2060](https://github.com/xoofx/markdig/commit/5a3c2060) indented and zero blocks | fix_production ✅ | no |
-| [P-09](../experiments/test-maintenance/cases/p09-800235ba/) | [d5f8a809](https://github.com/xoofx/markdig/commit/d5f8a809) | [800235ba](https://github.com/xoofx/markdig/commit/800235ba) CodeInlineParser bounds handling | fix_production ✅ | **yes** |
-| [P-11](../experiments/test-maintenance/cases/p11-0f98267a/) | [fcbf8170](https://github.com/xoofx/markdig/commit/fcbf8170) | [0f98267a](https://github.com/xoofx/markdig/commit/0f98267a) pipe-table unmatched subscript | fix_production ✅ | no |
-| [P-14](../experiments/test-maintenance/cases/p14-b15cf582/) | [61e9be29](https://github.com/xoofx/markdig/commit/61e9be29) | [b15cf582](https://github.com/xoofx/markdig/commit/b15cf582) HTML `search` tag support | fix_production ✅ | no |
-| [P-15](../experiments/test-maintenance/cases/p15-b8364135/) | [0f98267a](https://github.com/xoofx/markdig/commit/0f98267a) | [b8364135](https://github.com/xoofx/markdig/commit/b8364135) autolink URL roundtrip | fix_production ✅ | no |
-| [P-16](../experiments/test-maintenance/cases/p16-d6e88f16/) | [03bdf600](https://github.com/xoofx/markdig/commit/03bdf600) | [d6e88f16](https://github.com/xoofx/markdig/commit/d6e88f16) pipe table after leading paragraph | fix_production ✅ | no |
-| [P-17](../experiments/test-maintenance/cases/p17-bc4e3990/) | [9dffce52](https://github.com/xoofx/markdig/commit/9dffce52) | [bc4e3990](https://github.com/xoofx/markdig/commit/bc4e3990) blockquote ordered-list parsing | fix_production ✅ | no |
+| [P-01](../experiments/test-maintenance/cases/p01-d548b82b/) | [7ff8db90](https://github.com/xoofx/markdig/commit/7ff8db90) | [d548b82b](https://github.com/xoofx/markdig/commit/d548b82b) table without preceding blank line | fix_production ✅ | no |
+| [P-02](../experiments/test-maintenance/cases/p02-781d9b53/) | [54357022](https://github.com/xoofx/markdig/commit/54357022) | [781d9b53](https://github.com/xoofx/markdig/commit/781d9b53) block-attribute leading newline | fix_production ✅ | **yes** |
+| [P-03](../experiments/test-maintenance/cases/p03-fcbf8170/) | [5dca4149](https://github.com/xoofx/markdig/commit/5dca4149) | [fcbf8170](https://github.com/xoofx/markdig/commit/fcbf8170) CJK emphasis after entity newline | fix_production ✅ | no |
+| [P-04](../experiments/test-maintenance/cases/p04-5a3c2060/) | [682c7272](https://github.com/xoofx/markdig/commit/682c7272) | [5a3c2060](https://github.com/xoofx/markdig/commit/5a3c2060) indented and zero blocks | fix_production ✅ | no |
+| [P-05](../experiments/test-maintenance/cases/p05-800235ba/) | [d5f8a809](https://github.com/xoofx/markdig/commit/d5f8a809) | [800235ba](https://github.com/xoofx/markdig/commit/800235ba) CodeInlineParser bounds handling | fix_production ✅ | **yes** |
+| [P-06](../experiments/test-maintenance/cases/p06-0f98267a/) | [fcbf8170](https://github.com/xoofx/markdig/commit/fcbf8170) | [0f98267a](https://github.com/xoofx/markdig/commit/0f98267a) pipe-table unmatched subscript | fix_production ✅ | no |
+| [P-07](../experiments/test-maintenance/cases/p07-b15cf582/) | [61e9be29](https://github.com/xoofx/markdig/commit/61e9be29) | [b15cf582](https://github.com/xoofx/markdig/commit/b15cf582) HTML `search` tag support | fix_production ✅ | no |
+| [P-08](../experiments/test-maintenance/cases/p08-b8364135/) | [0f98267a](https://github.com/xoofx/markdig/commit/0f98267a) | [b8364135](https://github.com/xoofx/markdig/commit/b8364135) autolink URL roundtrip | fix_production ✅ | no |
+| [P-09](../experiments/test-maintenance/cases/p09-d6e88f16/) | [03bdf600](https://github.com/xoofx/markdig/commit/03bdf600) | [d6e88f16](https://github.com/xoofx/markdig/commit/d6e88f16) pipe table after leading paragraph | fix_production ✅ | no |
+| [P-10](../experiments/test-maintenance/cases/p10-bc4e3990/) | [9dffce52](https://github.com/xoofx/markdig/commit/9dffce52) | [bc4e3990](https://github.com/xoofx/markdig/commit/bc4e3990) blockquote ordered-list parsing | fix_production ✅ | no |
 
 ### Case Matrix — normal cases (expected DECISION: no_change)
 
@@ -151,12 +151,12 @@ was parsed by a byte-identical copy of Week 4 `parse-cobertura.py`.
 
 | Case | Frozen target | Net changed production file | Covered lines | Result |
 |---|---:|---|---:|---|
-| P-06 | 4/4 | `GenericAttributesParser.cs` | 108/115 (93.91%) | signal preserved |
-| P-09 | 46/46 | `CodeInlineParser.cs` | 63/66 (95.45%) | signal preserved |
+| P-02 | 4/4 | `GenericAttributesParser.cs` | 108/115 (93.91%) | signal preserved |
+| P-05 | 46/46 | `CodeInlineParser.cs` | 63/66 (95.45%) | signal preserved |
 
 The production scope follows Zod's validated-tree rule: files are qualified
 only when they remain in the net production diff from the frozen base after
-the fixture and model repair are applied. P-09's upstream candidate
+the fixture and model repair are applied. P-05's upstream candidate
 `SpanExtensions.cs` was recorded but excluded because it had no such net diff;
 under the frozen `net9.0` target its relevant polyfill branch is inactive.
 

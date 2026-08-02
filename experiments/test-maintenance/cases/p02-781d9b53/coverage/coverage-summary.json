@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "case_id": "P-02",
+  "category": "P",
+  "repair_success": true,
+  "target_filter": "FullyQualifiedName~TestExtensionsGenericAttributes|FullyQualifiedName~element|FullyQualifiedName~property",
+  "target_validation": {
+    "status": 0,
+    "counts": {
+      "failed": 0,
+      "passed": 4,
+      "skipped": 0,
+      "total": 4
+    }
+  },
+  "preservation_rechecked": true,
+  "coverage_collector": {
+    "name": "Microsoft.NET.Test.Sdk built-in Code Coverage collector",
+    "command": "dotnet test --collect:Code Coverage;Format=cobertura",
+    "output_format": "cobertura"
+  },
+  "coverage_parser": {
+    "path": "scripts/parse-cobertura.py",
+    "sha256": "622740d5aabcbd282d6680230cfa2cc3bcde5a41ad8006d530a93507453a6e18"
+  },
+  "production_scope": {
+    "basis": "net validated-tree diff from frozen base",
+    "candidate_production_files": [
+      "src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs"
+    ],
+    "excluded_candidate_production_files": []
+  },
+  "production_files": [
+    {
+      "file": "src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs",
+      "lines_covered": 108,
+      "lines_valid": 115,
+      "covered": true
+    }
+  ],
+  "all_production_files_available": true,
+  "all_production_files_covered": true,
+  "coverage_verdict": "signal_preserved",
+  "markdig_week4_reference": {
+    "commit": "caf6195e3c3a25b3b153329cb29ae7270bce5b57",
+    "signal_sha256": "acdf6b3ca65f8cf3d9ad45e4ddedfea7c7f0d504c07e3da857e99db0a75273cf",
+    "parse_cobertura_sha256": "622740d5aabcbd282d6680230cfa2cc3bcde5a41ad8006d530a93507453a6e18"
+  }
+}

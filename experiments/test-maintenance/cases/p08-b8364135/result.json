@@ -1,0 +1,133 @@
+{
+  "case_id": "P-08",
+  "category": "P",
+  "expected_decision": "fix_production",
+  "attempt": 1,
+  "status": "evaluated",
+  "reason": "executable-validation-failed",
+  "response": {
+    "first_line": "DECISION: fix_production",
+    "decision": "fix_production",
+    "decision_line_valid": true,
+    "body_empty": false,
+    "patch_present": true,
+    "raw_unified_diff_conformant": false,
+    "header_paths_safe": true,
+    "header_scope_valid": true,
+    "header_paths": [
+      "src/Markdig/Renderers/Roundtrip/Inlines/LinkInlineRenderer.cs"
+    ],
+    "parse_reason": null,
+    "response_sha256": "4045c3d3fc694ace92edb8f829ef1cc1796949d2b08a0af640c6591302f93c37",
+    "extracted_patch_sha256": "0a90d33e188f96ba3243142670ec744eea85cee540798b7a1a835ac7ce5947d9"
+  },
+  "fixture": {
+    "base_sha": "0f98267a8519ee6563dceae5ee31db3d60d2844f",
+    "upstream_sha": "b83641351f67e2c2f240167f9314aeb354714dad",
+    "tfm": "net10.0",
+    "target_filter": "FullyQualifiedName~TestAutoLinkInline",
+    "constructed": true,
+    "committed": true
+  },
+  "model_patch": {
+    "apply_attempted": true,
+    "apply_attempts": [
+      {
+        "method": "git-apply",
+        "rc": 128
+      },
+      {
+        "method": "git-apply-recount",
+        "rc": 128
+      },
+      {
+        "method": "patch-fuzz",
+        "rc": 2
+      },
+      {
+        "method": "context-match",
+        "rc": 0
+      }
+    ],
+    "apply_method": "context-match",
+    "apply_succeeded": true,
+    "effective_change": true,
+    "actual_paths": [
+      "src/Markdig/Renderers/Roundtrip/Inlines/LinkInlineRenderer.cs"
+    ],
+    "scope_valid": true,
+    "decision_side_valid": true,
+    "applied_diff": "applied-repair.diff",
+    "applied_diff_sha256": "8ad09d8f7804a3514096d87e0855f9b7c62fee6173df0a773ac1d83b497debe0"
+  },
+  "preservation": {
+    "checked": true,
+    "passed": true,
+    "rc": 0,
+    "method": "git apply --reverse --check fixture.patch"
+  },
+  "runs": [
+    {
+      "kind": "build",
+      "label": "after-model-action",
+      "command": "dotnet build src/Markdig.Tests/Markdig.Tests.csproj -c Release -f net10.0 -v q",
+      "rc": 0
+    },
+    {
+      "kind": "test",
+      "label": "target-after-model-action",
+      "command": "dotnet test src/Markdig.Tests/Markdig.Tests.csproj -c Release -f net10.0 --no-build --filter FullyQualifiedName~TestAutoLinkInline",
+      "filter": "FullyQualifiedName~TestAutoLinkInline",
+      "rc": 1,
+      "counts": {
+        "failed": 3,
+        "passed": 9,
+        "skipped": 0,
+        "total": 12
+      },
+      "failed_tests": [
+        "AutoLinksKeepUrlWhenRoundTripped(\"http://example.com/\",\"[http://example.com/](http://example.com/)\")",
+        "AutoLinksKeepUrlWhenRoundTripped(\"mailto:user@example.com\",\"[user@example.com](mailto:user@example.com)\")",
+        "AutoLinksKeepUrlWhenRoundTripped(\"www.example.com\",\"[www.example.com](http://www.example.com)\")"
+      ]
+    },
+    {
+      "kind": "test",
+      "label": "full-suite-after-model-action",
+      "command": "dotnet test src/Markdig.Tests/Markdig.Tests.csproj -c Release -f net10.0 --no-build",
+      "filter": null,
+      "rc": 1,
+      "counts": {
+        "failed": 3,
+        "passed": 3775,
+        "skipped": 1,
+        "total": 3779
+      },
+      "failed_tests": [
+        "AutoLinksKeepUrlWhenRoundTripped(\"http://example.com/\",\"[http://example.com/](http://example.com/)\")",
+        "AutoLinksKeepUrlWhenRoundTripped(\"mailto:user@example.com\",\"[user@example.com](mailto:user@example.com)\")",
+        "AutoLinksKeepUrlWhenRoundTripped(\"www.example.com\",\"[www.example.com](http://www.example.com)\")"
+      ]
+    }
+  ],
+  "decision_correct": true,
+  "response_contract_valid": true,
+  "behavior_validation_pass": false,
+  "repair_success": false,
+  "strict_signal_pass": false,
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "evaluated",
+      "reason": "executable-validation-failed",
+      "record": "result.json"
+    }
+  ],
+  "archive_case_id": "p08-b8364135",
+  "coverage": {
+    "applicable": false,
+    "reason": "repair-incomplete",
+    "coverage_verdict": "partial_repair",
+    "production_files": []
+  }
+}

@@ -43,35 +43,40 @@ satisfied the pre-registered executable stale-test condition.
 
 ## Accepted Fixture Set
 
-| Case | Category | Upstream | Base | Subject |
-|---|---|---|---|---|
-| S-05 | S | `12590e5fbe17` | `8c01cf054971` | feat(link-helper): improve ASCII normalization handling (#911) |
-| S-07 | S | `5365879a23c9` | `a9bd7c6a5e1a` | Fix AbbreviationExtension corrupting emphasis/bold/italic resolution (#935) (#936) |
-| S-09 | S | `148fd08b1d56` | `c488a2749719` | Add span validation/update APIs and tests |
-| P-04 | P | `d548b82bcd26` | `7ff8db901659` | Add support for a table without an extra new line before it |
-| P-06 | P | `781d9b536598` | `543570224e94` | Remove leading newline in block attributes (#896) |
-| P-07 | P | `fcbf8170633e` | `5dca4149a518` | Fix CJK emphasis after HTML entity newlines (#941) |
-| P-08 | P | `5a3c20607662` | `682c727288de` | Fixes #878: render indent and 0 blocks |
-| P-09 | P | `800235ba7ab7` | `d5f8a809a00d` | Fix IndexOutOfRangeException in CodeInlineParser (#900) |
-| P-11 | P | `0f98267a8519` | `fcbf8170633e` | Fix pipe table cells with unmatched subscript (#932) |
-| P-14 | P | `b15cf582a538` | `61e9be290b1d` | Add 'search' HTML tag support |
-| P-15 | P | `b83641351f67` | `0f98267a8519` | Fix roundtrip autolink URLs (#919) |
-| P-16 | P | `d6e88f16f7d2` | `03bdf6008631` | Fix pipe table parsing with a leading paragraph (#905) |
-| P-17 | P | `bc4e399087e1` | `9dffce52b610` | Fix blockquote ordered list parsing (#887) |
-| N-01 | N | `adfcf4252964` | `dab1ca548373` | Use FrozenDictionary in a couple places |
-| N-02 | N | `8269ff1af544` | `0e6d0f4cb24c` | Improve AutoLinkParser overhead for false-positive opening chars |
-| N-03 | N | `ec2eef25b2a7` | `6261660d377e` | Remove HtmlHelper.UnescapeNullable |
-| N-04 | N | `aab5543cb5b3` | `2e1d741aaf15` | Code cleanup |
-| N-05 | N | `14406bc60d51` | `2aa6780a3071` | Fixes issue #845 |
-| N-06 | N | `148278417f5a` | `88c5b5cb410f` | Added error throwing when stack is empty and PopIndent() is called |
-| N-07 | N | `c488a2749719` | `58e8217ddb0d` | Document parser authoring contracts and migration risks |
-| N-08 | N | `90c73b775453` | `ee403ce28f1a` | Update src/Markdig/Helpers/LinkHelper.cs |
-| N-09 | N | `3e0c72f0430c` | `d1233ffe66da` | Fixes exception in DefinitionListParser.GetCurrentDefinitionList() |
-| N-10 | N | `6261660d377e` | `6d1fa96389c8` | Explain why not to normalize link title into empty strings |
+Case IDs are assigned in acceptance order within each category, following the
+Zod Week 4 archive convention. The Queue column preserves each candidate's
+position in the frozen seeded screening queue; `cases.json` retains the same
+mapping in its `queue_id` field.
+
+| Case | Queue | Category | Upstream | Base | Subject |
+|---|---|---|---|---|---|
+| S-01 | S-05 | S | `12590e5fbe17` | `8c01cf054971` | feat(link-helper): improve ASCII normalization handling (#911) |
+| S-02 | S-07 | S | `5365879a23c9` | `a9bd7c6a5e1a` | Fix AbbreviationExtension corrupting emphasis/bold/italic resolution (#935) (#936) |
+| S-03 | S-09 | S | `148fd08b1d56` | `c488a2749719` | Add span validation/update APIs and tests |
+| P-01 | P-04 | P | `d548b82bcd26` | `7ff8db901659` | Add support for a table without an extra new line before it |
+| P-02 | P-06 | P | `781d9b536598` | `543570224e94` | Remove leading newline in block attributes (#896) |
+| P-03 | P-07 | P | `fcbf8170633e` | `5dca4149a518` | Fix CJK emphasis after HTML entity newlines (#941) |
+| P-04 | P-08 | P | `5a3c20607662` | `682c727288de` | Fixes #878: render indent and 0 blocks |
+| P-05 | P-09 | P | `800235ba7ab7` | `d5f8a809a00d` | Fix IndexOutOfRangeException in CodeInlineParser (#900) |
+| P-06 | P-11 | P | `0f98267a8519` | `fcbf8170633e` | Fix pipe table cells with unmatched subscript (#932) |
+| P-07 | P-14 | P | `b15cf582a538` | `61e9be290b1d` | Add 'search' HTML tag support |
+| P-08 | P-15 | P | `b83641351f67` | `0f98267a8519` | Fix roundtrip autolink URLs (#919) |
+| P-09 | P-16 | P | `d6e88f16f7d2` | `03bdf6008631` | Fix pipe table parsing with a leading paragraph (#905) |
+| P-10 | P-17 | P | `bc4e399087e1` | `9dffce52b610` | Fix blockquote ordered list parsing (#887) |
+| N-01 | N-01 | N | `adfcf4252964` | `dab1ca548373` | Use FrozenDictionary in a couple places |
+| N-02 | N-02 | N | `8269ff1af544` | `0e6d0f4cb24c` | Improve AutoLinkParser overhead for false-positive opening chars |
+| N-03 | N-03 | N | `ec2eef25b2a7` | `6261660d377e` | Remove HtmlHelper.UnescapeNullable |
+| N-04 | N-04 | N | `aab5543cb5b3` | `2e1d741aaf15` | Code cleanup |
+| N-05 | N-05 | N | `14406bc60d51` | `2aa6780a3071` | Fixes issue #845 |
+| N-06 | N-06 | N | `148278417f5a` | `88c5b5cb410f` | Added error throwing when stack is empty and PopIndent() is called |
+| N-07 | N-07 | N | `c488a2749719` | `58e8217ddb0d` | Document parser authoring contracts and migration risks |
+| N-08 | N-08 | N | `90c73b775453` | `ee403ce28f1a` | Update src/Markdig/Helpers/LinkHelper.cs |
+| N-09 | N-09 | N | `3e0c72f0430c` | `d1233ffe66da` | Fixes exception in DefinitionListParser.GetCurrentDefinitionList() |
+| N-10 | N-10 | N | `6261660d377e` | `6d1fa96389c8` | Explain why not to normalize link title into empty strings |
 
 The machine-readable source of truth is
 `experiments/test-maintenance/cases.json`, whose SHA-256 is
-`3b572f56a22b141a1387a15447598d1fc013ad1628b7ae355e27147318a382a1`.
+`f240da2c1a9107ef65f59905484bb07f7b2acbe4d12aabdf6c77d25f4e50538d`.
 The complete mining, screening, and fresh fixture-verification records are
 grouped in `experiments/test-maintenance/metadata/experiment.json`.
 

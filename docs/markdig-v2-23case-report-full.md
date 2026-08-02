@@ -61,7 +61,7 @@ Each fix was tried from the identical committed fixture state:
 4. Zod-style context matching: 13/16
 
 The successful 13 normalized repairs all changed non-empty, frozen allowed
-paths on the side named by the response. S-05, P-08, and P-14 matched no
+paths on the side named by the response. S-01, P-04, and P-07 matched no
 candidate pre-image and remained non-applying. Application succeeded for
 **13/16 responses (81.3%)**.
 
@@ -69,25 +69,25 @@ candidate pre-image and remained non-applying. Application succeeded for
 
 Two required P repairs succeeded end to end:
 
-- **P-06**: context-applied to
+- **P-02**: context-applied to
   `GenericAttributesParser.cs`; target 4/4 passed; full suite 3,551 passed,
   1 skipped, 0 failed; recent change preserved.
-- **P-09**: context-applied to `CodeInlineParser.cs`; target 46/46 passed;
+- **P-05**: context-applied to `CodeInlineParser.cs`; target 46/46 passed;
   full suite 3,552 passed, 1 skipped, 0 failed; recent change preserved.
 
 The other required fixes failed as follows:
 
-- S-05, P-08, P-14: patch did not apply after all four methods.
-- S-07, S-09, P-17: context application succeeded, but the resulting project
-  did not build. S-07 and S-09 also failed the preservation check.
-- P-04: target 9 failed; full suite 43 failed.
-- P-07: target 3 failed; full suite 5 failed.
-- P-11: target 1 failed; full suite 10 failed.
-- P-15: target 3 failed; full suite 3 failed.
-- P-16: target 2 failed; full suite 2 failed.
+- S-01, P-04, P-07: patch did not apply after all four methods.
+- S-02, S-03, P-10: context application succeeded, but the resulting project
+  did not build. S-02 and S-03 also failed the preservation check.
+- P-01: target 9 failed; full suite 43 failed.
+- P-03: target 3 failed; full suite 5 failed.
+- P-06: target 1 failed; full suite 10 failed.
+- P-08: target 3 failed; full suite 3 failed.
+- P-09: target 2 failed; full suite 2 failed.
 
 All eight applied P patches preserved the recent test-oracle change. Only
-P-06 and P-09 also restored both required test scopes, producing **2/13
+P-02 and P-05 also restored both required test scopes, producing **2/13
 (15.4%) successful required repairs**.
 
 The three N false-positive patches (N-02, N-06, N-09) applied, built, and left
@@ -109,12 +109,12 @@ Cobertura XML remained temporary because it contains local source paths.
 
 | Case | Target recheck | Net production scope | Line coverage | Coverage verdict |
 |---|---:|---|---:|---|
-| P-06 | 4/4 | `src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs` | 108/115 (93.91%) | signal preserved |
-| P-09 | 46/46 | `src/Markdig/Parsers/Inlines/CodeInlineParser.cs` | 63/66 (95.45%) | signal preserved |
+| P-02 | 4/4 | `src/Markdig/Extensions/GenericAttributes/GenericAttributesParser.cs` | 108/115 (93.91%) | signal preserved |
+| P-05 | 46/46 | `src/Markdig/Parsers/Inlines/CodeInlineParser.cs` | 63/66 (95.45%) | signal preserved |
 
 The scope is derived from the validated repaired tree's net production diff
 against the frozen base, matching Zod's `compute-mutate.py` semantics. For
-P-09, `src/Markdig/Polyfills/SpanExtensions.cs` was a frozen upstream
+P-05, `src/Markdig/Polyfills/SpanExtensions.cs` was a frozen upstream
 candidate but had no net diff after the model's alternative repair and is
 inactive under the frozen `net9.0` target. It is retained in the summary as an
 excluded candidate rather than treated as a missing covered file.
@@ -127,19 +127,19 @@ including coverage, is **9/23 (39.1%)**.
 
 | Case | Expected | Predicted | Decision correct | Apply method | Behavior valid | Preserved | Repair success | Strict signal | Outcome |
 |---|---|---|---:|---|---:|---:|---:|---:|---|
-| S-05 | fix_tests | fix_production | no | n/a | no | no | no | no | model-patch-does-not-apply |
-| S-07 | fix_tests | fix_production | no | context-match | no | no | no | no | build-failed-after-model-action |
-| S-09 | fix_tests | fix_production | no | context-match | no | no | no | no | build-failed-after-model-action |
-| P-04 | fix_production | fix_production | yes | context-match | no | yes | no | no | executable-validation-failed |
-| P-06 | fix_production | fix_production | yes | context-match | yes | yes | yes | yes | signal-pass |
-| P-07 | fix_production | fix_production | yes | context-match | no | yes | no | no | executable-validation-failed |
-| P-08 | fix_production | fix_production | yes | n/a | no | no | no | no | model-patch-does-not-apply |
-| P-09 | fix_production | fix_production | yes | context-match | yes | yes | yes | yes | signal-pass |
-| P-11 | fix_production | fix_production | yes | context-match | no | yes | no | no | executable-validation-failed |
-| P-14 | fix_production | fix_production | yes | n/a | no | no | no | no | model-patch-does-not-apply |
-| P-15 | fix_production | fix_production | yes | context-match | no | yes | no | no | executable-validation-failed |
-| P-16 | fix_production | fix_production | yes | context-match | no | yes | no | no | executable-validation-failed |
-| P-17 | fix_production | fix_production | yes | context-match | no | yes | no | no | build-failed-after-model-action |
+| S-01 | fix_tests | fix_production | no | n/a | no | no | no | no | model-patch-does-not-apply |
+| S-02 | fix_tests | fix_production | no | context-match | no | no | no | no | build-failed-after-model-action |
+| S-03 | fix_tests | fix_production | no | context-match | no | no | no | no | build-failed-after-model-action |
+| P-01 | fix_production | fix_production | yes | context-match | no | yes | no | no | executable-validation-failed |
+| P-02 | fix_production | fix_production | yes | context-match | yes | yes | yes | yes | signal-pass |
+| P-03 | fix_production | fix_production | yes | context-match | no | yes | no | no | executable-validation-failed |
+| P-04 | fix_production | fix_production | yes | n/a | no | no | no | no | model-patch-does-not-apply |
+| P-05 | fix_production | fix_production | yes | context-match | yes | yes | yes | yes | signal-pass |
+| P-06 | fix_production | fix_production | yes | context-match | no | yes | no | no | executable-validation-failed |
+| P-07 | fix_production | fix_production | yes | n/a | no | no | no | no | model-patch-does-not-apply |
+| P-08 | fix_production | fix_production | yes | context-match | no | yes | no | no | executable-validation-failed |
+| P-09 | fix_production | fix_production | yes | context-match | no | yes | no | no | executable-validation-failed |
+| P-10 | fix_production | fix_production | yes | context-match | no | yes | no | no | build-failed-after-model-action |
 | N-01 | no_change | no_change | yes | n/a | yes | yes | no | yes | signal-pass |
 | N-02 | no_change | fix_production | no | context-match | yes | no | no | no | recent-change-not-preserved |
 | N-03 | no_change | no_change | yes | n/a | yes | yes | no | yes | signal-pass |

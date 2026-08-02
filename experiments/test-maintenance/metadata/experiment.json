@@ -746,7 +746,7 @@
     },
     "results": [
       {
-        "case_id": "S-05",
+        "case_id": "S-01",
         "category": "S",
         "upstream_sha": "12590e5fbe1730984e0783452666a67df8e0b806",
         "reverified_status": "accepted",
@@ -755,7 +755,7 @@
         "ok": true
       },
       {
-        "case_id": "S-07",
+        "case_id": "S-02",
         "category": "S",
         "upstream_sha": "5365879a23c9f680b9ca6926783daa3f73795dc5",
         "reverified_status": "accepted",
@@ -764,7 +764,7 @@
         "ok": true
       },
       {
-        "case_id": "S-09",
+        "case_id": "S-03",
         "category": "S",
         "upstream_sha": "148fd08b1d5604177637307d82e6b83079642d63",
         "reverified_status": "accepted",
@@ -773,7 +773,7 @@
         "ok": true
       },
       {
-        "case_id": "P-04",
+        "case_id": "P-01",
         "category": "P",
         "upstream_sha": "d548b82bcd269c34221d06a007b06f3ea33ed236",
         "reverified_status": "accepted",
@@ -782,7 +782,7 @@
         "ok": true
       },
       {
-        "case_id": "P-06",
+        "case_id": "P-02",
         "category": "P",
         "upstream_sha": "781d9b536598e0b770c1eabbe58d2ac76b285409",
         "reverified_status": "accepted",
@@ -791,7 +791,7 @@
         "ok": true
       },
       {
-        "case_id": "P-07",
+        "case_id": "P-03",
         "category": "P",
         "upstream_sha": "fcbf8170633e7e1025a37718af9c253698166b52",
         "reverified_status": "accepted",
@@ -800,7 +800,7 @@
         "ok": true
       },
       {
-        "case_id": "P-08",
+        "case_id": "P-04",
         "category": "P",
         "upstream_sha": "5a3c206076621dd75c6f0ec36236f031ebbadea2",
         "reverified_status": "accepted",
@@ -809,7 +809,7 @@
         "ok": true
       },
       {
-        "case_id": "P-09",
+        "case_id": "P-05",
         "category": "P",
         "upstream_sha": "800235ba7ab773ac3ea691d16e4bb17a1f9b0200",
         "reverified_status": "accepted",
@@ -818,7 +818,7 @@
         "ok": true
       },
       {
-        "case_id": "P-11",
+        "case_id": "P-06",
         "category": "P",
         "upstream_sha": "0f98267a8519ee6563dceae5ee31db3d60d2844f",
         "reverified_status": "accepted",
@@ -827,7 +827,7 @@
         "ok": true
       },
       {
-        "case_id": "P-14",
+        "case_id": "P-07",
         "category": "P",
         "upstream_sha": "b15cf582a538e0c0e016e70cb8a0f03d4f2d55d8",
         "reverified_status": "accepted",
@@ -836,7 +836,7 @@
         "ok": true
       },
       {
-        "case_id": "P-15",
+        "case_id": "P-08",
         "category": "P",
         "upstream_sha": "b83641351f67e2c2f240167f9314aeb354714dad",
         "reverified_status": "accepted",
@@ -845,7 +845,7 @@
         "ok": true
       },
       {
-        "case_id": "P-16",
+        "case_id": "P-09",
         "category": "P",
         "upstream_sha": "d6e88f16f7d2d86a096a552250f89415513d09dc",
         "reverified_status": "accepted",
@@ -854,7 +854,7 @@
         "ok": true
       },
       {
-        "case_id": "P-17",
+        "case_id": "P-10",
         "category": "P",
         "upstream_sha": "bc4e399087e19ddbbdf95dc698bec7f752b3c8e5",
         "reverified_status": "accepted",

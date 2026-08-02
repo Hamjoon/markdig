@@ -1,0 +1,87 @@
+{
+  "case_id": "S-01",
+  "category": "S",
+  "expected_decision": "fix_tests",
+  "attempt": 1,
+  "status": "evaluated",
+  "reason": "model-patch-does-not-apply",
+  "response": {
+    "first_line": "DECISION: fix_production",
+    "decision": "fix_production",
+    "decision_line_valid": true,
+    "body_empty": false,
+    "patch_present": true,
+    "raw_unified_diff_conformant": false,
+    "header_paths_safe": true,
+    "header_scope_valid": true,
+    "header_paths": [
+      "src/Markdig/Helpers/LinkHelper.cs"
+    ],
+    "parse_reason": null,
+    "response_sha256": "6d79c72139e6b4088a010ede1b3e347d21157253a8dd3dad718871c63fedcebe",
+    "extracted_patch_sha256": "10fb81dfc052c2d7ec3732e478fdfc3eedbf42b391be8870752c2b2b5553684c"
+  },
+  "fixture": {
+    "base_sha": "8c01cf054971a1ec4cd663edaca6e2d035236133",
+    "upstream_sha": "12590e5fbe1730984e0783452666a67df8e0b806",
+    "tfm": "net9.0",
+    "target_filter": "FullyQualifiedName~TestLinkHelper",
+    "constructed": true,
+    "committed": true
+  },
+  "model_patch": {
+    "apply_attempted": true,
+    "apply_attempts": [
+      {
+        "method": "git-apply",
+        "rc": 128
+      },
+      {
+        "method": "git-apply-recount",
+        "rc": 128
+      },
+      {
+        "method": "patch-fuzz",
+        "rc": 2
+      },
+      {
+        "method": "context-match",
+        "rc": 1
+      }
+    ],
+    "apply_method": null,
+    "apply_succeeded": false,
+    "effective_change": false,
+    "actual_paths": [],
+    "scope_valid": null,
+    "decision_side_valid": null,
+    "applied_diff": null,
+    "applied_diff_sha256": null
+  },
+  "preservation": {
+    "checked": false,
+    "passed": false,
+    "rc": null
+  },
+  "runs": [],
+  "decision_correct": false,
+  "response_contract_valid": true,
+  "behavior_validation_pass": false,
+  "repair_success": false,
+  "strict_signal_pass": false,
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "evaluated",
+      "reason": "model-patch-does-not-apply",
+      "record": "result.json"
+    }
+  ],
+  "archive_case_id": "s01-12590e5f",
+  "coverage": {
+    "applicable": false,
+    "reason": "repair-target-misclassified",
+    "coverage_verdict": "signal_unknown",
+    "production_files": []
+  }
+}

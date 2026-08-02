@@ -1,0 +1,25 @@
+{
+  "case_id": "P-09",
+  "category": "P",
+  "base_sha": "03bdf6008631166ea8d288a647e2d1a2da0c389b",
+  "upstream_sha": "d6e88f16f7d2d86a096a552250f89415513d09dc",
+  "model": "openai/gpt-oss-120b",
+  "temperature": 0,
+  "allowed_files": [
+    "src/Markdig.Tests/TestPipeTable.cs",
+    "src/Markdig.Tests/Specs/GridTableSpecs.md",
+    "src/Markdig.Tests/Specs/PipeTableSpecs.md",
+    "src/Markdig/Extensions/Tables/PipeTableParser.cs"
+  ],
+  "fixture_paths": [
+    "src/Markdig.Tests/TestPipeTable.cs",
+    "src/Markdig.Tests/Specs/GridTableSpecs.md",
+    "src/Markdig.Tests/Specs/PipeTableSpecs.md"
+  ],
+  "test_revision": "d6e88f16f7d2d86a096a552250f89415513d09dc",
+  "production_revision": "03bdf6008631166ea8d288a647e2d1a2da0c389b",
+  "prompt_sha256": "2a0df82079bf2b44b09d410a4894c87120b6a3a92027ded89d0648069db7bacc",
+  "fixture_patch_sha256": "86e4d56cc69e91c016078f4d862ee9474b22fb77fb05451b864c744b9a8eaf09",
+  "test_output_sha256": "c42e9f877f2d553ec24b3ac078c3095e914ed28ef3da9a17899fc0a26f79507d",
+  "prompt_characters": 18843
+}
