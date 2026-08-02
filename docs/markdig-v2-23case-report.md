@@ -1,95 +1,90 @@
 # GPT-OSS on Historical Test-Maintenance Fixtures in Markdig
 
-## Executive Summary
+- Subject project: [xoofx/markdig](https://github.com/xoofx/markdig) (a .NET/C# Markdown parser) / Model: `openai/gpt-oss-120b`
+- Artifacts (per-case packets, prompts, model responses, logs, coverage results): [experiment/2026-07-week5-markdig-30case-archive](https://github.com/Hamjoon/markdig/tree/experiment/2026-07-week5-markdig-30case-archive) — the branch this report lives on
 
-This Week 5 experiment tested whether `openai/gpt-oss-120b` could distinguish
-three maintenance situations in Markdig and return a successful action:
+## Experiment question
 
-- stale tests that should be updated (S),
-- production regressions exposed by new tests (P), and
-- already-correct changes requiring no action (N).
+When a code repository has just been changed and some tests now fail (or still
+pass), the correct maintenance action depends on *why*: sometimes the tests are
+outdated, sometimes the change introduced a bug, and sometimes nothing needs
+fixing at all. This experiment asks whether a language model can tell these
+situations apart and act correctly, given only the recent change and the
+current test results. It repeats the question of the preceding Zod experiment
+on a second repository and language (C# instead of TypeScript), under the same
+protocol and judgment rules.
 
-The frozen dataset contained 23 cases: S=3, P=10, N=10. GPT-OSS made the exact
-decision in **17/23 cases (73.9%)**. Under the established patch-application,
-recent-change-preservation, and coverage procedure, strict signal success was
-**9/23 (39.1%)**: two successful P repairs with preserved coverage and seven
-correct N no-change actions.
+For 23 cases sampled from the commit history of the Markdig repository, the
+model must:
 
-The model diffs were not standard-format, so the Zod-style context matcher was
-needed. It applied 13/16 without editing model code, while successful required
-repair was rare: **2/13 required repairs (15.4%)**.
+1. Choose the correct response: `no_change` / `fix_tests` / `fix_production`.
+2. Produce a successful repair — the target tests pass **and** the recent
+   change is still present in the repaired code.
+3. Keep the repaired tests covering the changed production code (coverage
+   check).
 
-The two successful repairs both covered their net changed production file
-under the frozen target tests, so both satisfy the coverage signal gate.
+## Case composition
 
-## Research Question
+Each case is built from a real pair of commits in the Markdig history: a base
+version of the repository, plus one recent change applied on top of it. The
+three categories differ in what that recent change is and what the correct
+response is:
 
-Given a recent change diff, current test output, bounded relevant code
-snippets, and an allowed-file list, can GPT-OSS:
+- **Stale-test cases** (3): the production behavior was changed intentionally,
+  so tests written for the old behavior now fail. The tests are outdated, not
+  the code — the correct response is `fix_tests`.
+- **Production-regression cases** (10): a newly added test reveals a bug in
+  the production code, so the test fails. The test is right and the code is
+  wrong — the correct response is `fix_production`.
+- **Normal cases** (10): the test suite still passes after the production
+  change. Nothing is broken — the correct response is `no_change`.
 
-1. choose `fix_tests`, `fix_production`, or `no_change` correctly;
-2. produce an allowed repair that applies under the established Zod cascade;
-3. restore the required tests without undoing the intended recent change; and
-4. preserve target-test line coverage of the net changed production path?
+Case IDs below are prefixed `S`, `P`, and `N` for the three categories
+respectively, in acceptance order.
 
-## Dataset Construction
+Cases were drawn by seeded random sampling from a candidate pool of Markdig
+commits (2025-01 onward) filtered by pre-registered exclusion criteria. Each
+candidate's failing/passing condition was verified by actually building and
+running the tests, and verified candidates were accepted in queue order up to
+ten per category. The stale-test category stopped at three: its complete
+12-candidate queue was exhausted under the frozen criteria, and the window and
+criteria were not expanded — the shortfall is retained as an observed result
+(selection record:
+[markdig-23case-verification-results.md](markdig-23case-verification-results.md);
+screening record: [markdig-23case-screening.md](markdig-23case-screening.md)).
 
-Candidates came from non-merge Markdig commits dated from 2025-01-01 through
-the frozen endpoint. Pre-registered mining applied source/test classification,
-generated-file guards, size caps, duplicate controls, and a seeded category
-shuffle. Empirical screening reconstructed historical states and required
-executable failing/passing conditions.
+## Protocol overview
 
-| Category | Intended state | Expected decision | Frozen cases |
-|---|---|---|---:|
-| S | Production changed; old tests fail | `fix_tests` | 3 |
-| P | New tests fail against old production | `fix_production` | 10 |
-| N | Production changed; full suite remains green | `no_change` | 10 |
+Every case runs under the same framing: with no category hint, the model
+receives the recent-change diff, the test run output, and code snippets around
+the change, then decides whether a modification is needed and, only if so,
+produces a repair diff. Each case is a single request to the model — no
+retries, no follow-up turns — with deterministic settings (temperature 0).
+All 23 calls completed on the first attempt.
 
-S stopped at three because its complete 12-candidate queue was exhausted under
-the frozen criteria. The window and criteria were not expanded. All 23
-fixtures were independently reconstructed and reverified before model
-execution with exact test-count and fixture-identity matches.
+The prompt separates a **fixed template** from **per-case variables**. The
+template — identical across all 23 cases — consists of the intro, the
+constraint list (response protocol, no weakening or deleting of test
+assertions, preserve nearby behavior that should still pass) and the required
+response format (a `DECISION` first line, then a unified diff only if a fix is
+chosen). The variables are the case's allowed-file list and three tagged
+inputs: the recent-change diff, the test run output, and code snippets taken
+±25 lines around the changed regions. Every prompt sent is archived per case.
 
-## Model Protocol
+Each returned fix is applied to the case fixture through the same tolerance
+cascade as the Zod experiment (standard patch tools first, then a
+context-matching applier), the project is rebuilt, the target and full test
+suites are run, and a mechanical check verifies that the intended recent
+change is still present in the repaired tree.
 
-- Model: `openai/gpt-oss-120b`
-- API: OpenRouter chat completions
-- Temperature: 0
-- Trials: one independent user message and one assistant response per case
-- Order: frozen manifest order, S then P then N
-- Retries: transport-only when no assistant response exists
-- Observed model calls: 23 primary trials, 0 retries, 0 errors
-
-Each prompt included the fixture's recent-change diff, frozen test output,
-bounded snippets, and allowed paths. It did not expose the category or
-expected decision. A fix decision required code in diff form.
-
-The 23 calls used 75,626 prompt tokens and 34,534 completion tokens (110,160
-total). The API-reported aggregate cost was USD 0.011487683.
-
-## Evaluation Procedure
-
-Each fix response was evaluated through this cascade from an identical
-committed fixture state before every attempt:
-
-1. ordinary `git apply`;
-2. `git apply --recount`;
-3. GNU/BSD `patch` with fuzz 3;
-4. the Zod context matcher, which locates unchanged pre-images and tolerates
-   bare or inaccurate hunk coordinates.
-
-After a successful application, Git derived and enforced the actual allowed
-paths. The project was rebuilt; S/P target tests and the full suite were run;
-then `git apply --reverse --check fixture.patch` verified that the intended
-recent change remained present.
+**Repair is judged as a single binary outcome:** *yes* means the target tests
+pass **and** the recent change is still present in the repaired code; *no*
+means anything else (the model's diff could not be applied, the build or tests
+still fail, or the tests only pass because the repair undid the recent
+change). The signal check measures test coverage of the changed production
+file on successfully repaired code.
 
 ## Results
-
-**Repair** is a binary outcome: **yes** means the model action applied, the
-target and full test suites passed, and the complete recent change remained
-present. **No** covers a non-applying patch, build/test failure, or a passing
-tree that removed part of the recent change.
 
 ### Case Matrix — stale-test cases (expected DECISION: fix_tests)
 
@@ -141,96 +136,45 @@ tree that removed part of the recent change.
 - Strict signal success: **9 / 23** (stale-test 0/3,
   production-regression 2/10, normal 7/10)
 
-## Coverage Signal
+## Observations
 
-Coverage applies to repairs that pass patch application, target validation,
-and recent-change preservation. The two applicable repaired worktrees ran the
-frozen target filter with the Markdig Week 4 Microsoft.NET.Test.Sdk collector:
-`dotnet test --collect:"Code Coverage;Format=cobertura"`. The resulting XML
-was parsed by a byte-identical copy of Week 4 `parse-cobertura.py`.
-
-| Case | Frozen target | Net changed production file | Covered lines | Result |
-|---|---:|---|---:|---|
-| P-02 | 4/4 | `GenericAttributesParser.cs` | 108/115 (93.91%) | signal preserved |
-| P-05 | 46/46 | `CodeInlineParser.cs` | 63/66 (95.45%) | signal preserved |
-
-The production scope follows Zod's validated-tree rule: files are qualified
-only when they remain in the net production diff from the frozen base after
-the fixture and model repair are applied. P-05's upstream candidate
-`SpanExtensions.cs` was recorded but excluded because it had no such net diff;
-under the frozen `net9.0` target its relevant polyfill branch is inactive.
-
-Both applicable repairs therefore preserved the coverage signal. Strict signal
-success, including coverage, is **9/23 (39.1%)**.
-
-## Interpretation
-
-The model's primary weakness was not patch text that could never be applied.
-Its code applied in 81.3% of fix responses under the established tolerance
-policy. The larger problem was choosing the wrong maintenance direction for
-all stale-test cases and producing incomplete, uncompilable, or reverting
-changes after application.
-
-Decision-only accuracy exceeded strict signal success by 34.8 percentage
-points (73.9% versus 39.1%). Among the 13 cases that actually required a
-repair, only 2 succeeded. Patch syntax, patch application, classification,
-behavioral validation, and change preservation must therefore remain separate
-measurements.
-
-## Integrity and Reproducibility
-
-The experiment retains the seeded queues, screening evidence, 23-case frozen
-manifest, verification records, immutable prompts and raw responses, API
-metadata, extracted patches, all cascade attempts, 13 normalized applied
-diffs, sanitized build/test logs, per-case records, aggregate JSON, and English
-reports.
-
-The evaluator is pinned to the public Zod Week 4 application and
-validation sources by commit and SHA-256. An independent audit reconstructed
-all 20 preservation-checkable states from base + fixture + normalized repair,
-re-ran the reverse check, re-parsed stored test summaries, verified allowed
-paths and raw-response hashes, and reconciled every aggregate and report row.
-Pipeline errors and infrastructure retries were both zero.
-
-The coverage collector and parser are pinned to Markdig Week 4 by commit and
-SHA-256. The runner reconstructed both successful repairs, rechecked target
-counts and preservation, retained only sanitized summaries/logs, and discarded
-path-bearing Cobertura XML.
-
-After the completed local audit, the experiment branch was published for
-review at
-`https://github.com/Hamjoon/markdig/tree/experiment/2026-07-week5-markdig-30case-archive`.
-The repository is a fork of `xoofx/markdig`. No upstream PR was opened.
-
-Mutation testing was intentionally excluded from this experiment. No mutation
-score or mutation-derived judgment is reported.
+- **The model never chose `fix_tests`, and errors flow in one direction.** It
+  chose `fix_production` on all three stale-test cases and on three of the ten
+  normal cases; the opposite errors (choosing `fix_tests` on a
+  production-regression case) never occurred. As in the Zod experiment, the
+  model treats the tests as the specification and doubts the recent production
+  change — here the tendency is total: "the tests are outdated" was never
+  selected as a direction.
+- **Repairs that pass by undoing the change, and how they are caught.** The
+  three unnecessary edits on normal cases all applied, built, and left the
+  full test suite passing — yet each had reverted or altered the intended
+  recent production change. Test results alone cannot distinguish these from
+  harmless edits. The mechanical preservation check (verifying the recent
+  change is still present in the repaired code) identified exactly these
+  three, the same false-green pattern the Zod experiment observed.
+- **Decision accuracy overstates end-to-end performance.** Exact decisions
+  reached 17/23, but only 2 of the 13 fix-requiring cases produced a
+  successful repair. Most applied fixes failed afterward — at build, at the
+  test run, or at preservation — so patch syntax, patch application,
+  classification, behavioral validation, and change preservation must be
+  measured separately.
 
 ## Limitations
 
-- Only three S fixtures satisfied the frozen selection criteria, so stale-test
-  conclusions have a small denominator.
-- This is one repository, one historical window, one model configuration, and
-  one trial per case.
-- Context matching is intentionally more permissive than standard patch
-  parsing. Its outputs are therefore retained as normalized Git diffs, and
-  actual changed paths are checked after application.
+- Only three stale-test fixtures satisfied the frozen selection criteria, so
+  stale-test conclusions rest on a small denominator.
+- The prompt structure would allow the expected classification to be recovered
+  from surface cues alone (where the diff is and whether tests fail), so
+  DECISION agreement is an auxiliary metric.
+- Coverage confirms the changed production file is executed by the repaired
+  tests, but does not by itself measure how well those tests would detect
+  future bugs. Mutation testing was out of scope by instruction.
 - The preservation check is mechanical and exact: it establishes that the
   complete fixture patch remains reverse-applicable, not broader semantic
   equivalence.
-- Green target and full suites do not prove correctness outside tested
-  behavior.
-- Coverage runs only the frozen target filter. It confirms execution of each
-  net changed production file, not complete branch coverage or causal
-  adequacy of every changed line.
-- Mutation testing was out of scope, so this experiment does not estimate
-  assertion strength against injected faults.
+- Single model (`gpt-oss-120b`), single repository (Markdig), one historical
+  window, one trial per case.
 
-## Conclusion
+---
 
-On 23 frozen Markdig maintenance fixtures, GPT-OSS achieved 73.9% exact
-decision accuracy and 39.1% strict signal success. Thirteen of 16 proposed
-fixes applied under the Zod-equivalent cascade, but only two of 13 required
-repairs succeeded without undoing the recent change. The decisive gap was
-semantic and directional repair quality, not raw patch applicability alone.
-Both successful repairs retained file-level target-test coverage in the
-coverage signal stage.
+Execution details and per-case records: [markdig-v2-23case-report-full.md](./markdig-v2-23case-report-full.md)
